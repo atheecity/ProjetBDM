@@ -90,7 +90,6 @@ create or replace type applications_type as table of application_ref_type;
 /
 
 create or replace type systeme_type as object (
-    idS integer, 
     nomS varchar2(50)
 );
 /
@@ -122,7 +121,7 @@ DROP table motCle;
 DROP table categorie;
 
 create table systeme of systeme_type (
-    primary key(idS)
+    primary key(nomS)
 );
 
 create table motCle of motCle_type (

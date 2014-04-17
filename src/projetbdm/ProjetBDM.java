@@ -5,6 +5,7 @@
  */
 
 package projetbdm;
+import interfaces.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -66,6 +67,7 @@ public class ProjetBDM {
     
     public static void main(String[] args) {
         Connection con = connect();
+        WindowAdmin winA = new WindowAdmin();
     }
     
 }
