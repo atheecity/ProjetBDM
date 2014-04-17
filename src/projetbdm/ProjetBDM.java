@@ -5,6 +5,7 @@
  */
 
 package projetbdm;
+import interfaces.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -21,8 +22,8 @@ public class ProjetBDM {
         Connection con = null;
         try {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-            //String urlInt = "jdbc:oracle:thin:@butor:1521:ensb2013";
-            String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
+            String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
+            //String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
             con = DriverManager.getConnection(url, "cm429363", "cm429363");
         } catch (SQLException ec) {
             ec.printStackTrace();
@@ -69,6 +70,7 @@ public class ProjetBDM {
      */
     public static void main(String[] args) {
         Connection con = connect();
+        Window w = new Window();
     }
     
 }
