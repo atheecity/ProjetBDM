@@ -43,7 +43,7 @@ public class ProjetBDM {
         message[2] = "Mot de passe : "; //Message apparaîssant dans le corps du dialog
         message[3] = new JPasswordField ();
  
-//        Options (nom des boutons)
+        //Options (nom des boutons)
         String option[] = {"OK", "Annuler"};
  
         int result = JOptionPane.showOptionDialog(
@@ -65,9 +65,6 @@ public class ProjetBDM {
         return log;
     }
     
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         Connection con = connect();
         Window w = new Window();
