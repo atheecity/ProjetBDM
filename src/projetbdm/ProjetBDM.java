@@ -7,11 +7,13 @@
 package projetbdm;
 import interfaces.*;
 import java.sql.*;
+import oracle.jdbc.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import sun.security.util.Password;
 
 /**
  *
@@ -34,37 +36,18 @@ public class ProjetBDM {
         return con;
     }
     
-    public static String[] wConnectionAdmin()
+    public static boolean uConnexion(String login,String pass)
     {
-        String[] log = new String[2]; 
-        
-        //Données
-        Object[] message = new Object[4];
-        message[0] = "Login administrateur : "; //Message apparaîssant dans le corps du dialog
-        message[1] = new JTextField ();
-        message[2] = "Mot de passe : "; //Message apparaîssant dans le corps du dialog
-        message[3] = new JPasswordField ();
- 
-        //Options (nom des boutons)
-        String option[] = {"OK", "Annuler"};
- 
-        int result = JOptionPane.showOptionDialog(
-                null, // fenêtre parente
-                message, // corps du dialogue
-                "Connexion administrateur",// Titre du dialogue
-                JOptionPane.DEFAULT_OPTION, // type de dialogue
-                JOptionPane.QUESTION_MESSAGE, // type icone
-                null, // icône optionnelle
-                option, // boutons
-                message[1] // objet ayant le focus par défaut
-        );
- 
-        if(result == 0){
-            log[0] = ((JTextField )message[1]).getText();
-            log[1] = new String(((JPasswordField )message[3]).getPassword());
+        Connection con = connect();
+        try {
+            java.util.Map maMap = con.getTypeMap();
+            maMap.put("CM429363.UTILISATEUR_TYPE", Class.forName("projetbdm.Utilisateur"));
+            OracleStatement st = (OracleStatement) con.createStatement();
+            OracleResultSet rst = (OracleResultSet) st.executeQuery("");
         }
+        catch(Exception e) {}
         
-        return log;
+        return true;
     }
     
     public static void main(String[] args) {
