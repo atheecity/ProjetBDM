@@ -10,6 +10,8 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -66,6 +68,11 @@ public class ProjetBDM {
     }
     
     public static void main(String[] args) {
+        try { 
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
+        } catch (Exception ex) { 
+            ex.printStackTrace(); 
+        }
         Connection con = connect();
         Window w = new Window();
     }
