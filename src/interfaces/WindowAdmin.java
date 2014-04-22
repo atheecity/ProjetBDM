@@ -73,7 +73,7 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jPanelAddSysteme.setForeground(new java.awt.Color(254, 13, 13));
         jPanelAddSysteme.setToolTipText("");
-        jPanelAddSysteme.setLayout(new java.awt.GridLayout());
+        jPanelAddSysteme.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter"));
 
@@ -238,7 +238,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         else {
             try {
                 Connection con = ProjetBDM.connect();
-                java.util.Map maMap = con.getTypeMap();
                 PreparedStatement st = con.prepareStatement("insert into systeme values(?)");
                 Systeme s = new Systeme();
                 s.nomS = this.jTextFieldNomSyst.getText();
