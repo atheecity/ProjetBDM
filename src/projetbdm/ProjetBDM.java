@@ -43,13 +43,15 @@ public class ProjetBDM {
         try {
             java.util.Map maMap = con.getTypeMap();
             maMap.put("CM429363.UTILISATEUR_TYPE", Class.forName("projetbdm.Utilisateur"));
-            PreparedStatement st = con.prepareStatement("select value(u) from utilisateur where login = ?");
+            PreparedStatement st = con.prepareStatement("select value(u) from utilisateur u where login = ?");
             st.setString(1, login);
             ResultSet rst = st.executeQuery();
             rst.next();
             u = (Utilisateur) rst.getObject(1, maMap);
         }
-        catch(SQLException | ClassNotFoundException e) {}
+        catch(SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
         
         return (u.password == null ? pass == null : u.password.equals(pass));
     }
