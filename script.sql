@@ -108,8 +108,7 @@ create or replace type categorie_type as object (
 );
 /
 
-create or replace type utilisateur_type as object (
-    idU integer, 
+create type utilisateur_type as object (
     login varchar2(50),
     password varchar2(50)
 );
@@ -168,7 +167,7 @@ create table applicationSysteme of applicationSysteme_type (
 );
 
 create table utilisateur of utilisateur_type (
-    primary key (idU)
+    primary key (login)
 );
 
 
