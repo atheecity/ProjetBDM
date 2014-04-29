@@ -377,8 +377,35 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
         jLabel7.setText(" ");
+        String indic = (String)jComboBoxRech.getSelectedItem();
+        this.foncRecherche(indic);
     }//GEN-LAST:event_jButtonLanceRechMotActionPerformed
 
+    void foncRecherche(String choix)
+    {
+        switch(choix)
+        {
+            case "Dans tout" :
+                
+                break;
+            case "Dans image" : 
+                
+                break;
+            case "Dans application" :
+                
+                break;
+            case "Dans catégorie" :
+                
+                break;
+            case "Dans système" :
+                
+                break;
+            default :
+                
+                break;
+        }
+    }
+    
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
