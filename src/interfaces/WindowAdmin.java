@@ -114,7 +114,7 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        jPanelSysteme.setLayout(new java.awt.GridLayout());
+        jPanelSysteme.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Supprimer un système"));
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
@@ -156,7 +156,7 @@ public class WindowAdmin extends javax.swing.JFrame {
                 jPanelUtilisateurFocusGained(evt);
             }
         });
-        jPanelUtilisateur.setLayout(new java.awt.GridLayout());
+        jPanelUtilisateur.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter utilisateur"));
         jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
