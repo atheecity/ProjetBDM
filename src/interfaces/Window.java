@@ -63,7 +63,6 @@ public class Window extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -245,23 +244,15 @@ public class Window extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.CardLayout());
 
-        jButton4.setText("jButton4");
-
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(322, 322, 322)
-                .addComponent(jButton4)
-                .addContainerGap(408, Short.MAX_VALUE))
+            .addGap(0, 802, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(261, 261, 261)
-                .addComponent(jButton4)
-                .addContainerGap(416, Short.MAX_VALUE))
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
         jPanel7.add(jPanel10, "card4");
@@ -410,7 +401,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonAdmin;
     private javax.swing.JLabel jLabel1;
