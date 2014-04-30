@@ -900,7 +900,8 @@ public class Window extends javax.swing.JFrame {
         trouve.add(mini);
         int largueur = jPanel40.getPreferredSize().width;
         int hauteur = jPanel40.getPreferredSize().height;
-        jPanel40 = mini.afficheMini(largueur, hauteur);
+        JPanel jPanel400 = mini.afficheMini(largueur, hauteur);
+        jPanel40.add(jPanel400);
         System.out.println("largeur "+largueur+" hauteur "+hauteur);
     }
     
