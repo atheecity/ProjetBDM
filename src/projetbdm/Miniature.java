@@ -6,6 +6,7 @@
 
 package projetbdm;
 
+import interfaces.WindowAffiche;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -67,8 +68,32 @@ public class Miniature {
     public void afficheMini(JPanel panel, int x, int y)
     {
         JLabel lalala = new JLabel(new ImageIcon(this.img));
-        lalala.setBounds(x, y, 100, 100);
+        JLabel nomt = new JLabel(this.nom);
+        JLabel typet = new JLabel(this.type);
+        lalala.setBounds(x, y, 100, 70);
+        nomt.setBounds(x, y+70, 100, 15);
+        typet.setBounds(x, y+85, 100, 15);
         panel.add(lalala);
+        panel.add(nomt);
+        panel.add(typet);
         panel.repaint();
+        lalala.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                WindowAffiche waff = new WindowAffiche(num, nom);
+            }
+        });
+        nomt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                WindowAffiche waff = new WindowAffiche(num, nom);
+            }
+        });
+        typet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                WindowAffiche waff = new WindowAffiche(num, nom);
+            }
+        });
     }
 }

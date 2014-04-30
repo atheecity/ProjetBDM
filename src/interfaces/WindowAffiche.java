@@ -6,17 +6,21 @@
 
 package interfaces;
 
+import projetbdm.Miniature;
+
 /**
  *
  * @author Rémus
  */
 public class WindowAffiche extends javax.swing.JFrame {
-
+    int identifiant;
     /**
      * Creates new form WindowAffiche
      */
-    public WindowAffiche() {
+    public WindowAffiche(int m, String g) {
         initComponents();
+        this.identifiant = m;
+        this.setTitle(g);
         this.setVisible(true);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }

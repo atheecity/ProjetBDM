@@ -34,6 +34,7 @@ public class Window extends javax.swing.JFrame {
         this.con = con;
         initComponents();
         this.setVisible(true);
+        this.setTitle("Le monde des applications");
         jPanelAcceuil.setVisible(true);
         jPanelAffiche.setVisible(false);
         jPanelLogAdmin.setVisible(false);
@@ -281,15 +282,22 @@ public class Window extends javax.swing.JFrame {
 
         jPanel7.add(jPanelAcceuil, "card5");
 
+        jPanelAffiche.setBorder(javax.swing.BorderFactory.createTitledBorder("Résultat de la recherche"));
+        jPanelAffiche.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jPanelAfficheComponentResized(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAfficheLayout = new javax.swing.GroupLayout(jPanelAffiche);
         jPanelAffiche.setLayout(jPanelAfficheLayout);
         jPanelAfficheLayout.setHorizontalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
+            .addGap(0, 696, Short.MAX_VALUE)
         );
 
         jPanel7.add(jPanelAffiche, "card4");
@@ -380,6 +388,7 @@ public class Window extends javax.swing.JFrame {
 
     void foncRecherche(String choix)
     {
+        jPanelAffiche.removeAll();
         ArrayList<Miniature> trouve = new ArrayList();
         switch(choix)
         {
@@ -406,13 +415,25 @@ public class Window extends javax.swing.JFrame {
         Miniature mini2 = new Miniature(2, "rien.png", "nomImage2", "typeImage2");
         Miniature mini3 = new Miniature(3, "rien.png", "nomImage3", "typeImage3");
         Miniature mini4 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        Miniature mini5 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        Miniature mini6 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        Miniature mini7 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        Miniature mini8 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        Miniature mini9 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        Miniature mini10 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
         trouve.add(mini1);
         trouve.add(mini2);
         trouve.add(mini3);
         trouve.add(mini4);
-        int abscisse = 0;
-        int ordonne = 0;
-        int largueur = jPanelAffiche.getPreferredSize().width;
+        trouve.add(mini5);
+        trouve.add(mini6);
+        trouve.add(mini7);
+        trouve.add(mini8);
+        trouve.add(mini9);
+        trouve.add(mini10);
+        int abscisse = 20;
+        int ordonne = 10;
+        int largueur = jPanelAffiche.getSize().width;
         int cmp = 0;
         int cmpMax = largueur/110;
         for(Miniature mimi : trouve)
@@ -421,12 +442,12 @@ public class Window extends javax.swing.JFrame {
             cmp++;
             if(cmp<cmpMax)
             {
-                ordonne += 105;
+                ordonne += 110;
             }
             else
             {
-                abscisse += 75;
-                ordonne = 0;
+                abscisse += 110;
+                ordonne = 10;
                 cmp = 0;
             }
         }
@@ -478,6 +499,11 @@ public class Window extends javax.swing.JFrame {
         }
         jTextFieldRechImage.setText(image_chargement);
     }//GEN-LAST:event_jButtonParcourirActionPerformed
+
+    private void jPanelAfficheComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAfficheComponentResized
+        String indic = (String)jComboBoxRech.getSelectedItem();
+        this.foncRecherche(indic);
+    }//GEN-LAST:event_jPanelAfficheComponentResized
 
     
     
