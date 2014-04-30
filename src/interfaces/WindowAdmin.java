@@ -9,6 +9,7 @@ package interfaces;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import projetbdm.*;
 
 /**
@@ -39,157 +40,87 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTabbedPane = new javax.swing.JTabbedPane();
-        jPanelSysteme = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButtonAddSysteme = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jButtonSaveSysteme = new javax.swing.JButton();
+        jButtonAddSysteme = new javax.swing.JButton();
+        jLabelErrSysteme = new javax.swing.JLabel();
+        jLabelSuccSysteme = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jTabbedPaneImage = new javax.swing.JTabbedPane();
+        jPanelSysteme = new javax.swing.JPanel();
         jPanelUtilisateur = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jToggleButtonAddImage = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableUtilisateur = new javax.swing.JTable();
-        jPanel9 = new javax.swing.JPanel();
+        jScrollPaneImage = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanelAddImage = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldLogin = new javax.swing.JTextField();
-        jPasswordFieldPassword = new javax.swing.JPasswordField();
-        jButtonSaveUtilisateur = new javax.swing.JButton();
-        jLabelErrAddUtilisateur = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jButtonDeleteUtilisateur = new javax.swing.JButton();
-        jButtonAddUtilisateur = new javax.swing.JButton();
-        jPanelImage = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jTextFieldNomI = new javax.swing.JTextField();
         jTextFieldDateI = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescriptionI = new javax.swing.JTextArea();
-        jButtonSaveImage = new javax.swing.JButton();
         jButtonAnnulerImage = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        jButtonSaveImage = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jTextFieldUrlI = new javax.swing.JTextField();
-        jButtonParcourirImage = new javax.swing.JButton();
-        jPanel13 = new javax.swing.JPanel();
-        jButtonAddImage = new javax.swing.JButton();
+        jButtonParcourirI = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(790, 479));
-        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter un système"));
+        java.awt.GridBagLayout jPanel4Layout = new java.awt.GridBagLayout();
+        jPanel4Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanel4Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0};
+        jPanel4.setLayout(jPanel4Layout);
 
-        jTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-
-        jPanelSysteme.setLayout(new java.awt.BorderLayout());
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
-        java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
-        jPanel3Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
-        jPanel3Layout.rowHeights = new int[] {0, 5, 0, 5, 0};
-        jPanel3.setLayout(jPanel3Layout);
-
-        jButtonAddSysteme.setText("Ajouter un système");
+        jButtonAddSysteme.setText("Sauvegarder");
         jButtonAddSysteme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddSystemeActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonAddSysteme, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        jPanel4.add(jButtonAddSysteme, gridBagConstraints);
 
-        jButton2.setText("Supprimer");
-        jButton2.setEnabled(false);
-        jPanel3.add(jButton2, new java.awt.GridBagConstraints());
+        jLabelErrSysteme.setForeground(new java.awt.Color(255, 0, 0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        jPanel4.add(jLabelErrSysteme, gridBagConstraints);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Liste des systèmes"));
-        jPanel10.setLayout(new java.awt.CardLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Sélection", "Sélection"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable1);
-
-        jPanel10.add(jScrollPane2, "card2");
-
-        java.awt.GridBagLayout jPanel4Layout1 = new java.awt.GridBagLayout();
-        jPanel4Layout1.columnWidths = new int[] {0, 5, 0, 5, 0};
-        jPanel4Layout1.rowHeights = new int[] {0, 5, 0, 5, 0};
-        jPanel4.setLayout(jPanel4Layout1);
-
-        jLabel3.setText("Nom du système : ");
+        jLabelSuccSysteme.setForeground(new java.awt.Color(18, 224, 5));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        jPanel4.add(jLabel3, gridBagConstraints);
+        gridBagConstraints.gridwidth = 3;
+        jPanel4.add(jLabelSuccSysteme, gridBagConstraints);
 
-        jButtonSaveSysteme.setText("Sauvegarder");
+        jLabel6.setText("Nom système d'exploitation : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel4.add(jButtonSaveSysteme, gridBagConstraints);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        jPanel4.add(jLabel6, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel4.add(jTextField1, gridBagConstraints);
 
-        jPanel10.add(jPanel4, "card3");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(790, 479));
+        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
-        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel5Layout.createSequentialGroup()
-                .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
+        jTabbedPaneImage.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        jPanelSysteme.add(jPanel5, java.awt.BorderLayout.CENTER);
-
-        jTabbedPane.addTab("Système", jPanelSysteme);
+        jPanelSysteme.setLayout(new java.awt.GridLayout(1, 0));
+        jTabbedPaneImage.addTab("Système", jPanelSysteme);
 
         jPanelUtilisateur.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -201,222 +132,95 @@ public class WindowAdmin extends javax.swing.JFrame {
                 jPanelUtilisateurFocusGained(evt);
             }
         });
-        jPanelUtilisateur.setLayout(new java.awt.BorderLayout());
+        jPanelUtilisateur.setLayout(new java.awt.GridLayout(1, 0));
+        jPanelUtilisateur.add(jPanel5);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Liste des admins"));
-        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jPanel2ComponentShown(evt);
-            }
-        });
-        jPanel2.setLayout(new java.awt.CardLayout());
-
-        jScrollPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jScrollPane1ComponentShown(evt);
-            }
-        });
-
-        jTableUtilisateur.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Sélection", "Login"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTableUtilisateur);
-
-        jPanel2.add(jScrollPane1, "card4");
-
-        java.awt.GridBagLayout jPanel9Layout = new java.awt.GridBagLayout();
-        jPanel9Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        jPanel9Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0};
-        jPanel9.setLayout(jPanel9Layout);
-
-        jLabel1.setText("Login : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel9.add(jLabel1, gridBagConstraints);
-
-        jLabel2.setText("Mot de passe : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        jPanel9.add(jLabel2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel9.add(jTextFieldLogin, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 1);
-        jPanel9.add(jPasswordFieldPassword, gridBagConstraints);
-
-        jButtonSaveUtilisateur.setText("Enregistrer");
-        jButtonSaveUtilisateur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveUtilisateurActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel9.add(jButtonSaveUtilisateur, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        jPanel9.add(jLabelErrAddUtilisateur, gridBagConstraints);
-
-        jPanel2.add(jPanel9, "card3");
+        jTabbedPaneImage.addTab("Utilisateur", jPanelUtilisateur);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
-        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        jPanel1Layout.rowHeights = new int[] {0, 5, 0};
-        jPanel1.setLayout(jPanel1Layout);
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jButtonDeleteUtilisateur.setText("Supprimer");
-        jButtonDeleteUtilisateur.setEnabled(false);
-        jButtonDeleteUtilisateur.setRequestFocusEnabled(false);
-        jButtonDeleteUtilisateur.setRolloverEnabled(false);
-        jButtonDeleteUtilisateur.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonAddImage.setText("Ajouter une image");
+        jToggleButtonAddImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteUtilisateurActionPerformed(evt);
+                jToggleButtonAddImageActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel1.add(jButtonDeleteUtilisateur, gridBagConstraints);
+        jPanel1.add(jToggleButtonAddImage, new java.awt.GridBagConstraints());
 
-        jButtonAddUtilisateur.setText("Ajouter utilisateur");
-        jButtonAddUtilisateur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddUtilisateurActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel1.add(jButtonAddUtilisateur, gridBagConstraints);
+        jPanel2.setLayout(new java.awt.CardLayout());
 
-        org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanelUtilisateur.add(jPanel8, java.awt.BorderLayout.CENTER);
-
-        jTabbedPane.addTab("Utilisateur", jPanelUtilisateur);
-
-        jPanelImage.setLayout(new java.awt.BorderLayout());
-
-        jPanel12.setLayout(new java.awt.CardLayout());
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Sélection", "Nom", "Date", "Description"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false, false, false
-            };
+        ));
+        jScrollPaneImage.setViewportView(jTable1);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        jPanel2.add(jScrollPaneImage, "card2");
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTable2);
+        jPanelAddImage.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une image"));
+        java.awt.GridBagLayout jPanelAddImageLayout = new java.awt.GridBagLayout();
+        jPanelAddImageLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanelAddImageLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanelAddImage.setLayout(jPanelAddImageLayout);
 
-        jPanel12.add(jScrollPane3, "card2");
-
-        java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
-        jPanel6Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        jPanel6Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
-        jPanel6.setLayout(jPanel6Layout);
-
-        jLabel4.setText("Nom");
+        jLabel1.setText("Nom image : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        jPanel6.add(jLabel4, gridBagConstraints);
+        jPanelAddImage.add(jLabel1, gridBagConstraints);
 
-        jLabel5.setText("Date");
+        jLabel2.setText("Date : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        jPanel6.add(jLabel5, gridBagConstraints);
+        jPanelAddImage.add(jLabel2, gridBagConstraints);
 
-        jLabel6.setText("Description");
+        jLabel3.setText("Description : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        jPanel6.add(jLabel6, gridBagConstraints);
+        jPanelAddImage.add(jLabel3, gridBagConstraints);
+
+        jTextFieldNomI.setText("jTextField2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel6.add(jTextFieldNomI, gridBagConstraints);
+        jPanelAddImage.add(jTextFieldNomI, gridBagConstraints);
+
+        jTextFieldDateI.setText("jTextField3");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel6.add(jTextFieldDateI, gridBagConstraints);
+        jPanelAddImage.add(jTextFieldDateI, gridBagConstraints);
 
         jTextAreaDescriptionI.setColumns(20);
         jTextAreaDescriptionI.setRows(5);
-        jScrollPane4.setViewportView(jTextAreaDescriptionI);
+        jScrollPane1.setViewportView(jTextAreaDescriptionI);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 5;
-        jPanel6.add(jScrollPane4, gridBagConstraints);
+        jPanelAddImage.add(jScrollPane1, gridBagConstraints);
+
+        jButtonAnnulerImage.setText("Annuler");
+        jButtonAnnulerImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnulerImageActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        jPanelAddImage.add(jButtonAnnulerImage, gridBagConstraints);
 
         jButtonSaveImage.setText("Sauvegarder");
         jButtonSaveImage.addActionListener(new java.awt.event.ActionListener() {
@@ -426,124 +230,62 @@ public class WindowAdmin extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel6.add(jButtonSaveImage, gridBagConstraints);
+        gridBagConstraints.gridy = 10;
+        jPanelAddImage.add(jButtonSaveImage, gridBagConstraints);
 
-        jButtonAnnulerImage.setText("Annuler");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel6.add(jButtonAnnulerImage, gridBagConstraints);
-
-        jLabel7.setText("Image");
+        jLabel4.setText("Image : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        jPanel6.add(jLabel7, gridBagConstraints);
+        jPanelAddImage.add(jLabel4, gridBagConstraints);
+
+        jTextFieldUrlI.setText("jTextField2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel6.add(jTextFieldUrlI, gridBagConstraints);
+        jPanelAddImage.add(jTextFieldUrlI, gridBagConstraints);
 
-        jButtonParcourirImage.setText("Parcourir");
-        jButtonParcourirImage.addActionListener(new java.awt.event.ActionListener() {
+        jButtonParcourirI.setText("Parcourir");
+        jButtonParcourirI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonParcourirImageActionPerformed(evt);
+                jButtonParcourirIActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel6.add(jButtonParcourirImage, gridBagConstraints);
+        jPanelAddImage.add(jButtonParcourirI, gridBagConstraints);
 
-        jPanel12.add(jPanel6, "card3");
+        jPanel2.add(jPanelAddImage, "card3");
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
-        jPanel13.setLayout(new java.awt.GridBagLayout());
-
-        jButtonAddImage.setText("Ajouter une image");
-        jButtonAddImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddImageActionPerformed(evt);
-            }
-        });
-        jPanel13.add(jButtonAddImage, new java.awt.GridBagConstraints());
-
-        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel13, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+        org.jdesktop.layout.GroupLayout jPanel6Layout = new org.jdesktop.layout.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel11Layout.createSequentialGroup()
-                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel6Layout.createSequentialGroup()
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 88, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanelImage.add(jPanel11, java.awt.BorderLayout.CENTER);
+        jTabbedPaneImage.addTab("Image", jPanel6);
 
-        jTabbedPane.addTab("Image", jPanelImage);
-
-        getContentPane().add(jTabbedPane);
+        getContentPane().add(jTabbedPaneImage);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonDeleteUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUtilisateurActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeleteUtilisateurActionPerformed
-
-    private void jTextFieldLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldLoginActionPerformed
-
-    private void jPasswordFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldPasswordActionPerformed
-
-    private void jButtonAddUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUtilisateurActionPerformed
-        String login = this.jTextFieldLogin.getText();
-        String password = new String(this.jPasswordFieldPassword.getPassword());
-        this.jLabelSucAddUtilisateur.setText("");
-        this.jLabelErrAddUtilisateur.setText("");
-                
-        if (login.length() < 3 || password.length() < 3) {
-            this.jLabelErrAddUtilisateur.setText("Login et/ou mot de passe trop court");
-        }
-        else {
-            Utilisateur u = new Utilisateur();
-            u.login = login;
-            u.password = password;
-            try {
-                PreparedStatement st = this.con.prepareStatement("insert into utilisateur values(?)");
-                st.setObject(1, u);
-                st.executeUpdate();
-                this.jLabelSucAddUtilisateur.setText("Utilisateur ajouté avec succès !");
-            } catch (SQLException ex) {
-                Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_jButtonAddUtilisateurActionPerformed
 
     private void jPanelUtilisateurFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanelUtilisateurFocusGained
 
     }//GEN-LAST:event_jPanelUtilisateurFocusGained
 
-    private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
-        
-    }//GEN-LAST:event_jPanel2ComponentShown
-
     private void jPanelUtilisateurComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelUtilisateurComponentShown
-        Utilisateur u = new Utilisateur();
+        /*Utilisateur u = new Utilisateur();
         try {
             java.util.Map maMap = con.getTypeMap();
             maMap.put("CM429363.UTILISATEUR_TYPE", Class.forName("projetbdm.Utilisateur"));
@@ -556,61 +298,80 @@ public class WindowAdmin extends javax.swing.JFrame {
         }
         catch(SQLException | ClassNotFoundException e) {
             System.out.println(e);
-        }
+        }*/
     }//GEN-LAST:event_jPanelUtilisateurComponentShown
 
     private void jButtonAddSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSystemeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAddSystemeActionPerformed
 
+    private void jToggleButtonAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAddImageActionPerformed
+        this.jScrollPaneImage.setVisible(false);
+        this.jPanelAddImage.setVisible(true);
+    }//GEN-LAST:event_jToggleButtonAddImageActionPerformed
+
+    private void jButtonAnnulerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerImageActionPerformed
+        this.jPanelAddImage.setVisible(false);
+        this.jScrollPaneImage.setVisible(true);
+    }//GEN-LAST:event_jButtonAnnulerImageActionPerformed
+
+    private void jButtonSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveImageActionPerformed
+        String nom = this.jTextFieldNomI.getText();
+        String date = this.jTextFieldDateI.getText();
+        String description = this.jTextAreaDescriptionI.getText();
+        String urlI = this.jTextFieldUrlI.getText();
+       // int id = ProjetBDM.getId("image");
+        
+        Image img = new Image();
+        img.insererImage(1, nom, date, description, urlI);
+    }//GEN-LAST:event_jButtonSaveImageActionPerformed
+
+    private void jButtonParcourirIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParcourirIActionPerformed
+        JFileChooser jf=new JFileChooser();
+        int i=jf.showOpenDialog(this);
+        String urlI = "";
+        if(i==JFileChooser.APPROVE_OPTION)
+        {
+            urlI = jf.getSelectedFile().toString();
+        }
+        this.jTextFieldUrlI.setText(urlI);
+    }//GEN-LAST:event_jButtonParcourirIActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddImage;
     private javax.swing.JButton jButtonAddSysteme;
-    private javax.swing.JButton jButtonAddUtilisateur;
     private javax.swing.JButton jButtonAnnulerImage;
-    private javax.swing.JButton jButtonDeleteUtilisateur;
-    private javax.swing.JButton jButtonParcourirImage;
+    private javax.swing.JButton jButtonParcourirI;
     private javax.swing.JButton jButtonSaveImage;
-    private javax.swing.JButton jButtonSaveSysteme;
-    private javax.swing.JButton jButtonSaveUtilisateur;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelErrAddUtilisateur;
+    private javax.swing.JLabel jLabelErrSysteme;
+    private javax.swing.JLabel jLabelSuccSysteme;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel jPanelImage;
+    private javax.swing.JPanel jPanelAddImage;
     private javax.swing.JPanel jPanelSysteme;
     private javax.swing.JPanel jPanelUtilisateur;
-    private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JScrollPane jScrollPaneImage;
+    private javax.swing.JTabbedPane jTabbedPaneImage;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTableUtilisateur;
     private javax.swing.JTextArea jTextAreaDescriptionI;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldDateI;
-    private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldNomI;
     private javax.swing.JTextField jTextFieldUrlI;
+    private javax.swing.JToggleButton jToggleButtonAddImage;
     // End of variables declaration//GEN-END:variables
 }

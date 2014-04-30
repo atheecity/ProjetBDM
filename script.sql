@@ -22,11 +22,12 @@ create or replace type note_ref_type as object (
 create or replace type notes_type as table of note_ref_type;
 /
 
-create or replace type image_type as object (
+create type image_type as object (
     idI integer, 
     dateI date, 
     nomI varchar2(50),
-    applicationI ref application_type
+    descriptionI varchar2(150),
+    imageI ORDSYS.ORDImage
 );
 /
 
@@ -142,8 +143,7 @@ create table note of note_type (
 );
 
 create table image of image_type (
-    primary key(idI),
-    applicationI scope is application
+    primary key(idI)
 );
 
 create table video of video_type (
