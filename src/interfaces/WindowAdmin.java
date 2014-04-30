@@ -10,9 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import projetbdm.*;
 
@@ -92,10 +94,29 @@ public class WindowAdmin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldUrlI = new javax.swing.JTextField();
         jButtonParcourirI = new javax.swing.JButton();
+        jPanelCategorie = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jButtonAddCategorie = new javax.swing.JButton();
+        jButtonDeleteCategorie = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jPanelAddCategorie = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldNomC = new javax.swing.JTextField();
+        jButtonAnnulerC = new javax.swing.JButton();
+        jButtonSaveC = new javax.swing.JButton();
+        jPanelApplication = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jPanel11 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administration application");
-        setMaximumSize(new java.awt.Dimension(790, 479));
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jTabbedPaneImage.setTabPlacement(javax.swing.JTabbedPane.LEFT);
@@ -235,12 +256,12 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelSystemeLayout.setHorizontalGroup(
             jPanelSystemeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+            .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         jPanelSystemeLayout.setVerticalGroup(
             jPanelSystemeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelSystemeLayout.createSequentialGroup()
-                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -270,6 +291,11 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanel3.add(jButtonAddUtilisateur, new java.awt.GridBagConstraints());
 
         jButtonDeleteUtilisateur.setText("Supprimer");
+        jButtonDeleteUtilisateur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteUtilisateurActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonDeleteUtilisateur, new java.awt.GridBagConstraints());
 
         jPanel6.setLayout(new java.awt.CardLayout());
@@ -370,12 +396,12 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelUtilisateurLayout.setHorizontalGroup(
             jPanelUtilisateurLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+            .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         jPanelUtilisateurLayout.setVerticalGroup(
             jPanelUtilisateurLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelUtilisateurLayout.createSequentialGroup()
-                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -561,17 +587,198 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelImageLayout.setHorizontalGroup(
             jPanelImageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelImageLayout.createSequentialGroup()
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPaneImage.addTab("Image", jPanelImage);
+
+        jPanelCategorie.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelCategorieComponentShown(evt);
+            }
+        });
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+
+        jButtonAddCategorie.setText("Ajouter une catégorie");
+        jButtonAddCategorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddCategorieActionPerformed(evt);
+            }
+        });
+        jPanel8.add(jButtonAddCategorie, new java.awt.GridBagConstraints());
+
+        jButtonDeleteCategorie.setText("Supprimer");
+        jButtonDeleteCategorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteCategorieActionPerformed(evt);
+            }
+        });
+        jPanel8.add(jButtonDeleteCategorie, new java.awt.GridBagConstraints());
+
+        jPanel9.setLayout(new java.awt.CardLayout());
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Sélection", "Nom catégorie"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+
+        jPanel9.add(jScrollPane4, "card2");
+
+        jPanelAddCategorie.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une catégorie"));
+        jPanelAddCategorie.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setText("Nom de la catégorie : ");
+        jPanelAddCategorie.add(jLabel6, new java.awt.GridBagConstraints());
+
+        jTextFieldNomC.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldNomC.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldNomC.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        jPanelAddCategorie.add(jTextFieldNomC, gridBagConstraints);
+
+        jButtonAnnulerC.setText("Annuler");
+        jButtonAnnulerC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnulerCActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanelAddCategorie.add(jButtonAnnulerC, gridBagConstraints);
+
+        jButtonSaveC.setText("Sauvegarder");
+        jButtonSaveC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveCActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        jPanelAddCategorie.add(jButtonSaveC, gridBagConstraints);
+
+        jPanel9.add(jPanelAddCategorie, "card3");
+
+        org.jdesktop.layout.GroupLayout jPanelCategorieLayout = new org.jdesktop.layout.GroupLayout(jPanelCategorie);
+        jPanelCategorie.setLayout(jPanelCategorieLayout);
+        jPanelCategorieLayout.setHorizontalGroup(
+            jPanelCategorieLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelCategorieLayout.setVerticalGroup(
+            jPanelCategorieLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelCategorieLayout.createSequentialGroup()
+                .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPaneImage.addTab("Catégorie", jPanelCategorie);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jButton1.setText("Ajouter une application");
+        jPanel4.add(jButton1, new java.awt.GridBagConstraints());
+
+        jButton2.setText("Supprimer");
+        jPanel4.add(jButton2, new java.awt.GridBagConstraints());
+
+        jPanel10.setLayout(new java.awt.CardLayout());
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Sélection", "Identifiant", "Nom", "Description", "Date création", "Taille", "Version actuelle"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable5);
+
+        jPanel10.add(jScrollPane5, "card2");
+
+        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 695, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 380, Short.MAX_VALUE)
+        );
+
+        jPanel10.add(jPanel11, "card3");
+
+        org.jdesktop.layout.GroupLayout jPanelApplicationLayout = new org.jdesktop.layout.GroupLayout(jPanelApplication);
+        jPanelApplication.setLayout(jPanelApplicationLayout);
+        jPanelApplicationLayout.setHorizontalGroup(
+            jPanelApplicationLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelApplicationLayout.setVerticalGroup(
+            jPanelApplicationLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelApplicationLayout.createSequentialGroup()
+                .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPaneImage.addTab("Application", jPanelApplication);
 
         getContentPane().add(jTabbedPaneImage);
 
@@ -583,6 +790,11 @@ public class WindowAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelUtilisateurFocusGained
 
     private void jPanelUtilisateurComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelUtilisateurComponentShown
+        this.upadteTableUtilisateur();
+    }//GEN-LAST:event_jPanelUtilisateurComponentShown
+
+    public void upadteTableUtilisateur()
+    {
         Utilisateur u = new Utilisateur();
         try {
             java.util.Map maMap = con.getTypeMap();
@@ -599,8 +811,8 @@ public class WindowAdmin extends javax.swing.JFrame {
         catch(SQLException | ClassNotFoundException e) {
             System.out.println(e);
         }
-    }//GEN-LAST:event_jPanelUtilisateurComponentShown
-
+    }
+    
     private void jToggleButtonAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAddImageActionPerformed
         this.jScrollPaneImage.setVisible(false);
         this.jPanelAddImage.setVisible(true);
@@ -733,15 +945,105 @@ public class WindowAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanelSystemeComponentShown
 
+    private void jButtonAddCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddCategorieActionPerformed
+        this.jScrollPane4.setVisible(false);
+        this.jPanelAddCategorie.setVisible(true);
+    }//GEN-LAST:event_jButtonAddCategorieActionPerformed
+
+    private void jButtonAnnulerCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerCActionPerformed
+        this.jScrollPane4.setVisible(true);
+        this.jPanelAddCategorie.setVisible(false);
+    }//GEN-LAST:event_jButtonAnnulerCActionPerformed
+
+    private void jButtonSaveCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveCActionPerformed
+        String nomC = this.jTextFieldNomC.getText();
+        if (nomC.length() >= 3)
+        {
+            int idC = ProjetBDM.getId("categorie");
+            String sql = "insert into categorie values (" + idC + ",'" + nomC + "', applications_type())";
+            try {
+                Statement stmt = this.con.createStatement();
+                stmt.executeQuery(sql);
+                con.commit();
+                stmt.close();
+                this.jScrollPane4.setVisible(true);
+                this.jPanelAddCategorie.setVisible(false);
+            } catch (SQLException ex) {
+                Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Nom de la catégorie trop court");
+        }
+    }//GEN-LAST:event_jButtonSaveCActionPerformed
+
+    private void jPanelCategorieComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelCategorieComponentShown
+        PreparedStatement st;
+        try {
+            st = con.prepareStatement("select * from categorie");
+            ResultSet rst = st.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) this.jTable4.getModel();
+            model.getDataVector().removeAllElements();
+            while (rst.next()) {
+                String nomC = rst.getString(2);
+                model.addRow(new Object[]{false, nomC});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jPanelCategorieComponentShown
+
+    private void jButtonDeleteCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteCategorieActionPerformed
+        Boolean select = false;
+        for (int i = 0; i < this.jTable4.getRowCount(); i++)
+        {
+            if (this.jTable4.getValueAt(i, 0).equals(true)){
+                select = true;
+            }
+        }
+        if (!select)
+            JOptionPane.showMessageDialog(this, "Aucune catégorie n'est sélectionnée");
+    }//GEN-LAST:event_jButtonDeleteCategorieActionPerformed
+
+    private void jButtonDeleteUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUtilisateurActionPerformed
+        Boolean select = false;
+        for (int i = 0; i < this.jTable2.getRowCount(); i++)
+        {
+            if (this.jTable2.getValueAt(i, 0).equals(true)){
+                select = true;
+                try {
+                    PreparedStatement st = con.prepareStatement("delete from utilisateur "
+                            + "where login = ?");
+                    st.setString(1, this.jTable2.getValueAt(i, 1).toString());
+                    st.executeUpdate();
+                    con.commit();
+                    st.close();
+                    this.upadteTableUtilisateur();
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if (!select)
+            JOptionPane.showMessageDialog(this, "Aucun utilisateur n'est sélectionné");
+    }//GEN-LAST:event_jButtonDeleteUtilisateurActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAddCategorie;
     private javax.swing.JButton jButtonAddSysteme;
     private javax.swing.JButton jButtonAddUtilisateur;
     private javax.swing.JButton jButtonAnnuler;
+    private javax.swing.JButton jButtonAnnulerC;
     private javax.swing.JButton jButtonAnnulerImage;
     private javax.swing.JButton jButtonAnnulerS;
+    private javax.swing.JButton jButtonDeleteCategorie;
     private javax.swing.JButton jButtonDeleteSysteme;
     private javax.swing.JButton jButtonDeleteUtilisateur;
     private javax.swing.JButton jButtonParcourirI;
+    private javax.swing.JButton jButtonSaveC;
     private javax.swing.JButton jButtonSaveImage;
     private javax.swing.JButton jButtonSaveSysteme;
     private javax.swing.JButton jButtonSaveUtilisateur;
@@ -752,18 +1054,27 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelAddCategorie;
     private javax.swing.JPanel jPanelAddImage;
     private javax.swing.JPanel jPanelAddSysteme;
     private javax.swing.JPanel jPanelAddUtilisateur;
+    private javax.swing.JPanel jPanelApplication;
+    private javax.swing.JPanel jPanelCategorie;
     private javax.swing.JPanel jPanelImage;
     private javax.swing.JPanel jPanelSysteme;
     private javax.swing.JPanel jPanelUtilisateur;
@@ -771,15 +1082,20 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPaneImage;
     private javax.swing.JTabbedPane jTabbedPaneImage;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     private javax.swing.JTextArea jTextAreaDescriptionI;
     private javax.swing.JTextField jTextFieldDateI;
     private javax.swing.JTextField jTextFieldFabriquantS;
     private javax.swing.JTextField jTextFieldLogin;
+    private javax.swing.JTextField jTextFieldNomC;
     private javax.swing.JTextField jTextFieldNomI;
     private javax.swing.JTextField jTextFieldNomS;
     private javax.swing.JTextField jTextFieldUrlI;

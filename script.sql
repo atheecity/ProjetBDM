@@ -104,7 +104,6 @@ create or replace type applicationSysteme_type as object (
 create or replace type categorie_type as object (
     idC integer, 
     nomC varchar2(50),
-    logoC varchar2(250),
     applicationsC applications_type
 );
 /
