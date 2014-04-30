@@ -26,6 +26,7 @@ public class ProjetBDM {
             String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
             //String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
             con = DriverManager.getConnection(url, "cm429363", "cm429363");
+            con.setAutoCommit(false);
         } catch (SQLException ec) {
             ec.printStackTrace();
         }
@@ -45,6 +46,7 @@ public class ProjetBDM {
             ResultSet rst = st.executeQuery();
             rst.next();
             u = (Utilisateur) rst.getObject(1, maMap);
+            rst.close();
         }
         catch(SQLException | ClassNotFoundException e) {
             System.out.println(e);
@@ -77,9 +79,8 @@ public class ProjetBDM {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
         } catch (Exception ex) { 
         }
-        Connection con = connect();
-        Window w = new Window(con);
-        //WindowAdmin wa = new WindowAdmin(con);
+        //Window w = new Window(con);
+        WindowAdmin wa = new WindowAdmin(connect());
     }
     
 }
