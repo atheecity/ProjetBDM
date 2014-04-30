@@ -99,21 +99,16 @@ public class Window extends javax.swing.JFrame {
         jPanel67 = new javax.swing.JPanel();
         jPanel68 = new javax.swing.JPanel();
         jPanel69 = new javax.swing.JPanel();
-        jPanel70 = new javax.swing.JPanel();
-        jPanel71 = new javax.swing.JPanel();
-        jPanel72 = new javax.swing.JPanel();
-        jPanel73 = new javax.swing.JPanel();
-        jPanel74 = new javax.swing.JPanel();
-        jPanel75 = new javax.swing.JPanel();
         jPanelAcceuil = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jPanelAffichev2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(1000, 750));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setMinimumSize(new java.awt.Dimension(210, 0));
@@ -295,7 +290,7 @@ public class Window extends javax.swing.JFrame {
         jPanel7.setLayout(new java.awt.CardLayout());
 
         jPanelAffiche.setPreferredSize(new java.awt.Dimension(780, 700));
-        jPanelAffiche.setLayout(new java.awt.GridLayout(6, 6, 11, 11));
+        jPanelAffiche.setLayout(new java.awt.GridLayout(5, 6, 11, 2));
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
@@ -305,7 +300,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel40Layout.setVerticalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel40);
@@ -318,7 +313,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel41);
@@ -331,7 +326,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel42Layout.setVerticalGroup(
             jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel42);
@@ -344,7 +339,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel43);
@@ -357,7 +352,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel44Layout.setVerticalGroup(
             jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel44);
@@ -370,7 +365,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel45Layout.setVerticalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel45);
@@ -383,7 +378,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel46Layout.setVerticalGroup(
             jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel46);
@@ -396,7 +391,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel47Layout.setVerticalGroup(
             jPanel47Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel47);
@@ -409,7 +404,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel48Layout.setVerticalGroup(
             jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel48);
@@ -422,7 +417,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel49Layout.setVerticalGroup(
             jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel49);
@@ -435,7 +430,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel50Layout.setVerticalGroup(
             jPanel50Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel50);
@@ -448,7 +443,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel51Layout.setVerticalGroup(
             jPanel51Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel51);
@@ -461,7 +456,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel52Layout.setVerticalGroup(
             jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel52);
@@ -474,7 +469,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel53Layout.setVerticalGroup(
             jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel53);
@@ -487,7 +482,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel54Layout.setVerticalGroup(
             jPanel54Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel54);
@@ -500,7 +495,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel55Layout.setVerticalGroup(
             jPanel55Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel55);
@@ -513,7 +508,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel56Layout.setVerticalGroup(
             jPanel56Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel56);
@@ -526,7 +521,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel57Layout.setVerticalGroup(
             jPanel57Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel57);
@@ -539,7 +534,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel58Layout.setVerticalGroup(
             jPanel58Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel58);
@@ -552,7 +547,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel59Layout.setVerticalGroup(
             jPanel59Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel59);
@@ -565,7 +560,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel60Layout.setVerticalGroup(
             jPanel60Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel60);
@@ -578,7 +573,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel61Layout.setVerticalGroup(
             jPanel61Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel61);
@@ -591,7 +586,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel62Layout.setVerticalGroup(
             jPanel62Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel62);
@@ -604,7 +599,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel63Layout.setVerticalGroup(
             jPanel63Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel63);
@@ -617,7 +612,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel64Layout.setVerticalGroup(
             jPanel64Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel64);
@@ -630,7 +625,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel65Layout.setVerticalGroup(
             jPanel65Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel65);
@@ -643,7 +638,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel66Layout.setVerticalGroup(
             jPanel66Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel66);
@@ -656,7 +651,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel67Layout.setVerticalGroup(
             jPanel67Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel67);
@@ -669,7 +664,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel68Layout.setVerticalGroup(
             jPanel68Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel68);
@@ -682,88 +677,10 @@ public class Window extends javax.swing.JFrame {
         );
         jPanel69Layout.setVerticalGroup(
             jPanel69Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+            .addGap(0, 142, Short.MAX_VALUE)
         );
 
         jPanelAffiche.add(jPanel69);
-
-        javax.swing.GroupLayout jPanel70Layout = new javax.swing.GroupLayout(jPanel70);
-        jPanel70.setLayout(jPanel70Layout);
-        jPanel70Layout.setHorizontalGroup(
-            jPanel70Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        jPanel70Layout.setVerticalGroup(
-            jPanel70Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
-        );
-
-        jPanelAffiche.add(jPanel70);
-
-        javax.swing.GroupLayout jPanel71Layout = new javax.swing.GroupLayout(jPanel71);
-        jPanel71.setLayout(jPanel71Layout);
-        jPanel71Layout.setHorizontalGroup(
-            jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        jPanel71Layout.setVerticalGroup(
-            jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
-        );
-
-        jPanelAffiche.add(jPanel71);
-
-        javax.swing.GroupLayout jPanel72Layout = new javax.swing.GroupLayout(jPanel72);
-        jPanel72.setLayout(jPanel72Layout);
-        jPanel72Layout.setHorizontalGroup(
-            jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        jPanel72Layout.setVerticalGroup(
-            jPanel72Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
-        );
-
-        jPanelAffiche.add(jPanel72);
-
-        javax.swing.GroupLayout jPanel73Layout = new javax.swing.GroupLayout(jPanel73);
-        jPanel73.setLayout(jPanel73Layout);
-        jPanel73Layout.setHorizontalGroup(
-            jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        jPanel73Layout.setVerticalGroup(
-            jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
-        );
-
-        jPanelAffiche.add(jPanel73);
-
-        javax.swing.GroupLayout jPanel74Layout = new javax.swing.GroupLayout(jPanel74);
-        jPanel74.setLayout(jPanel74Layout);
-        jPanel74Layout.setHorizontalGroup(
-            jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        jPanel74Layout.setVerticalGroup(
-            jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
-        );
-
-        jPanelAffiche.add(jPanel74);
-
-        javax.swing.GroupLayout jPanel75Layout = new javax.swing.GroupLayout(jPanel75);
-        jPanel75.setLayout(jPanel75Layout);
-        jPanel75Layout.setHorizontalGroup(
-            jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        jPanel75Layout.setVerticalGroup(
-            jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
-        );
-
-        jPanelAffiche.add(jPanel75);
 
         jPanel7.add(jPanelAffiche, "card2");
 
@@ -783,10 +700,23 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
                 .addGap(288, 288, 288)
                 .addComponent(jLabel5)
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addContainerGap(417, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanelAcceuil, "card5");
+
+        javax.swing.GroupLayout jPanelAffichev2Layout = new javax.swing.GroupLayout(jPanelAffichev2);
+        jPanelAffichev2.setLayout(jPanelAffichev2Layout);
+        jPanelAffichev2Layout.setHorizontalGroup(
+            jPanelAffichev2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 780, Short.MAX_VALUE)
+        );
+        jPanelAffichev2Layout.setVerticalGroup(
+            jPanelAffichev2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 719, Short.MAX_VALUE)
+        );
+
+        jPanel7.add(jPanelAffichev2, "card4");
 
         jMenu1.setText("File");
 
@@ -821,7 +751,7 @@ public class Window extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -896,13 +826,23 @@ public class Window extends javax.swing.JFrame {
                 System.out.println("erreur combo box");
                 break;
         }
-        Miniature mini = new Miniature(1, "rien.png", "nomImage", "typeImage");
-        trouve.add(mini);
-        int largueur = jPanel40.getPreferredSize().width;
+        Miniature mini1 = new Miniature(1, "rien.png", "nomImage1", "typeImage1");
+        Miniature mini2 = new Miniature(2, "rien.png", "nomImage2", "typeImage2");
+        Miniature mini3 = new Miniature(3, "rien.png", "nomImage3", "typeImage3");
+        Miniature mini4 = new Miniature(4, "rien.png", "nomImage4", "typeImage4");
+        trouve.add(mini1);
+        trouve.add(mini2);
+        trouve.add(mini3);
+        trouve.add(mini4);
+        /*int largueur = jPanel40.getPreferredSize().width;
         int hauteur = jPanel40.getPreferredSize().height;
         JPanel jPanel400 = mini.afficheMini(largueur, hauteur);
-        jPanel40.add(jPanel400);
-        System.out.println("largeur "+largueur+" hauteur "+hauteur);
+        MiniaturePanel mp = new MiniaturePanel();
+        mp.setSize(largueur, hauteur);
+        mp.remplir(mini);
+        jPanel40.add(mp);
+        jPanel41.add(mp);*/
+        //System.out.println("largeur "+largueur+" hauteur "+hauteur);
     }
     
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
@@ -989,14 +929,9 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel68;
     private javax.swing.JPanel jPanel69;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel70;
-    private javax.swing.JPanel jPanel71;
-    private javax.swing.JPanel jPanel72;
-    private javax.swing.JPanel jPanel73;
-    private javax.swing.JPanel jPanel74;
-    private javax.swing.JPanel jPanel75;
     private javax.swing.JPanel jPanelAcceuil;
     private javax.swing.JPanel jPanelAffiche;
+    private javax.swing.JPanel jPanelAffichev2;
     private javax.swing.JPanel jPanelImageCompa;
     private javax.swing.JPanel jPanelLogAdmin;
     private javax.swing.JPasswordField jPasswordFieldPassword;

@@ -7,6 +7,7 @@
 package projetbdm;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -72,11 +73,13 @@ public class Miniature {
         ImgPan.setSize(larg, haut-28);
         JLabel titre = new JLabel(this.nom);
         JLabel typ = new JLabel(this.type);
-        JLabel imagee = new JLabel( new ImageIcon(this.img));        
+        JLabel imagee = new JLabel( new ImageIcon(this.img)); 
+        JButton bout = new JButton("voir");
         ImgPan.add(imagee);
         pan.add(ImgPan);
         pan.add(titre);
         pan.add(typ);
+        pan.add(bout);
         return pan;
     }
 }

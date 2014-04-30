@@ -82,8 +82,8 @@ public class ProjetBDM {
         } catch (Exception ex) { 
         }
         Connection con = connect();
-        //Window w = new Window(con);
-        WindowAdmin wa = new WindowAdmin(con);
+        Window w = new Window(con);
+        //WindowAdmin wa = new WindowAdmin(con);
     }
     
 }
