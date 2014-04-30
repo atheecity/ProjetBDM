@@ -338,8 +338,6 @@ public class WindowAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonParcourirIActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonAddImage;
     private javax.swing.JButton jButtonAddSysteme;
     private javax.swing.JButton jButtonAnnulerImage;
     private javax.swing.JButton jButtonParcourirI;
@@ -352,10 +350,6 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelErrSysteme;
     private javax.swing.JLabel jLabelSuccSysteme;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
