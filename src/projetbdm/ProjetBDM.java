@@ -7,10 +7,7 @@
 package projetbdm;
 import interfaces.*;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.UIManager;
-import oracle.jdbc.OraclePreparedStatement;
 
 
 /**
@@ -32,28 +29,6 @@ public class ProjetBDM {
         }
         
         return con;
-    }
-    
-    public static int getId(String table)
-    {
-        Connection con = connect();
-        OraclePreparedStatement pstmt;
-        ResultSet rset;
-        int nb = 0;
-
-        try {
-            pstmt = (OraclePreparedStatement) con.prepareStatement("SELECT count(*)"
-                    + "FROM " + table);
-            rset = pstmt.executeQuery();
-            while(rset.next())
-            {
-                nb = Integer.parseInt(rset.getString(1));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjetBDM.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return nb+1;
     }
     
     public static boolean uConnexion(String login,String pass)
@@ -82,8 +57,8 @@ public class ProjetBDM {
         } catch (Exception ex) { 
         }
         Connection con = connect();
-        //Window w = new Window(con);
-        WindowAdmin wa = new WindowAdmin(con);
+        Window w = new Window(con);
+        //WindowAdmin wa = new WindowAdmin(con);
     }
     
 }
