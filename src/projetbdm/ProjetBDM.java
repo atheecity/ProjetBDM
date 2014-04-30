@@ -7,6 +7,8 @@
 package projetbdm;
 import interfaces.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 
@@ -23,7 +25,7 @@ public class ProjetBDM {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
             //String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
-            con = DriverManager.getConnection(url, "cm429363", "cm429363");
+            con = DriverManager.getConnection(url, "ra185310", "ra185310");
         } catch (SQLException ec) {
             ec.printStackTrace();
         }
@@ -51,14 +53,33 @@ public class ProjetBDM {
         return (u.password == null ? pass == null : u.password.equals(pass));
     }
     
+    public static int getId(String nameTable)
+    {
+        Connection con = connect();
+        int nb = 0;
+        try {
+            Statement st = con.createStatement();
+            ResultSet rset = st.executeQuery("SELECT count(*) FROM " + nameTable);
+            while(rset.next())
+            {
+                nb = Integer.parseInt(rset.getString(1));
+            }
+            rset.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjetBDM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return nb+1;
+    }
+    
     public static void main(String[] args) {
         try { 
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
         } catch (Exception ex) { 
         }
         Connection con = connect();
-        Window w = new Window(con);
-        //WindowAdmin wa = new WindowAdmin(con);
+        //Window w = new Window(con);
+        WindowAdmin wa = new WindowAdmin(con);
     }
     
 }

@@ -1,37 +1,60 @@
 package projetbdm;
 
+import java.io.IOException;
 import java.sql.*; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
+import oracle.ord.im.OrdImage;
 
-public class Image implements SQLData
+public class Image 
 { 
-
-    String sql_type;
-    public Date dateI;
-    public String nomI;
-    public Ref refApplicationI;
     
-    public Image() {}
- 
-    @Override
-    public String getSQLTypeName ()
-    { 
-        return "CM429363.IMAGE_TYPE";
+    private Connection con;
+    
+    public Image() 
+    {
+        this.con = ProjetBDM.connect();
     }
-
-    @Override
-    public void readSQL(SQLInput  stream , String typeName) throws SQLException 
-    { 
-        sql_type = typeName;
-        this.dateI = stream.readDate();
-        this.nomI = stream.readNString();
-        this.refApplicationI = stream.readRef();
+    
+    public void insererImage(int id, String nom, String date, String description, String urlI)
+    {
+        String sql = ("INSERT INTO image VALUES (" + id + ",to_date('" + date 
+                + "', 'YYYY-MM-DD'),'" + nom + "','" + description + "', ordsys.ordimage.init())");
+       // try {
+            //Statement stmt = this.con.createStatement();
+            //stmt.executeQuery(sql);
+            this.insererOrdImage(urlI, 1);
+        /*} catch (SQLException ex) {
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
-
-    @Override
-    public void writeSQL(SQLOutput stream) throws SQLException 
-    { 
-       stream.writeDate(this.dateI);
-       stream.writeString(this.nomI);
-       stream.writeRef(this.refApplicationI);
+    
+    public void insererOrdImage(String urlI, int idI)
+    {
+        try {
+            Statement stmt = con.createStatement();
+            OracleResultSet rset;
+            rset = (OracleResultSet) stmt.executeQuery("select image from photo where "
+                    + "idP=" + idI + " for update");
+            while(rset.next())
+            {
+                OrdImage img = (OrdImage) rset.getORAData(1, OrdImage.getORADataFactory());
+                img.loadDataFromFile(urlI);
+                img.setProperties();
+                OraclePreparedStatement pstmt = (OraclePreparedStatement) con.prepareStatement("update "
+                        + "photo set image = ? where idP=?");
+                pstmt.setORAData(1, img);
+                pstmt.setInt(2, idI);
+                pstmt.execute();
+                pstmt.close();
+            }
+            rset.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

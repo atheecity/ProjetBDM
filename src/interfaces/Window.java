@@ -178,7 +178,7 @@ public class Window extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelLogAdminLayout.setVerticalGroup(
             jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +193,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAdmin)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTextFieldRechImage.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class Window extends javax.swing.JFrame {
                                         .addComponent(jTextFieldMotRech, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jButtonLanceRechMot, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, Short.MAX_VALUE)
                                 .addComponent(jSeparator1))
                             .addComponent(jPanelLogAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -821,7 +821,7 @@ public class Window extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
