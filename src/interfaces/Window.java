@@ -10,9 +10,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.Connection;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import projetbdm.Miniature;
 import projetbdm.ProjetBDM;
@@ -270,7 +268,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
                 .addGap(309, 309, 309)
                 .addComponent(jLabel5)
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addContainerGap(469, Short.MAX_VALUE))
         );
         jPanelAcceuilLayout.setVerticalGroup(
             jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +291,7 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setLayout(jPanelAfficheLayout);
         jPanelAfficheLayout.setHorizontalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGap(0, 798, Short.MAX_VALUE)
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,21 +449,6 @@ public class Window extends javax.swing.JFrame {
                 cmp = 0;
             }
         }
-        //mini1.afficheMini(jPanelAffiche, 0, 0);
-        //mini1.afficheMini(jPanelAffiche, 200, 200);
-        /*JLabel lalala = new JLabel(new ImageIcon(mini1.getImg()));
-        lalala.setBounds(0, 0, 100, 100);
-        jPanelAffiche.add(lalala);
-        jPanelAffiche.repaint();*/
-        /*int largueur = jPanel40.getPreferredSize().width;
-        int hauteur = jPanel40.getPreferredSize().height;
-        JPanel jPanel400 = mini.afficheMini(largueur, hauteur);
-        MiniaturePanel mp = new MiniaturePanel();
-        mp.setSize(largueur, hauteur);
-        mp.remplir(mini);
-        jPanel40.add(mp);
-        jPanel41.add(mp);*/
-        //System.out.println("largeur "+largueur+" hauteur "+hauteur);
     }
     
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed

@@ -25,7 +25,7 @@ public class ProjetBDM {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
             //String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
-            con = DriverManager.getConnection(url, "ra185310", "ra185310");
+            con = DriverManager.getConnection(url, "cm429363", "cm429363");
         } catch (SQLException ec) {
             ec.printStackTrace();
         }

@@ -171,5 +171,5 @@ create table utilisateur of utilisateur_type (
 );
 
 alter type image_type add attribute miniature ordsys.ordimage cascade;
-alter type image_type add member procedure addMini;
+alter type image_type add member procedure addMini cascade;
 

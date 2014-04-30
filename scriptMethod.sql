@@ -12,7 +12,7 @@ CREATE OR REPLACE TYPE BODY image_type AS
 		img ordsys.ordimage;
 		mini ordsys.ordimage;
 	BEGIN
-        select i.image into img
+        select i.imageI into img
 		from image i
 		where i.idI=self.idI
 		for update;
