@@ -1,37 +1,63 @@
 package projetbdm;
 
-import java.sql.*; 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
+import oracle.jdbc.OracleStatement;
+import oracle.ord.im.*;
 
-public class Image implements SQLData
+public class Image
 { 
-
-    String sql_type;
-    public Date dateI;
-    public String nomI;
-    public Ref refApplicationI;
     
-    public Image() {}
+    private Connection con;
+    
+    public Image() 
+    {
+        this.con = ProjetBDM.connect();
+    }
  
-    @Override
-    public String getSQLTypeName ()
-    { 
-        return "CM429363.IMAGE_TYPE";
+    public void addImage(String url, int idI)
+    {
+        try { 
+            Statement stmt = this.con.createStatement();
+            
+            String sql2 = "SELECT imageI from image where idI = " + idI + " FOR UPDATE";
+            OracleResultSet rset = (OracleResultSet) stmt.executeQuery(sql2);
+            while(rset.next())
+            {
+                System.out.println(url);
+                OrdImage img = (OrdImage) rset.getORAData(1, OrdImage.getORADataFactory());
+                img.loadDataFromFile(url);
+                img.setProperties();
+                String sql3 = "UPDATE image set imageI = ? where idI = ?";
+                OraclePreparedStatement pstmt = (OraclePreparedStatement) con.prepareStatement(sql3);
+                pstmt.setORAData(1, img);
+                pstmt.setInt(2, idI);
+                pstmt.execute();
+                pstmt.close();
+            }
+            rset.close();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-    @Override
-    public void readSQL(SQLInput  stream , String typeName) throws SQLException 
-    { 
-        sql_type = typeName;
-        this.dateI = stream.readDate();
-        this.nomI = stream.readNString();
-        this.refApplicationI = stream.readRef();
-    }
-
-    @Override
-    public void writeSQL(SQLOutput stream) throws SQLException 
-    { 
-       stream.writeDate(this.dateI);
-       stream.writeString(this.nomI);
-       stream.writeRef(this.refApplicationI);
+    
+    public void addChampImage(int idI, String nom, String dateI, String description, String url)
+    {
+        String sql = "INSERT INTO image VALUES (" + idI + ",to_date('" + dateI + "', 'YYYY-MM-DD')"
+                + " ,'" + nom + "','" + description + "',ORDSYS.ORDImage.init())";
+        
+        try {
+            OracleStatement ost = (OracleStatement) con.createStatement();
+            ost.execute(sql);
+            this.addImage(url, idI);
+        } catch (SQLException ex) {
+            Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
