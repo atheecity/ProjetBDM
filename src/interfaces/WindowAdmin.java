@@ -6,16 +6,14 @@
 
 package interfaces;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import oracle.jdbc.*;
+import oracle.sql.*;
 import projetbdm.*;
 
 
@@ -127,28 +125,31 @@ public class WindowAdmin extends javax.swing.JFrame {
         jTextFieldVersionAA = new javax.swing.JTextField();
         jButtonAnnulerA = new javax.swing.JButton();
         jButtonSuivantA1 = new javax.swing.JButton();
-        jPanelAddApplication4 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jButtonSaveApplication = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
         jPanelAddApplication3 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jButtonSuivantA3 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
         jPanelAddApplication2 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jButtonSuivantA2 = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jPanelAddApplication4 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jButtonSaveApplication = new javax.swing.JButton();
+        jPanel16 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable8 = new javax.swing.JTable();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administration application");
@@ -174,6 +175,11 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanel5.add(jButtonAddSysteme, new java.awt.GridBagConstraints());
 
         jButtonDeleteSysteme.setText("Supprimer");
+        jButtonDeleteSysteme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteSystemeActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButtonDeleteSysteme, new java.awt.GridBagConstraints());
 
         jPanel7.setLayout(new java.awt.CardLayout());
@@ -296,7 +302,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelSystemeLayout.setVerticalGroup(
             jPanelSystemeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelSystemeLayout.createSequentialGroup()
-                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -436,7 +442,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelUtilisateurLayout.setVerticalGroup(
             jPanelUtilisateurLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelUtilisateurLayout.createSequentialGroup()
-                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -627,7 +633,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelImageLayout.createSequentialGroup()
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -740,7 +746,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelCategorieLayout.setVerticalGroup(
             jPanelCategorieLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelCategorieLayout.createSequentialGroup()
-                .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -902,74 +908,6 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jPanel10.add(jPanelAddApplication, "card3");
 
-        jPanelAddApplication4.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jPanelAddApplication4ComponentShown(evt);
-            }
-        });
-
-        jPanel15.setLayout(new java.awt.GridBagLayout());
-
-        jButtonSaveApplication.setText("Sauvegarder");
-        jButtonSaveApplication.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveApplicationActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        jPanel15.add(jButtonSaveApplication, gridBagConstraints);
-
-        jLabel19.setText("Sélectionner un ou plusieurs système pour l'application");
-        jPanel15.add(jLabel19, new java.awt.GridBagConstraints());
-
-        jPanel16.setLayout(new java.awt.CardLayout());
-
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Sélection", "Nom", "Nom fabriquant", "Version"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane9.setViewportView(jTable8);
-
-        jPanel16.add(jScrollPane9, "card2");
-
-        org.jdesktop.layout.GroupLayout jPanelAddApplication4Layout = new org.jdesktop.layout.GroupLayout(jPanelAddApplication4);
-        jPanelAddApplication4.setLayout(jPanelAddApplication4Layout);
-        jPanelAddApplication4Layout.setHorizontalGroup(
-            jPanelAddApplication4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel15, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanel16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
-        );
-        jPanelAddApplication4Layout.setVerticalGroup(
-            jPanelAddApplication4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication4Layout.createSequentialGroup()
-                .add(jPanel16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel10.add(jPanelAddApplication4, "card3");
-
         jPanelAddApplication3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 3/4"));
         jPanelAddApplication3.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -990,12 +928,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         jPanel13.add(jButtonSuivantA3, gridBagConstraints);
-
-        jLabel17.setText("Sélectionner des images ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        jPanel13.add(jLabel17, gridBagConstraints);
 
         jPanel14.setLayout(new java.awt.CardLayout());
 
@@ -1026,24 +958,36 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jPanel14.add(jScrollPane8, "card2");
 
+        jPanel19.setLayout(new java.awt.GridBagLayout());
+
+        jLabel20.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabel20.setText("Sélectionner les images de l'application");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel19.add(jLabel20, gridBagConstraints);
+
         org.jdesktop.layout.GroupLayout jPanelAddApplication3Layout = new org.jdesktop.layout.GroupLayout(jPanelAddApplication3);
         jPanelAddApplication3.setLayout(jPanelAddApplication3Layout);
         jPanelAddApplication3Layout.setHorizontalGroup(
             jPanelAddApplication3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel13, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .add(jPanel19, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelAddApplication3Layout.setVerticalGroup(
             jPanelAddApplication3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication3Layout.createSequentialGroup()
-                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .add(jPanel19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel10.add(jPanelAddApplication3, "card5");
 
-        jPanelAddApplication2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 2/3"));
+        jPanelAddApplication2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 2/4"));
         jPanelAddApplication2.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jPanelAddApplication2ComponentShown(evt);
@@ -1059,24 +1003,16 @@ public class WindowAdmin extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
         jPanel11.add(jButtonSuivantA2, gridBagConstraints);
 
-        jLabel16.setText("Sélectionner la catégorie de l'application");
+        jButton1.setText("Annuler");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        jPanel11.add(jLabel16, gridBagConstraints);
-
-        jButton1.setText("Annuler");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(15, 0, 0, 0);
         jPanel11.add(jButton1, gridBagConstraints);
 
         jPanel12.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -1113,24 +1049,114 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jPanel12.add(jScrollPane7, "card2");
 
+        jPanel17.setLayout(new java.awt.GridBagLayout());
+
+        jLabel18.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(77, 77, 77));
+        jLabel18.setText("Sélectionner au moins une catégorie pour l'application");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel17.add(jLabel18, gridBagConstraints);
+
         org.jdesktop.layout.GroupLayout jPanelAddApplication2Layout = new org.jdesktop.layout.GroupLayout(jPanelAddApplication2);
         jPanelAddApplication2.setLayout(jPanelAddApplication2Layout);
         jPanelAddApplication2Layout.setHorizontalGroup(
             jPanelAddApplication2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel11, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(jPanelAddApplication2Layout.createSequentialGroup()
-                .add(0, 0, 0)
-                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .add(jPanel17, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelAddApplication2Layout.setVerticalGroup(
             jPanelAddApplication2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication2Layout.createSequentialGroup()
-                .add(jPanel12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .add(jPanel17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 78, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel10.add(jPanelAddApplication2, "card4");
+
+        jPanelAddApplication4.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 4/4"));
+        jPanelAddApplication4.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelAddApplication4ComponentShown(evt);
+            }
+        });
+
+        jPanel15.setLayout(new java.awt.GridBagLayout());
+
+        jButtonSaveApplication.setText("Sauvegarder");
+        jButtonSaveApplication.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveApplicationActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanel15.add(jButtonSaveApplication, gridBagConstraints);
+
+        jPanel16.setLayout(new java.awt.CardLayout());
+
+        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Sélection", "Nom", "Nom fabriquant", "Version"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(jTable8);
+
+        jPanel16.add(jScrollPane9, "card2");
+
+        jPanel18.setLayout(new java.awt.GridBagLayout());
+
+        jLabel16.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabel16.setText("Sélectionner au moins un système d'exploitation");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel18.add(jLabel16, gridBagConstraints);
+
+        org.jdesktop.layout.GroupLayout jPanelAddApplication4Layout = new org.jdesktop.layout.GroupLayout(jPanelAddApplication4);
+        jPanelAddApplication4.setLayout(jPanelAddApplication4Layout);
+        jPanelAddApplication4Layout.setHorizontalGroup(
+            jPanelAddApplication4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel15, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .add(jPanel18, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelAddApplication4Layout.setVerticalGroup(
+            jPanelAddApplication4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication4Layout.createSequentialGroup()
+                .add(jPanel18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 371, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(32, 32, 32))
+        );
+
+        jPanel10.add(jPanelAddApplication4, "card3");
 
         org.jdesktop.layout.GroupLayout jPanelApplicationLayout = new org.jdesktop.layout.GroupLayout(jPanelApplication);
         jPanelApplication.setLayout(jPanelApplicationLayout);
@@ -1142,7 +1168,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelApplicationLayout.setVerticalGroup(
             jPanelApplicationLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelApplicationLayout.createSequentialGroup()
-                .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .add(jPanel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 474, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1260,25 +1286,43 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
         this.jScrollPane2.setVisible(true);
         this.jPanelAddUtilisateur.setVisible(false);
+        this.resetFormUtilisateur();
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jButtonSaveUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveUtilisateurActionPerformed
-        try {
-            Utilisateur u = new Utilisateur();
-            u.login = this.jTextFieldLogin.getText();
-            u.password = new String(this.jPasswordFieldPass.getPassword());
-            java.util.Map maMap = con.getTypeMap();
-            PreparedStatement st = con.prepareStatement("insert into utilisateur "
-                    + "values(?)");
-            st.setObject(1, u);
-            st.executeUpdate();
-            con.commit();
-            this.jPanelAddUtilisateur.setVisible(false);
-            this.jScrollPane2.setVisible(true);
-        }
-        catch(Exception e) {System.out.println(e);}
+        String login = this.jTextFieldLogin.getText();
+        String password = new String(this.jPasswordFieldPass.getPassword());
+        
+        if (!login.isEmpty())
+            if (!password.isEmpty()) {
+                try {
+                    Utilisateur u = new Utilisateur();
+                    u.login = login;
+                    u.password = password;
+                    java.util.Map maMap = con.getTypeMap();
+                    PreparedStatement st = con.prepareStatement("insert into utilisateur "
+                            + "values(?)");
+                    st.setObject(1, u);
+                    st.executeUpdate();
+                    con.commit();
+                    st.close();
+                    this.jPanelAddUtilisateur.setVisible(false);
+                    this.jScrollPane2.setVisible(true);
+                    this.resetFormUtilisateur();
+                }
+                catch(Exception e) {System.out.println(e);}
+            }
+            else JOptionPane.showMessageDialog(this, "Remplir le champ mot de passe");
+        else JOptionPane.showMessageDialog(this, "Remplir le champ login");
+        this.upadteTableUtilisateur();
     }//GEN-LAST:event_jButtonSaveUtilisateurActionPerformed
 
+    private void resetFormUtilisateur()
+    {
+        this.jTextFieldLogin.setText("");
+        this.jPasswordFieldPass.setText("");
+    }
+    
     private void jButtonAddSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSystemeActionPerformed
         this.jScrollPane3.setVisible(false);
         this.jPanelAddSysteme.setVisible(true);
@@ -1287,26 +1331,53 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jButtonAnnulerSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerSActionPerformed
         this.jScrollPane3.setVisible(true);
         this.jPanelAddSysteme.setVisible(false);
+        this.resetFormSysteme();
     }//GEN-LAST:event_jButtonAnnulerSActionPerformed
 
     private void jButtonSaveSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveSystemeActionPerformed
-        try {
-            Systeme s = new Systeme();
-            s.nomS = this.jTextFieldNomS.getText();
-            s.fabriquantS = this.jTextFieldFabriquantS.getText();
-            s.versionA = Float.parseFloat(this.jTextFieldVersionA.getText());
-            java.util.Map maMap = con.getTypeMap();
-            PreparedStatement st = con.prepareStatement("insert into systeme "
-                    + "values(?)");
-            st.setObject(1, s);
-            st.executeUpdate();
-            con.commit();
-            this.jPanelAddSysteme.setVisible(false);
-            this.jScrollPane3.setVisible(true);
-        }
-        catch(Exception e) {System.out.println(e);}
+        String nomS = this.jTextFieldNomS.getText();
+        String fabriquantS = this.jTextFieldFabriquantS.getText();
+        String versionA = this.jTextFieldVersionA.getText();
+        
+        if (!nomS.isEmpty())
+            if (!fabriquantS.isEmpty())
+                if (!versionA.isEmpty()) {
+                    try {
+                        float versionA2 = Float.parseFloat(versionA);
+                        try {
+                            Systeme s = new Systeme();
+                            s.nomS = nomS;
+                            s.fabriquantS = fabriquantS;
+                            s.versionA = versionA2;
+                            PreparedStatement st = con.prepareStatement("insert into systeme "
+                                    + "values(?)");
+                            st.setObject(1, s);
+                            st.executeUpdate();
+                            con.commit();
+                            st.close();
+                            this.jPanelAddSysteme.setVisible(false);
+                            this.jScrollPane3.setVisible(true);
+                            this.resetFormSysteme();
+                        }
+                        catch(Exception e) {System.out.println(e);}
+                    }
+                    catch(NumberFormatException nfe){JOptionPane.showMessageDialog(this, "Format version non valide");}
+                }
+                else JOptionPane.showMessageDialog(this, "Remplir le champ version");
+            else JOptionPane.showMessageDialog(this, "Remplir le champ fabriquant");
+        else JOptionPane.showMessageDialog(this, "Remplir le champ nom");
+        
+        DefaultTableModel model = (DefaultTableModel) this.jTable3.getModel();
+        this.initTabSysteme(model);
     }//GEN-LAST:event_jButtonSaveSystemeActionPerformed
 
+    private void resetFormSysteme()
+    {
+        this.jTextFieldNomS.setText("");
+        this.jTextFieldFabriquantS.setText("");
+        this.jTextFieldVersionA.setText("");
+    }
+    
     private void jPanelSystemeComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelSystemeComponentShown
         DefaultTableModel model = (DefaultTableModel) this.jTable3.getModel();
         this.initTabSysteme(model);
@@ -1391,16 +1462,48 @@ public class WindowAdmin extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Supprimer les catégories
+     * @param evt 
+     */
     private void jButtonDeleteCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteCategorieActionPerformed
         Boolean select = false;
         for (int i = 0; i < this.jTable4.getRowCount(); i++)
         {
             if (this.jTable4.getValueAt(i, 0).equals(true)){
                 select = true;
+                int idC = Integer.parseInt(this.jTable4.getValueAt(i, 1).toString());
+                PreparedStatement st;
+                try {
+                    st = con.prepareStatement("select value(c) from categorie c "
+                            + "where c.idC = ?");
+                    st.setInt(1, idC);
+                    OracleResultSet rset = (OracleResultSet) st.executeQuery();
+                    rset.next();
+                    STRUCT stt = (STRUCT) rset.getSTRUCT(1);
+                    Object[] tabAtt = stt.getAttributes();
+                    Array ar = (Array) tabAtt[2];
+                    OracleResultSet rset2 = (OracleResultSet) ar.getResultSet();
+                    if (!rset2.next()){
+                        st = con.prepareStatement("delete categorie where idC = ?");
+                        st.setInt(1, idC);
+                        st.execute();
+                        con.commit();
+                        st.close();
+                    }
+                    else JOptionPane.showMessageDialog(this, "La catégorie " + tabAtt[1] + 
+                            " contient des applications");
+                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         if (!select)
             JOptionPane.showMessageDialog(this, "Aucune catégorie n'est sélectionnée");
+        
+        DefaultTableModel model = (DefaultTableModel) this.jTable4.getModel();
+        this.initTabCategorie(model);
     }//GEN-LAST:event_jButtonDeleteCategorieActionPerformed
 
     private void jButtonDeleteUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUtilisateurActionPerformed
@@ -1548,8 +1651,8 @@ public class WindowAdmin extends javax.swing.JFrame {
                 idC = Integer.parseInt(this.jTable6.getValueAt(i, 1).toString());
             }
         }
-            //Insértion de l'application de base
-            PreparedStatement st;
+        //Insértion de l'application de base
+        PreparedStatement st;
         try {
             st = con.prepareStatement("insert into application("
                     + "select ?, ?, to_date(?,'YYYY-MM-DD'), ?, ?, ?, ref(c), images_type() from categorie c where c.idC = ?)");
@@ -1566,7 +1669,107 @@ public class WindowAdmin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Ajout de l'application dans la catégorie
+        try {
+            st = con.prepareStatement("insert into the (select c.applicationsC from categorie c "
+                    + "where c.idC = ?) select ref(a) from application a where a.idA = ?");
+            st.setInt(1, idC);
+            st.setInt(2, idA);
+            st.execute();
+            con.commit();
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Ajout des images dans l'application et de la ref dans l'image
+        for (int i = 0; i < this.jTable7.getRowCount(); i++)
+        {
+            if (this.jTable7.getValueAt(i, 0).equals(true)){
+                int idI = Integer.parseInt(this.jTable7.getValueAt(i, 1).toString());
+                try {
+                    st = con.prepareStatement("insert into the (select a.imagesA from application a "
+                            + "where a.idA = ?) select ref(i) from image i where i.idI = ?");
+                    st.setInt(1, idA);
+                    st.setInt(2, idI);
+                    st.execute();
+                    con.commit();
+                    
+                    st = con.prepareStatement("select ref(a) from application a where "
+                            + "a.idA = " + idA);
+                    OracleResultSet rset = (OracleResultSet) st.executeQuery();
+                    rset.next();
+                    oracle.sql.REF refA = rset.getREF(1);
+                    PreparedStatement ps = con.prepareStatement("update image i set "
+                            + "i.applicationI = ? where idI = ?");
+                    ps.setRef(1, refA);
+                    ps.setInt(2, idI);
+                    ps.execute();
+                    con.commit();
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //Ajout des systemes pour l'application
+        for (int i = 0; i < this.jTable8.getRowCount(); i++)
+        {
+            if (this.jTable8.getValueAt(i, 0).equals(true)){
+                String nomS = this.jTable8.getValueAt(i, 1).toString();
+                try {
+                    st = con.prepareStatement("insert into applicationSysteme("
+                            + "select ref(s), ref(a) from systeme s, application a where s.nomS = ? and a.idA = ?)");
+                    st.setString(1, nomS);
+                    st.setInt(2, idA);
+                    st.execute();
+                    con.commit();
+                    st.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_jButtonSaveApplicationActionPerformed
+
+    /**
+     * Permet de supprimer les systèmes cochés
+     * @param evt 
+     */
+    private void jButtonDeleteSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSystemeActionPerformed
+        int count = 0;
+        for (int i = 0; i < this.jTable3.getRowCount(); i++)
+        {
+            if (this.jTable3.getValueAt(i, 0).equals(true)){
+                count++;
+                String nomS = this.jTable3.getValueAt(i, 1).toString();
+                try {
+                    PreparedStatement st;
+                    st = con.prepareStatement("select count(*) from applicationSysteme where "
+                            + "systemeA = (select ref(s) from systeme s where nomS = ?)");
+                    st.setString(1, nomS);
+                    OracleResultSet rset = (OracleResultSet) st.executeQuery();
+                    rset.next();
+                    if (rset.getInt(1) == 0)
+                    {
+                        st = con.prepareStatement("delete systeme where nomS = ?");
+                        st.setString(1, nomS);
+                        st.execute();
+                        con.commit();
+                        st.close();
+                    }
+                    else JOptionPane.showMessageDialog(this, "Vous ne pouvez pas supprimer le systeme : " + nomS + " "
+                            + "car il contient des applications");
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if (count == 0)
+            JOptionPane.showMessageDialog(this, "Aucun système sélectionné");
+        
+        DefaultTableModel model = (DefaultTableModel) this.jTable3.getModel();
+        this.initTabSysteme(model);
+    }//GEN-LAST:event_jButtonDeleteSystemeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1601,9 +1804,9 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1619,6 +1822,9 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
