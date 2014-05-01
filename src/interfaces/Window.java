@@ -438,28 +438,6 @@ public class Window extends javax.swing.JFrame {
             
             s.close();
         }catch(Exception e){e.printStackTrace();}
-        /*
-        Miniature mini1 = new Miniature(1, "rien.png", "nomImage1", "typeImage1", con);
-        Miniature mini2 = new Miniature(2, "rien.png", "nomImage2", "typeImage2", con);
-        Miniature mini3 = new Miniature(3, "rien.png", "nomImage3", "typeImage3", con);
-        Miniature mini4 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        Miniature mini5 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        Miniature mini6 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        Miniature mini7 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        Miniature mini8 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        Miniature mini9 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        Miniature mini10 = new Miniature(4, "rien.png", "nomImage4", "typeImage4", con);
-        trouve.add(mini1);
-        trouve.add(mini2);
-        trouve.add(mini3);
-        trouve.add(mini4);
-        trouve.add(mini5);
-        trouve.add(mini6);
-        trouve.add(mini7);
-        trouve.add(mini8);
-        trouve.add(mini9);
-        trouve.add(mini10);
-        */
         this.remplirPanelAffiche(trouve);
     }
     

@@ -11,13 +11,9 @@ import java.awt.Image;
 import java.sql.Connection;
 import java.sql.Statement;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.ord.im.OrdImage;
-import projetbdm.Miniature;
 
 /**
  *
@@ -164,7 +160,6 @@ public class WindowAffiche extends javax.swing.JFrame {
                 info = info+"Information de l'image :\n nom : "+nom+"\n date : "+date+"\n description : "+descrip+"\n\n";
                 jTextArea.setText(info);
                 im.getDataInFile(urlFich);
-                //im.setProperties();
                 DefaultTableModel dtm = (DefaultTableModel) this.jTableAttribut.getModel();
                 dtm.addRow(new Object[]{"hauteur",im.getHeight()});
                 dtm.addRow(new Object[]{"Largeur",im.getWidth()});
