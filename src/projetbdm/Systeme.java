@@ -7,7 +7,7 @@ public class Systeme implements SQLData
 
     String sql_type;
     public String nomS;
-    public String fabriquantS;
+    public String fabriquantS; 
     public float versionA;
     
     public Systeme() {}
