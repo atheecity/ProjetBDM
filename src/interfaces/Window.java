@@ -9,9 +9,12 @@ package interfaces;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import oracle.jdbc.OracleResultSet;
+import oracle.ord.im.OrdImage;
 import projetbdm.Miniature;
 import projetbdm.ProjetBDM;
 
@@ -25,6 +28,8 @@ public class Window extends javax.swing.JFrame {
     String image_chargement = " ";
     Image img;
     JPanel paner;
+    ArrayList<Miniature> trouve = new ArrayList();
+            
     /**
      * Creates new form Window
      */
@@ -187,7 +192,7 @@ public class Window extends javax.swing.JFrame {
             .addGap(0, 130, Short.MAX_VALUE)
         );
 
-        jComboBoxRech.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dans tout", "Dans image", "Dans application", "Dans catégorie", "Dans système" }));
+        jComboBoxRech.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Toutes les images", "Dans image", "Dans image (nom)", "Dans image (description)", "Dans application", "Dans application (nom)", "Dans application (description)" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -387,28 +392,53 @@ public class Window extends javax.swing.JFrame {
     void foncRecherche(String choix)
     {
         jPanelAffiche.removeAll();
-        ArrayList<Miniature> trouve = new ArrayList();
-        switch(choix)
+        trouve = new ArrayList();
+        try
         {
-            case "Dans tout" :
-                
-                break;
-            case "Dans image" : 
-                
-                break;
-            case "Dans application" :
-                
-                break;
-            case "Dans catégorie" :
-                
-                break;
-            case "Dans système" :
-                
-                break;
-            default :
-                System.out.println("erreur combo box");
-                break;
-        }
+            Statement s=con.createStatement();            
+            switch(choix)
+            {
+                case "Toutes les images" :
+                    OracleResultSet rset=(OracleResultSet)s.executeQuery("select miniature, idI, nomI from image");
+                    while(rset.next())
+                    {
+                        OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                        int nume = rset.getInt(2);
+                        String nome = rset.getString(3);
+                        String url = "miniature-"+nome+".jpeg";
+                        minia.getDataInFile(url);
+                        Miniature mimimini = new Miniature(nume, "rien.png", nome, "image", con);
+                        trouve.add(mimimini);
+                    }
+                    rset.close();
+                    break;
+                case "Dans image" : 
+
+                    break;
+                case "Dans image (nom)" : 
+
+                    break;
+                case "Dans image (description)" : 
+
+                    break;
+                case "Dans application" :
+
+                    break;
+                case "Dans application (nom)" :
+
+                    break;
+                case "Dans application (description)" :
+
+                    break;
+
+                default :
+                    System.out.println("erreur combo box");
+                    break;
+            }
+            
+            s.close();
+        }catch(Exception e){e.printStackTrace();}
+        /*
         Miniature mini1 = new Miniature(1, "rien.png", "nomImage1", "typeImage1", con);
         Miniature mini2 = new Miniature(2, "rien.png", "nomImage2", "typeImage2", con);
         Miniature mini3 = new Miniature(3, "rien.png", "nomImage3", "typeImage3", con);
@@ -429,6 +459,7 @@ public class Window extends javax.swing.JFrame {
         trouve.add(mini8);
         trouve.add(mini9);
         trouve.add(mini10);
+        */
         this.remplirPanelAffiche(trouve);
     }
     
@@ -489,8 +520,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonParcourirActionPerformed
 
     private void jPanelAfficheComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAfficheComponentResized
-        String indic = (String)jComboBoxRech.getSelectedItem();
-        this.foncRecherche(indic);
+        this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jPanelAfficheComponentResized
 
     

@@ -55,7 +55,7 @@ public class WindowAffiche extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAttribut = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 400));
@@ -73,10 +73,8 @@ public class WindowAffiche extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanelAttribut.setLayout(new java.awt.GridLayout(2, 1));
-
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 200));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 91));
 
         jTableAttribut.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,26 +94,37 @@ public class WindowAffiche extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAttribut);
 
-        jPanelAttribut.add(jScrollPane1);
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jScrollPane2.setViewportView(jTextArea);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
-
-        jPanelAttribut.add(jScrollPane2);
+        javax.swing.GroupLayout jPanelAttributLayout = new javax.swing.GroupLayout(jPanelAttribut);
+        jPanelAttribut.setLayout(jPanelAttributLayout);
+        jPanelAttributLayout.setHorizontalGroup(
+            jPanelAttributLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanelAttributLayout.setVerticalGroup(
+            jPanelAttributLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAttributLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
             .addComponent(jPanelAttribut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -142,13 +151,20 @@ public class WindowAffiche extends javax.swing.JFrame {
         {
             //récup de l'image dans la base
             Statement s = con.createStatement();
-            String idI = "1";
-            String urlFich = "test1.jpeg";
-            OracleResultSet rset = (OracleResultSet)s.executeQuery("select imageI from image where idI="+idI);
+            String idI = Integer.toString(identifiant);
+            String info = "";
+            OracleResultSet rset = (OracleResultSet)s.executeQuery("select imageI, nomI, dateI, descriptionI from image where idI="+idI);
             if(rset.next())
             {
-                OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());
+                OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());                
+                String urlFich = rset.getString(2)+".jpeg";
+                String nom = rset.getString(2);
+                String date = rset.getString(3);
+                String descrip = rset.getString(4);
+                info = info+"Information de l'image :\n nom : "+nom+"\n date : "+date+"\n description : "+descrip+"\n\n";
+                jTextArea.setText(info);
                 im.getDataInFile(urlFich);
+                //im.setProperties();
                 DefaultTableModel dtm = (DefaultTableModel) this.jTableAttribut.getModel();
                 dtm.addRow(new Object[]{"hauteur",im.getHeight()});
                 dtm.addRow(new Object[]{"Largeur",im.getWidth()});
@@ -170,6 +186,6 @@ public class WindowAffiche extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAttribut;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea;
     // End of variables declaration//GEN-END:variables
 }

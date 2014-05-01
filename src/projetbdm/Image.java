@@ -25,7 +25,7 @@ public class Image
         try {
             Statement stmt = this.con.createStatement();
             stmt.executeQuery(sql);
-            this.insererOrdImage(urlI, 1);
+            this.insererOrdImage(urlI, id);
         } catch (SQLException ex) {
             Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
         }

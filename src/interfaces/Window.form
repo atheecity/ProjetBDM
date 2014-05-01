@@ -327,12 +327,14 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxRech">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Dans tout"/>
+              <StringArray count="7">
+                <StringItem index="0" value="Toutes les images"/>
                 <StringItem index="1" value="Dans image"/>
-                <StringItem index="2" value="Dans application"/>
-                <StringItem index="3" value="Dans cat&#xe9;gorie"/>
-                <StringItem index="4" value="Dans syst&#xe8;me"/>
+                <StringItem index="2" value="Dans image (nom)"/>
+                <StringItem index="3" value="Dans image (description)"/>
+                <StringItem index="4" value="Dans application"/>
+                <StringItem index="5" value="Dans application (nom)"/>
+                <StringItem index="6" value="Dans application (description)"/>
               </StringArray>
             </Property>
           </Properties>
