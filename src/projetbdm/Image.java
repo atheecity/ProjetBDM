@@ -21,7 +21,7 @@ public class Image
     public void insererImage(int id, String nom, String date, String description, String urlI)
     {
         String sql = "INSERT INTO image VALUES (" + id + ",to_date('" + date 
-                + "', 'YYYY-MM-DD'),'" + nom + "','" + description + "', ordsys.ordimage.init())";
+                + "', 'YYYY-MM-DD'),'" + nom + "','" + description + "', ordsys.ordimage.init(), ordsys.ordimage.init())";
         try {
             Statement stmt = this.con.createStatement();
             stmt.executeQuery(sql);

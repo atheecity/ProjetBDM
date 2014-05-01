@@ -1,12 +1,29 @@
-create or replace type motCle_type as object (
+drop table application;
+drop table image;
+drop type application_ref_type force;
+drop type applications_type force;
+drop type application_type force;
+drop type images_type force;
+drop type image_ref_type force;
+drop type image_type force;
+drop type systeme_type force;
+drop type applicationSysteme_type force;
+drop type categorie_type force;
+drop type motCle_type force;
+drop type note_type force;
+drop type note_ref_type force;
+drop type notes_type force;
+drop type motCleImage_type force;
+
+create type motCle_type as object (
     mot varchar2(50)
 );
 /
 
-create or replace type application_type;
+create type application_type;
 /
 
-create or replace type note_type as object (
+create type note_type as object (
     idN integer, 
     note integer,
     text varchar2(200),
@@ -14,12 +31,12 @@ create or replace type note_type as object (
 );
 /
 
-create or replace type note_ref_type as object (
+create type note_ref_type as object (
     noteR ref note_type
 );
 /
 
-create or replace type notes_type as table of note_ref_type;
+create type notes_type as table of note_ref_type;
 /
 
 create type image_type as object (
@@ -27,25 +44,27 @@ create type image_type as object (
     dateI date, 
     nomI varchar2(50),
     descriptionI varchar2(150),
-    imageI ORDSYS.ORDImage
+    imageI ORDSYS.ORDImage, 
+    miniature ordsys.ordimage, 
+    member procedure addMini
 );
 /
 
-create or replace type image_ref_type as object (
+create type image_ref_type as object (
     imageR ref image_type
 );
 /
 
-create or replace type images_type as table of image_ref_type;
+create type images_type as table of image_ref_type;
 /
 
-create or replace type motCleImage_type as object (
+create type motCleImage_type as object (
     imageM ref image_type,
     motCleI ref motCle_type
 );
 /
 
-create or replace type video_type as object (
+create type video_type as object (
     idV integer, 
     dateV date, 
     nomV varchar2(50),
@@ -61,37 +80,39 @@ create type video_ref_type as object (
 create type videos_type as table of video_ref_type;
 / 
 
-create or replace type motCleVideo_type as object (
+create type motCleVideo_type as object (
     videoM ref video_type,
     motCleV ref motCle_type
 );
 /
 
-create or replace type categorie_type;
+create type categorie_type;
 /
 
-create or replace type application_type as object (
+create type application_type as object (
     idA integer, 
     nomA varchar2(50),
     dateA date, 
     descriptionA varchar2(250),
     taille float, 
-    version integer,
+    version float,
     categorieA ref categorie_type,
     imagesA images_type
 );
 /
 
-create or replace type application_ref_type as object (
+create type application_ref_type as object (
     applicationR ref application_type
 );
 /
 
-create or replace type applications_type as table of application_ref_type;
+create type applications_type as table of application_ref_type;
 /
 
-create or replace type systeme_type as object (
-    nomS varchar2(50)
+create type systeme_type as object (
+    nomS varchar2(50), 
+    fabriquant varchar2(150), 
+    versionA float
 );
 /
 
@@ -118,6 +139,13 @@ create type utilisateur_type as object (
 DROP table systeme;
 DROP table motCle;
 DROP table categorie;
+DROP table application;
+DROP table note;
+drop table image;
+drop table video;
+drop table motCleVideo;
+drop table motCleImage;
+drop table applicationSystme;
 
 create table systeme of systeme_type (
     primary key(nomS)
@@ -168,7 +196,4 @@ create table applicationSysteme of applicationSysteme_type (
 create table utilisateur of utilisateur_type (
     primary key (login)
 );
-
-alter type image_type add attribute miniature ordsys.ordimage cascade;
-alter type image_type add member procedure addMini cascade;
 
