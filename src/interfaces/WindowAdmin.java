@@ -1200,7 +1200,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         int id = ProjetBDM.getId("image");
         
         Image img = new Image();
-        img.insererImage(1, nom, date, description, urlI);
+        img.insererImage(id, nom, date, description, urlI);
     }//GEN-LAST:event_jButtonSaveImageActionPerformed
 
     private void jButtonParcourirIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParcourirIActionPerformed
