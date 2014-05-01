@@ -23,8 +23,8 @@ public class ProjetBDM {
         Connection con = null;
         try {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-            String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
-            //String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
+            //String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
+            String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
             con = DriverManager.getConnection(url, "cm429363", "cm429363");
             con.setAutoCommit(false);
         } catch (SQLException ec) {
@@ -79,8 +79,8 @@ public class ProjetBDM {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
         } catch (Exception ex) { 
         }
-        //Window w = new Window(con);
-        WindowAdmin wa = new WindowAdmin(connect());
+        Window w = new Window(connect());
+        //WindowAdmin wa = new WindowAdmin(connect());
     }
     
 }

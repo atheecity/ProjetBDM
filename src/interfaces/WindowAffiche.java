@@ -6,6 +6,17 @@
 
 package interfaces;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.sql.Connection;
+import java.sql.Statement;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
+import oracle.ord.im.OrdImage;
 import projetbdm.Miniature;
 
 /**
@@ -14,15 +25,20 @@ import projetbdm.Miniature;
  */
 public class WindowAffiche extends javax.swing.JFrame {
     int identifiant;
+    private final Connection con;
+    Image img;
+    JPanel paner;
     /**
      * Creates new form WindowAffiche
      */
-    public WindowAffiche(int m, String g) {
+    public WindowAffiche(Connection c, int m, String g) {
         initComponents();
         this.identifiant = m;
+        this.con = c;
         this.setTitle(g);
         this.setVisible(true);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.remplirTout();
     }
 
     /**
@@ -34,13 +50,15 @@ public class WindowAffiche extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListAttri = new javax.swing.JList();
         jPanelImage = new javax.swing.JPanel();
+        jPanelAttribut = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAttribut = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jScrollPane1.setViewportView(jListAttri);
+        setPreferredSize(new java.awt.Dimension(700, 400));
 
         jPanelImage.setPreferredSize(new java.awt.Dimension(400, 400));
 
@@ -55,29 +73,103 @@ public class WindowAffiche extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jPanelAttribut.setLayout(new java.awt.GridLayout(2, 1));
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 200));
+
+        jTableAttribut.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Attributs de l'image", ""
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableAttribut);
+
+        jPanelAttribut.add(jScrollPane1);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jPanelAttribut.add(jScrollPane2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addComponent(jPanelAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanelAttribut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     
+    private void afficheImage(JPanel pan,Image img)
+    {
+        Graphics g=pan.getGraphics();
+        g.drawImage(img, 0, 0, pan.getWidth(),pan.getHeight(),this);
+    }
+    
+    @Override
+    public void paint(Graphics g)
+    {
+        super.paint(g);
+        if(img!=null)
+            afficheImage(paner,img);
+    }
+    
+    public void remplirTout()
+    {
+        try
+        {
+            //récup de l'image dans la base
+            Statement s = con.createStatement();
+            String idI = "1";
+            String urlFich = "test1.jpeg";
+            OracleResultSet rset = (OracleResultSet)s.executeQuery("select imageI from image where idI="+idI);
+            if(rset.next())
+            {
+                OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());
+                im.getDataInFile(urlFich);
+                DefaultTableModel dtm = (DefaultTableModel) this.jTableAttribut.getModel();
+                dtm.addRow(new Object[]{"hauteur",im.getHeight()});
+                dtm.addRow(new Object[]{"Largeur",im.getWidth()});
+                dtm.addRow(new Object[]{"Taille",im.getContentLength()});
+                dtm.addRow(new Object[]{"Format",im.getFormat()});
+                img = jPanelImage.getToolkit().getImage(urlFich);
+                paner = jPanelImage;
+                repaint();
+            }
+            rset.close();
+            s.close();
+        }catch(Exception e){e.printStackTrace();}
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList jListAttri;
+    private javax.swing.JPanel jPanelAttribut;
     private javax.swing.JPanel jPanelImage;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableAttribut;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

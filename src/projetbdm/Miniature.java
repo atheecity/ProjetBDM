@@ -7,8 +7,8 @@
 package projetbdm;
 
 import interfaces.WindowAffiche;
+import java.sql.Connection;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,6 +22,7 @@ public class Miniature {
     String img;    
     String nom;
     String type;
+    private final Connection con;    
     
     public int getNum() {
         return num;
@@ -57,12 +58,13 @@ public class Miniature {
     
     
     
-    public Miniature(int n, String i, String s, String t)
+    public Miniature(int n, String i, String s, String t, Connection c)
     {
         this.num = n;
         this.img = i;
         this.nom = s;
         this.type = t;
+        this.con = c;
     }
     
     public void afficheMini(JPanel panel, int x, int y)
@@ -80,19 +82,19 @@ public class Miniature {
         lalala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                WindowAffiche waff = new WindowAffiche(num, nom);
+                WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
         });
         nomt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                WindowAffiche waff = new WindowAffiche(num, nom);
+                WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
         });
         typet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                WindowAffiche waff = new WindowAffiche(num, nom);
+                WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
         });
     }
