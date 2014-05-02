@@ -79,7 +79,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelImage = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jToggleButtonAddImage = new javax.swing.JToggleButton();
-        jButtonSupprimer = new javax.swing.JButton();
+        jButtonSupprimerImage = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPaneImage = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -472,8 +472,13 @@ public class WindowAdmin extends javax.swing.JFrame {
         });
         jPanel1.add(jToggleButtonAddImage, new java.awt.GridBagConstraints());
 
-        jButtonSupprimer.setText("Supprimer");
-        jPanel1.add(jButtonSupprimer, new java.awt.GridBagConstraints());
+        jButtonSupprimerImage.setText("Supprimer");
+        jButtonSupprimerImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSupprimerImageActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonSupprimerImage, new java.awt.GridBagConstraints());
 
         jPanel2.setLayout(new java.awt.CardLayout());
 
@@ -1742,7 +1747,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             st = con.prepareStatement("insert into application("
                     + "select numA.nextval, ?, to_date(?,'DD/MM/YYYY'), ?, ?, ?, ref(c), images_type() from categorie c where c.idC = ?)");
             st.setString(1, nomA);
-            st.setString(2, "2012-12-12");
+            st.setString(2, date);
             st.setString(3, descA);
             st.setFloat(4, tailleA);
             st.setFloat(5, versionA);
@@ -1870,6 +1875,46 @@ public class WindowAdmin extends javax.swing.JFrame {
         this.resetFormApplication();
     }//GEN-LAST:event_jButtonAnnulerA4ActionPerformed
 
+    private void jButtonSupprimerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerImageActionPerformed
+        for (int i = 0; i < this.jTable1.getRowCount(); i++)
+        {
+            if (this.jTable1.getValueAt(i, 0).equals(true)){
+                PreparedStatement st;
+                int idI = Integer.parseInt(this.jTable1.getValueAt(i, 1).toString());
+                try {
+                    st = con.prepareStatement("select value(i) from image i "
+                            + "where i.idI = ?");
+                    st.setInt(1, idI);
+                    OracleResultSet rset = (OracleResultSet) st.executeQuery();
+                    rset.next();
+                    STRUCT stt = (STRUCT) rset.getSTRUCT(1);
+                    Object[] tabAtt = stt.getAttributes();
+                    REF refA = (REF) tabAtt[6];
+                    STRUCT ste = (STRUCT) refA.getSTRUCT();
+                    Object[] tabAttA = ste.getAttributes();
+                    System.out.println(tabAttA[0]);
+                    System.out.println(idI);
+                    st = con.prepareStatement("delete the ("
+                            + "select a.imagesA from application a "
+                            + "where a.idA=?) e where e.imageR.idI=?");
+                    st.setInt(1, Integer.parseInt(tabAttA[0].toString()));
+                    st.setInt(2, idI);
+                    st.execute();
+                    con.commit();
+                    st = con.prepareStatement("delete from image"
+                            + " where idI=?");
+                    st.setInt(1, idI);
+                    st.execute();
+                    con.commit();
+                    
+                    st.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButtonSupprimerImageActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddApplication;
@@ -1896,7 +1941,7 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSuivantA1;
     private javax.swing.JButton jButtonSuivantA2;
     private javax.swing.JButton jButtonSuivantA3;
-    private javax.swing.JButton jButtonSupprimer;
+    private javax.swing.JButton jButtonSupprimerImage;
     private com.toedter.calendar.JDateChooser jDateChooserApplication;
     private com.toedter.calendar.JDateChooser jDateChooserImage;
     private javax.swing.JLabel jLabel1;
