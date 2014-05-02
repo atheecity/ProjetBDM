@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import oracle.jdbc.OracleResultSet;
 import oracle.ord.im.OrdImage;
@@ -148,7 +149,7 @@ public class Window extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelLogAdminLayout.setVerticalGroup(
             jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +164,7 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAdmin)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTextFieldRechImage.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +214,7 @@ public class Window extends javax.swing.JFrame {
                                         .addComponent(jTextFieldMotRech, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jButtonLanceRechMot, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, Short.MAX_VALUE)
                                 .addComponent(jSeparator1))
                             .addComponent(jPanelLogAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,7 +301,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         jPanel7.add(jPanelAffiche, "card4");
@@ -338,7 +339,7 @@ public class Window extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -385,35 +386,75 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
         jLabel7.setText(" ");
+        trouve.clear();
+        jPanelAffiche.removeAll();
+        jPanelAffiche.repaint();
         String indic = (String)jComboBoxRech.getSelectedItem();
         this.foncRecherche(indic);
     }//GEN-LAST:event_jButtonLanceRechMotActionPerformed
 
     void foncRecherche(String choix)
     {
-        jPanelAffiche.removeAll();
         trouve = new ArrayList();
         try
         {
             Statement s=con.createStatement();            
+            String mot = jTextFieldMotRech.getText();
+            OracleResultSet rset;
             switch(choix)
             {
                 case "Toutes les images" :
-                    OracleResultSet rset=(OracleResultSet)s.executeQuery("select miniature, idI, nomI from image");
+                    rset = (OracleResultSet)s.executeQuery("select miniature, idI, nomI from image");
                     while(rset.next())
                     {
                         OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
                         int nume = rset.getInt(2);
                         String nome = rset.getString(3);
-                        String url = "miniature-"+nome+".jpeg";
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else 
+                        {
+                            url = "miniature-"+num2+nome+".jpeg";
                         minia.getDataInFile(url);
-                        Miniature mimimini = new Miniature(nume, "rien.png", nome, "image", con);
+                        }
+                        Miniature mimimini = new Miniature(nume, url, nome, "image", con);
                         trouve.add(mimimini);
                     }
                     rset.close();
                     break;
                 case "Dans image" : 
-
+                    if(!"".equals(mot))
+                    {
+                        rset = (OracleResultSet)s.executeQuery(
+                            "select miniature, idI, nomI "
+                                    + "from image "
+                                    + "where contains (nomI,'!"+mot+"')>0 "
+                                    + "or contains (descriptionI,'!"+mot+"')>0");
+                        while(rset.next())
+                        {
+                            OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                            int nume = rset.getInt(2);
+                            String nome = rset.getString(3);
+                            String num2 = Integer.toString(nume);
+                            String url ;
+                            if(minia.getContentLength() == 0) url = "rien.png";
+                            else 
+                            {
+                                url = "miniature-"+num2+nome+".jpeg";
+                                minia.getDataInFile(url);
+                            }
+                            Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                            trouve.add(mimimini);
+                        }
+                        rset.close();
+                    }
+                    else
+                    {
+                        JLabel jj = new JLabel("Pas de résultat pour votre recherche");
+                        jj.setBounds(20, 20, 500, 15);
+                        jPanelAffiche.add(jj);
+                    }
                     break;
                 case "Dans image (nom)" : 
 
@@ -443,6 +484,16 @@ public class Window extends javax.swing.JFrame {
     
     public void remplirPanelAffiche(ArrayList<Miniature> trouve)
     {
+        jPanelAffiche.removeAll();
+        jPanelAffiche.repaint();
+        if(trouve.isEmpty())
+        {
+            JLabel jj = new JLabel("Pas de résultat pour votre recherche");
+            jj.setBounds(20, 20, 500, 15);
+            jPanelAffiche.add(jj);
+        }
+        else
+        {
         int abscisse = 20;
         int ordonne = 10;
         int largueur = jPanelAffiche.getSize().width;
@@ -463,6 +514,7 @@ public class Window extends javax.swing.JFrame {
                 cmp = 0;
             }
         }
+    }
     }
     
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
