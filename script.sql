@@ -151,10 +151,22 @@ create table categorie of categorie_type (
     primary key(idC)
 ) nested table applicationsC store as tabApplications ;
 
+CREATE SEQUENCE NumC
+  MINVALUE 0
+  START WITH 0
+  INCREMENT BY 1
+  NOCACHE;
+
 create table application of application_type (
     primary key(idA), 
     categorieA scope is categorie
 ) nested table imagesA store as tabImages;
+
+CREATE SEQUENCE NumA
+  MINVALUE 0
+  START WITH 0
+  INCREMENT BY 1
+  NOCACHE;
 
 /*create table note of note_type (
     primary key(idN), 
@@ -165,6 +177,13 @@ create table image of image_type (
     primary key(idI),
     applicationI scope is application
 );
+
+--IMAGE
+CREATE SEQUENCE NumI
+  MINVALUE 0
+  START WITH 0
+  INCREMENT BY 1
+  NOCACHE;
 
 /*create table video of video_type (
     primary key(idV),

@@ -18,26 +18,27 @@ public class Image
         this.con = ProjetBDM.connect();
     }
     
-    public void insererImage(int id, String nom, String date, String description, String urlI)
+    public void insererImage(String nom, String date, String description, String urlI)
     {
-        String sql = "INSERT INTO image VALUES (" + id + ",to_date('" + date 
-                + "', 'YYYY-MM-DD'),'" + nom + "','" + description + "', ordsys.ordimage.init(), ordsys.ordimage.init(), null)";
+        String sql = "INSERT INTO image VALUES (numI.nextval,to_date('" + date 
+                + "', 'DD/MM/YYYY'),'" + nom + "','" + description + "', ordsys.ordimage.init(), ordsys.ordimage.init(), null)";
         try {
             Statement stmt = this.con.createStatement();
             stmt.executeQuery(sql);
-            this.insererOrdImage(urlI, id);
+            con.commit();
+            this.insererOrdImage(urlI);
         } catch (SQLException ex) {
             Logger.getLogger(Image.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void insererOrdImage(String urlI, int idI)
+    public void insererOrdImage(String urlI)
     {
         try {
             Statement stmt = con.createStatement();
             OracleResultSet rset;
             rset = (OracleResultSet) stmt.executeQuery("select imageI, miniature from image where "
-                    + "idI=" + idI + " for update");
+                    + "idI=(SELECT (max(idI)) FROM image) for update");
             while(rset.next())
             {
                 OrdImage img = (OrdImage) rset.getORAData(1, OrdImage.getORADataFactory());
@@ -48,17 +49,15 @@ public class Image
                 miniature.setProperties();
                 //Mise à jour de l'attribut image
                 OraclePreparedStatement pstmt = (OraclePreparedStatement) con.prepareStatement("update "
-                        + "image set imageI = ? where idI=?");
+                        + "image set imageI = ? where idI=(SELECT (max(idI)) FROM image)");
                 pstmt.setORAData(1, img);
-                pstmt.setInt(2, idI);
                 pstmt.execute();
                 con.commit();
                 pstmt.close();
                 //Mise à jour de l'attribut miniature
                 OraclePreparedStatement pstmt2 = (OraclePreparedStatement) con.prepareStatement("update "
-                        + "image set miniature = ? where idI=?");
+                        + "image set miniature = ? where idI=(SELECT (max(idI)) FROM image)");
                 pstmt2.setORAData(1, miniature);
-                pstmt2.setInt(2, idI);
                 pstmt2.execute();
                 con.commit();
                 pstmt2.close();

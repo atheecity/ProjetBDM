@@ -7,6 +7,10 @@
 package interfaces;
 
 import java.sql.*;
+import java.text.DateFormat;
+import static java.text.DateFormat.MEDIUM;
+import static java.text.DateFormat.SHORT;
+import static java.util.Locale.FRANCE;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -84,7 +88,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNomI = new javax.swing.JTextField();
-        jTextFieldDateI = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescriptionI = new javax.swing.JTextArea();
         jButtonAnnulerImage = new javax.swing.JButton();
@@ -92,6 +95,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldUrlI = new javax.swing.JTextField();
         jButtonParcourirI = new javax.swing.JButton();
+        jDateChooserImage = new com.toedter.calendar.JDateChooser();
         jPanelCategorie = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jButtonAddCategorie = new javax.swing.JButton();
@@ -541,21 +545,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE_LEADING;
         jPanelAddImage.add(jTextFieldNomI, gridBagConstraints);
 
-        jTextFieldDateI.setMaximumSize(new java.awt.Dimension(200, 28));
-        jTextFieldDateI.setMinimumSize(new java.awt.Dimension(50, 28));
-        jTextFieldDateI.setPreferredSize(new java.awt.Dimension(200, 28));
-        jTextFieldDateI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDateIActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE_LEADING;
-        jPanelAddImage.add(jTextFieldDateI, gridBagConstraints);
-
         jTextAreaDescriptionI.setColumns(20);
         jTextAreaDescriptionI.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescriptionI);
@@ -620,6 +609,16 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanelAddImage.add(jButtonParcourirI, gridBagConstraints);
+
+        jDateChooserImage.setDateFormatString("d/MM/YYYY");
+        jDateChooserImage.setMaximumSize(new java.awt.Dimension(150, 28));
+        jDateChooserImage.setMinimumSize(new java.awt.Dimension(150, 28));
+        jDateChooserImage.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        jPanelAddImage.add(jDateChooserImage, gridBagConstraints);
 
         jPanel2.add(jPanelAddImage, "card3");
 
@@ -980,7 +979,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication3Layout.createSequentialGroup()
                 .add(jPanel19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1072,7 +1071,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication2Layout.createSequentialGroup()
                 .add(jPanel17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1220,13 +1219,13 @@ public class WindowAdmin extends javax.swing.JFrame {
 
     private void jButtonSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveImageActionPerformed
         String nom = this.jTextFieldNomI.getText();
-        String date = this.jTextFieldDateI.getText();
+        DateFormat fmt = DateFormat.getDateInstance(SHORT, FRANCE);
+        String date = fmt.format(this.jDateChooserImage.getDate());
         String description = this.jTextAreaDescriptionI.getText();
         String urlI = this.jTextFieldUrlI.getText();
-        int id = ProjetBDM.getId("image");
         
         Image img = new Image();
-        img.insererImage(id, nom, date, description, urlI);
+        img.insererImage(nom, date, description, urlI);
     }//GEN-LAST:event_jButtonSaveImageActionPerformed
 
     private void jButtonParcourirIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParcourirIActionPerformed
@@ -1239,10 +1238,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         }
         this.jTextFieldUrlI.setText(image_chargement);
     }//GEN-LAST:event_jButtonParcourirIActionPerformed
-
-    private void jTextFieldDateIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDateIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDateIActionPerformed
 
     private void jScrollPaneImageComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jScrollPaneImageComponentShown
 
@@ -1421,8 +1416,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         String nomC = this.jTextFieldNomC.getText();
         if (nomC.length() >= 3)
         {
-            int idC = ProjetBDM.getId("categorie");
-            String sql = "insert into categorie values (" + idC + ",'" + nomC + "', applications_type())";
+            String sql = "insert into categorie values (numC.nextval,'" + nomC + "', applications_type())";
             try {
                 Statement stmt = this.con.createStatement();
                 stmt.executeQuery(sql);
@@ -1642,7 +1636,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         String dateA = this.jTextFieldDateA.getText();
         float tailleA = Float.parseFloat(this.jTextFieldTailleA.getText());
         float versionA = Float.parseFloat(this.jTextFieldVersionAA.getText());
-        int idA = ProjetBDM.getId("application");
         //Récupère données formualaire 2 (catégorie)
         int idC = 0;
         for (int i = 0; i < this.jTable6.getRowCount(); i++)
@@ -1655,14 +1648,13 @@ public class WindowAdmin extends javax.swing.JFrame {
         PreparedStatement st;
         try {
             st = con.prepareStatement("insert into application("
-                    + "select ?, ?, to_date(?,'YYYY-MM-DD'), ?, ?, ?, ref(c), images_type() from categorie c where c.idC = ?)");
-            st.setInt(1, idA);
-            st.setString(2, nomA);
-            st.setString(3, "2012-12-12");
-            st.setString(4, descA);
-            st.setFloat(5, tailleA);
-            st.setFloat(6, versionA);
-            st.setInt(7, idC);
+                    + "select numA.nextval, ?, to_date(?,'YYYY-MM-DD'), ?, ?, ?, ref(c), images_type() from categorie c where c.idC = ?)");
+            st.setString(1, nomA);
+            st.setString(2, "2012-12-12");
+            st.setString(3, descA);
+            st.setFloat(4, tailleA);
+            st.setFloat(5, versionA);
+            st.setInt(6, idC);
             st.executeQuery();
             con.commit();
             st.close();   
@@ -1672,9 +1664,8 @@ public class WindowAdmin extends javax.swing.JFrame {
         //Ajout de l'application dans la catégorie
         try {
             st = con.prepareStatement("insert into the (select c.applicationsC from categorie c "
-                    + "where c.idC = ?) select ref(a) from application a where a.idA = ?");
+                    + "where c.idC = ?) select ref(a) from application a where a.idA = (SELECT (max(idA)) FROM application)");
             st.setInt(1, idC);
-            st.setInt(2, idA);
             st.execute();
             con.commit();
             st.close();
@@ -1688,14 +1679,13 @@ public class WindowAdmin extends javax.swing.JFrame {
                 int idI = Integer.parseInt(this.jTable7.getValueAt(i, 1).toString());
                 try {
                     st = con.prepareStatement("insert into the (select a.imagesA from application a "
-                            + "where a.idA = ?) select ref(i) from image i where i.idI = ?");
-                    st.setInt(1, idA);
-                    st.setInt(2, idI);
+                            + "where a.idA = (SELECT (max(idA)) FROM application)) select ref(i) from image i where i.idI = ?");
+                    st.setInt(1, idI);
                     st.execute();
                     con.commit();
                     
                     st = con.prepareStatement("select ref(a) from application a where "
-                            + "a.idA = " + idA);
+                            + "a.idA = (SELECT (max(idA)) FROM application)");
                     OracleResultSet rset = (OracleResultSet) st.executeQuery();
                     rset.next();
                     oracle.sql.REF refA = rset.getREF(1);
@@ -1718,9 +1708,8 @@ public class WindowAdmin extends javax.swing.JFrame {
                 String nomS = this.jTable8.getValueAt(i, 1).toString();
                 try {
                     st = con.prepareStatement("insert into applicationSysteme("
-                            + "select ref(s), ref(a) from systeme s, application a where s.nomS = ? and a.idA = ?)");
+                            + "select ref(s), ref(a) from systeme s, application a where s.nomS = ? and a.idA = (SELECT (max(idA)) FROM application))");
                     st.setString(1, nomS);
-                    st.setInt(2, idA);
                     st.execute();
                     con.commit();
                     st.close();
@@ -1796,6 +1785,7 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSuivantA2;
     private javax.swing.JButton jButtonSuivantA3;
     private javax.swing.JButton jButtonSupprimer;
+    private com.toedter.calendar.JDateChooser jDateChooserImage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1869,7 +1859,6 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescA;
     private javax.swing.JTextArea jTextAreaDescriptionI;
     private javax.swing.JTextField jTextFieldDateA;
-    private javax.swing.JTextField jTextFieldDateI;
     private javax.swing.JTextField jTextFieldFabriquantS;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldNomA;
