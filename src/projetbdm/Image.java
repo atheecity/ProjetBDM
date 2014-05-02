@@ -20,10 +20,11 @@ public class Image
     
     public void insererImage(String nom, String date, String description, String urlI)
     {
-        String sql = "INSERT INTO image VALUES (numI.nextval,to_date('" + date 
-                + "', 'DD/MM/YYYY'),'" + nom + "','" + description + "', ordsys.ordimage.init(), ordsys.ordimage.init(), null)";
+        String sql = "INSERT INTO image VALUES (numI.nextval,to_date(?"
+                + ", 'DD/MM/YYYY'),'" + nom + "','" + description + "', ordsys.ordimage.init(), ordsys.ordimage.init(), null)";
         try {
-            Statement stmt = this.con.createStatement();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, date);
             stmt.executeQuery(sql);
             con.commit();
             this.insererOrdImage(urlI);
