@@ -209,3 +209,8 @@ create table utilisateur of utilisateur_type (
     primary key (login)
 );
 
+--création des index
+create index nomIindex on image(nomI) indextype is ctxsys.context;
+create index descriptionIindex on image(descriptionI) indextype is ctxsys.context;
+create index nomAindex on application(nomA) indextype is ctxsys.context;
+create index descriptionAindex on application(descriptionA) indextype is ctxsys.context;

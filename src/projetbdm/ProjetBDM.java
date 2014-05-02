@@ -79,8 +79,8 @@ public class ProjetBDM {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
         } catch (Exception ex) { 
         }
-        //Window w = new Window(connect());
-        WindowAdmin wa = new WindowAdmin(connect());
+        Window w = new Window(connect());
+        //WindowAdmin wa = new WindowAdmin(connect());
     }
     
 }

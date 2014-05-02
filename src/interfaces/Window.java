@@ -391,51 +391,147 @@ public class Window extends javax.swing.JFrame {
 
     void foncRecherche(String choix)
     {
-        jPanelAffiche.removeAll();
+        
         trouve = new ArrayList();
         try
         {
-            Statement s=con.createStatement();            
+            Statement s=con.createStatement();
+            String mot = jTextFieldMotRech.getText();
+            OracleResultSet rset;
             switch(choix)
             {
                 case "Toutes les images" :
-                    OracleResultSet rset=(OracleResultSet)s.executeQuery("select miniature, idI, nomI from image");
+                    rset = (OracleResultSet)s.executeQuery("select miniature, idI, nomI from image");
                     while(rset.next())
                     {
                         OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
                         int nume = rset.getInt(2);
                         String nome = rset.getString(3);
-                        String url = "miniature-"+nome+".jpeg";
-                        minia.getDataInFile(url);
-                        Miniature mimimini = new Miniature(nume, "rien.png", nome, "image", con);
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else 
+                        {
+                            url = "miniature-"+num2+nome+".jpeg";
+                            minia.getDataInFile(url);
+                        }
+                        Miniature mimimini = new Miniature(nume, url, nome, "image", con);
                         trouve.add(mimimini);
                     }
                     rset.close();
                     break;
                 case "Dans image" : 
-
+                    rset = (OracleResultSet)s.executeQuery(
+                            "select miniature, idI, nomI "
+                                    + "from image "
+                                    + "where contains (nomI,'!"+mot+"')>0 "
+                                    + "or contains (descriptionI,'!"+mot+"')>0");
+                    while(rset.next())
+                    {
+                        OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                        int nume = rset.getInt(2);
+                        String nome = rset.getString(3);
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else 
+                        {
+                            url = "miniature-"+num2+nome+".jpeg";
+                            minia.getDataInFile(url);
+                        }
+                        Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                        trouve.add(mimimini);
+                    }
+                    rset.close();
                     break;
                 case "Dans image (nom)" : 
-
+                    rset = (OracleResultSet)s.executeQuery(
+                            "select miniature, idI, nomI "
+                                    + "from image "
+                                    + "where contains (nomI,'!"+mot+"')>0");
+                    while(rset.next())
+                    {
+                        OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                        int nume = rset.getInt(2);
+                        String nome = rset.getString(3);
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else 
+                        {
+                            url = "miniature-"+num2+nome+".jpeg";
+                            minia.getDataInFile(url);
+                        }
+                        Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                        trouve.add(mimimini);
+                    }
+                    rset.close();
                     break;
                 case "Dans image (description)" : 
-
+                    rset = (OracleResultSet)s.executeQuery(
+                            "select miniature, idI, nomI "
+                                    + "from image "
+                                    + "where contains (descriptionI,'!"+mot+"')>0");
+                    while(rset.next())
+                    {
+                        OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                        int nume = rset.getInt(2);
+                        String nome = rset.getString(3);
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else 
+                        {
+                            url = "miniature-"+num2+nome+".jpeg";
+                            minia.getDataInFile(url);
+                        }
+                        Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                        trouve.add(mimimini);
+                    }
+                    rset.close();
                     break;
                 case "Dans application" :
-
+                    
                     break;
                 case "Dans application (nom)" :
-
+                    rset = (OracleResultSet)s.executeQuery(
+                            "select a.idA "
+                                    + "from application a "
+                                    + "where contains (nomA,'!"+mot+"')>0");
+                    while(rset.next())
+                    {
+                        int numnum = rset.getInt(1);
+                        OracleResultSet rset2 = (OracleResultSet)s.executeQuery(
+                            "select miniature, idI, nomI "
+                                    + "from image i "
+                                    + "where i.applicationI.idA = "+numnum+" ");
+                        while(rset2.next())
+                        {
+                            OrdImage minia = (OrdImage) rset2.getORAData(1,OrdImage.getORADataFactory());
+                            int nume = rset2.getInt(2);
+                            String nome = rset2.getString(3);
+                            String num2 = Integer.toString(nume);
+                            String url ;
+                            if(minia.getContentLength() == 0) url = "rien.png";
+                            else 
+                            {
+                                url = "miniature-"+num2+nome+".jpeg";
+                                minia.getDataInFile(url);
+                            }
+                            Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                            trouve.add(mimimini);
+                        }
+                        rset2.close();
+                    }
+                    rset.close();
                     break;
                 case "Dans application (description)" :
-
+                    
                     break;
-
                 default :
                     System.out.println("erreur combo box");
                     break;
             }
-            
             s.close();
         }catch(Exception e){e.printStackTrace();}
         this.remplirPanelAffiche(trouve);
@@ -443,6 +539,7 @@ public class Window extends javax.swing.JFrame {
     
     public void remplirPanelAffiche(ArrayList<Miniature> trouve)
     {
+        jPanelAffiche.removeAll();
         int abscisse = 20;
         int ordonne = 10;
         int largueur = jPanelAffiche.getSize().width;

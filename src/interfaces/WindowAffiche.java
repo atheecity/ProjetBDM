@@ -149,15 +149,24 @@ public class WindowAffiche extends javax.swing.JFrame {
             Statement s = con.createStatement();
             String idI = Integer.toString(identifiant);
             String info = "";
-            OracleResultSet rset = (OracleResultSet)s.executeQuery("select imageI, nomI, dateI, descriptionI from image where idI="+idI);
+            OracleResultSet rset = (OracleResultSet)s.executeQuery(
+                    "select imageI, nomI, dateI, descriptionI, "
+                            + "i.applicationI.nomA, i.applicationI.descriptionA, i.applicationI.version "
+                            + "from image i "
+                            + "where i.idI="+idI);
             if(rset.next())
             {
-                OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());                
-                String urlFich = rset.getString(2)+".jpeg";
-                String nom = rset.getString(2);
+                OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());
+                String nomI = rset.getString(2);
+                String urlFich = idI+nomI+".jpeg";
                 String date = rset.getString(3);
-                String descrip = rset.getString(4);
-                info = info+"Information de l'image :\n nom : "+nom+"\n date : "+date+"\n description : "+descrip+"\n\n";
+                String descripI = rset.getString(4);
+                String nomA = rset.getString(5);
+                String descripA = rset.getString(6);
+                String versionA = rset.getString(7);
+                info = info+"Information sur l'image :\n nom : "+nomI+"\n date : "+date+"\n description : "+descripI+"\n\n";
+                String info2 = "Information sur l'application :\n nom : "+nomA+"\n description : "+descripA+"\n version : "+versionA;
+                info = info+info2;
                 jTextArea.setText(info);
                 im.getDataInFile(urlFich);
                 DefaultTableModel dtm = (DefaultTableModel) this.jTableAttribut.getModel();
