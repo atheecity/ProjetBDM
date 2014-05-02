@@ -122,16 +122,17 @@ public class WindowAdmin extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jTextFieldNomA = new javax.swing.JTextField();
-        jTextFieldDateA = new javax.swing.JTextField();
         jTextFieldTailleA = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextAreaDescA = new javax.swing.JTextArea();
         jTextFieldVersionAA = new javax.swing.JTextField();
         jButtonAnnulerA = new javax.swing.JButton();
         jButtonSuivantA1 = new javax.swing.JButton();
+        jDateChooserApplication = new com.toedter.calendar.JDateChooser();
         jPanelAddApplication3 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jButtonSuivantA3 = new javax.swing.JButton();
+        jButtonAnnulerA3 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
@@ -140,7 +141,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelAddApplication2 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jButtonSuivantA2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonAnnulerA2 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
@@ -149,6 +150,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelAddApplication4 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jButtonSaveApplication = new javax.swing.JButton();
+        jButtonAnnulerA4 = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTable8 = new javax.swing.JTable();
@@ -306,7 +308,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelSystemeLayout.setVerticalGroup(
             jPanelSystemeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelSystemeLayout.createSequentialGroup()
-                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -446,7 +448,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelUtilisateurLayout.setVerticalGroup(
             jPanelUtilisateurLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelUtilisateurLayout.createSequentialGroup()
-                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .add(jPanel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -633,7 +635,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelImageLayout.createSequentialGroup()
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -746,7 +748,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelCategorieLayout.setVerticalGroup(
             jPanelCategorieLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelCategorieLayout.createSequentialGroup()
-                .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .add(jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -802,7 +804,7 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jPanel10.add(jScrollPane5, "card2");
 
-        jPanelAddApplication.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 1/3"));
+        jPanelAddApplication.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 1/4"));
         java.awt.GridBagLayout jPanel11Layout = new java.awt.GridBagLayout();
         jPanel11Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel11Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
@@ -845,14 +847,6 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         jPanelAddApplication.add(jTextFieldNomA, gridBagConstraints);
-
-        jTextFieldDateA.setMaximumSize(new java.awt.Dimension(200, 28));
-        jTextFieldDateA.setMinimumSize(new java.awt.Dimension(200, 28));
-        jTextFieldDateA.setPreferredSize(new java.awt.Dimension(200, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        jPanelAddApplication.add(jTextFieldDateA, gridBagConstraints);
 
         jTextFieldTailleA.setMaximumSize(new java.awt.Dimension(200, 28));
         jTextFieldTailleA.setMinimumSize(new java.awt.Dimension(200, 28));
@@ -906,6 +900,15 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(19, 0, 0, 0);
         jPanelAddApplication.add(jButtonSuivantA1, gridBagConstraints);
 
+        jDateChooserApplication.setDateFormatString("d/MM/YYYY");
+        jDateChooserApplication.setMaximumSize(new java.awt.Dimension(200, 28));
+        jDateChooserApplication.setMinimumSize(new java.awt.Dimension(200, 28));
+        jDateChooserApplication.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        jPanelAddApplication.add(jDateChooserApplication, gridBagConstraints);
+
         jPanel10.add(jPanelAddApplication, "card3");
 
         jPanelAddApplication3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajouter une application 3/4"));
@@ -916,7 +919,10 @@ public class WindowAdmin extends javax.swing.JFrame {
         });
 
         jPanel13.setBorder(null);
-        jPanel13.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jPanel13Layout = new java.awt.GridBagLayout();
+        jPanel13Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
+        jPanel13Layout.rowHeights = new int[] {0, 5, 0};
+        jPanel13.setLayout(jPanel13Layout);
 
         jButtonSuivantA3.setText("Suivant");
         jButtonSuivantA3.addActionListener(new java.awt.event.ActionListener() {
@@ -925,9 +931,20 @@ public class WindowAdmin extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
         jPanel13.add(jButtonSuivantA3, gridBagConstraints);
+
+        jButtonAnnulerA3.setText("Annuler");
+        jButtonAnnulerA3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnulerA3ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel13.add(jButtonAnnulerA3, gridBagConstraints);
 
         jPanel14.setLayout(new java.awt.CardLayout());
 
@@ -980,7 +997,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication3Layout.createSequentialGroup()
                 .add(jPanel19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1008,12 +1025,17 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
         jPanel11.add(jButtonSuivantA2, gridBagConstraints);
 
-        jButton1.setText("Annuler");
+        jButtonAnnulerA2.setText("Annuler");
+        jButtonAnnulerA2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnulerA2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
-        jPanel11.add(jButton1, gridBagConstraints);
+        jPanel11.add(jButtonAnnulerA2, gridBagConstraints);
 
         jPanel12.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -1072,7 +1094,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication2Layout.createSequentialGroup()
                 .add(jPanel17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1086,7 +1108,10 @@ public class WindowAdmin extends javax.swing.JFrame {
             }
         });
 
-        jPanel15.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jPanel15Layout = new java.awt.GridBagLayout();
+        jPanel15Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
+        jPanel15Layout.rowHeights = new int[] {0, 5, 0};
+        jPanel15.setLayout(jPanel15Layout);
 
         jButtonSaveApplication.setText("Sauvegarder");
         jButtonSaveApplication.addActionListener(new java.awt.event.ActionListener() {
@@ -1095,9 +1120,20 @@ public class WindowAdmin extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
         jPanel15.add(jButtonSaveApplication, gridBagConstraints);
+
+        jButtonAnnulerA4.setText("Annuler");
+        jButtonAnnulerA4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnulerA4ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel15.add(jButtonAnnulerA4, gridBagConstraints);
 
         jPanel16.setLayout(new java.awt.CardLayout());
 
@@ -1150,10 +1186,9 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication4Layout.createSequentialGroup()
                 .add(jPanel18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 371, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jPanel16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 411, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(32, 32, 32))
+                .add(jPanel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel10.add(jPanelAddApplication4, "card3");
@@ -1162,13 +1197,13 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelApplication.setLayout(jPanelApplicationLayout);
         jPanelApplicationLayout.setHorizontalGroup(
             jPanelApplicationLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelApplicationLayout.setVerticalGroup(
             jPanelApplicationLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelApplicationLayout.createSequentialGroup()
-                .add(jPanel10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 474, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jPanel10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1553,8 +1588,18 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jButtonAnnulerAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerAActionPerformed
         this.jScrollPane5.setVisible(true);
         this.jPanelAddApplication.setVisible(false);
+        this.resetFormApplication();
     }//GEN-LAST:event_jButtonAnnulerAActionPerformed
 
+    private void resetFormApplication()
+    {
+        this.jTextFieldNomA.setText("");
+        this.jTextAreaDescA.setText("");
+        this.jDateChooserApplication.setDate(null);
+        this.jTextFieldTailleA.setText("");
+        this.jTextFieldVersionAA.setText("");
+    }
+    
     private void jPanel12ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel12ComponentShown
         
     }//GEN-LAST:event_jPanel12ComponentShown
@@ -1562,7 +1607,7 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jButtonSuivantA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSuivantA1ActionPerformed
         String nomA = this.jTextFieldNomA.getText();
         String descA = this.jTextAreaDescA.getText();
-        String dateA = this.jTextFieldDateA.getText();
+        DateFormat fmt = DateFormat.getDateInstance(SHORT, FRANCE);
         String tailleA = this.jTextFieldTailleA.getText();
         String versionA =this.jTextFieldVersionAA.getText();
         
@@ -1570,16 +1615,19 @@ public class WindowAdmin extends javax.swing.JFrame {
         {
             if (!descA.isEmpty())
             {
-                if (!tailleA.isEmpty())
-                {
-                    if (!versionA.isEmpty())
+                try {
+                    String date = fmt.format(this.jDateChooserApplication.getDate());
+                    if (!tailleA.isEmpty())
                     {
-                        this.jPanelAddApplication.setVisible(false);
-                        this.jPanelAddApplication2.setVisible(true);
+                        if (!versionA.isEmpty())
+                        {
+                            this.jPanelAddApplication.setVisible(false);
+                            this.jPanelAddApplication2.setVisible(true);
+                        }
+                        else JOptionPane.showMessageDialog(this, "Version non valide");
                     }
-                    else JOptionPane.showMessageDialog(this, "Version non valide");
-                }
-                else JOptionPane.showMessageDialog(this, "Taille non valide");
+                    else JOptionPane.showMessageDialog(this, "Taille non valide");
+                } catch (Exception e) { JOptionPane.showMessageDialog(this, "Date non valide"); }
             }
             else JOptionPane.showMessageDialog(this, "Description trop courte pour l'application");
         }
@@ -1676,7 +1724,8 @@ public class WindowAdmin extends javax.swing.JFrame {
         //Récupère données du formulaire 1
         String nomA = this.jTextFieldNomA.getText();
         String descA = this.jTextAreaDescA.getText();
-        String dateA = this.jTextFieldDateA.getText();
+        DateFormat fmt = DateFormat.getDateInstance(SHORT, FRANCE);
+        String date = fmt.format(this.jDateChooserApplication.getDate());
         float tailleA = Float.parseFloat(this.jTextFieldTailleA.getText());
         float versionA = Float.parseFloat(this.jTextFieldVersionAA.getText());
         //Récupère données formualaire 2 (catégorie)
@@ -1691,7 +1740,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         PreparedStatement st;
         try {
             st = con.prepareStatement("insert into application("
-                    + "select numA.nextval, ?, to_date(?,'YYYY-MM-DD'), ?, ?, ?, ref(c), images_type() from categorie c where c.idC = ?)");
+                    + "select numA.nextval, ?, to_date(?,'DD/MM/YYYY'), ?, ?, ?, ref(c), images_type() from categorie c where c.idC = ?)");
             st.setString(1, nomA);
             st.setString(2, "2012-12-12");
             st.setString(3, descA);
@@ -1803,8 +1852,25 @@ public class WindowAdmin extends javax.swing.JFrame {
         this.initTabSysteme(model);
     }//GEN-LAST:event_jButtonDeleteSystemeActionPerformed
 
+    private void jButtonAnnulerA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerA2ActionPerformed
+        this.jScrollPane5.setVisible(true);
+        this.jPanelAddApplication2.setVisible(false);
+        this.resetFormApplication();
+    }//GEN-LAST:event_jButtonAnnulerA2ActionPerformed
+
+    private void jButtonAnnulerA3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerA3ActionPerformed
+        this.jScrollPane5.setVisible(true);
+        this.jPanelAddApplication3.setVisible(false);
+        this.resetFormApplication();
+    }//GEN-LAST:event_jButtonAnnulerA3ActionPerformed
+
+    private void jButtonAnnulerA4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerA4ActionPerformed
+        this.jScrollPane5.setVisible(true);
+        this.jPanelAddApplication3.setVisible(false);
+        this.resetFormApplication();
+    }//GEN-LAST:event_jButtonAnnulerA4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddApplication;
     private javax.swing.JButton jButtonAddCategorie;
@@ -1812,6 +1878,9 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddUtilisateur;
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonAnnulerA;
+    private javax.swing.JButton jButtonAnnulerA2;
+    private javax.swing.JButton jButtonAnnulerA3;
+    private javax.swing.JButton jButtonAnnulerA4;
     private javax.swing.JButton jButtonAnnulerC;
     private javax.swing.JButton jButtonAnnulerImage;
     private javax.swing.JButton jButtonAnnulerS;
@@ -1828,6 +1897,7 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSuivantA2;
     private javax.swing.JButton jButtonSuivantA3;
     private javax.swing.JButton jButtonSupprimer;
+    private com.toedter.calendar.JDateChooser jDateChooserApplication;
     private com.toedter.calendar.JDateChooser jDateChooserImage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1901,7 +1971,6 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JTable jTable8;
     private javax.swing.JTextArea jTextAreaDescA;
     private javax.swing.JTextArea jTextAreaDescriptionI;
-    private javax.swing.JTextField jTextFieldDateA;
     private javax.swing.JTextField jTextFieldFabriquantS;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldNomA;
