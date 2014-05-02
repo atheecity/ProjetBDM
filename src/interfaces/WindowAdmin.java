@@ -1815,6 +1815,10 @@ public class WindowAdmin extends javax.swing.JFrame {
                 }
             }
         }
+        DefaultTableModel model = (DefaultTableModel) this.jTable5.getModel();
+        this.initTabApplication(model);
+        this.jPanelAddApplication4.setVisible(false);
+        this.jScrollPane5.setVisible(true);
     }//GEN-LAST:event_jButtonSaveApplicationActionPerformed
 
     /**
@@ -1876,9 +1880,11 @@ public class WindowAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAnnulerA4ActionPerformed
 
     private void jButtonSupprimerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerImageActionPerformed
+        Boolean select = false;
         for (int i = 0; i < this.jTable1.getRowCount(); i++)
         {
             if (this.jTable1.getValueAt(i, 0).equals(true)){
+                select = true;
                 PreparedStatement st;
                 int idI = Integer.parseInt(this.jTable1.getValueAt(i, 1).toString());
                 try {
@@ -1906,13 +1912,20 @@ public class WindowAdmin extends javax.swing.JFrame {
                     st.setInt(1, idI);
                     st.execute();
                     con.commit();
-                    
                     st.close();
+                    this.jPanelAddImage.setVisible(false);
+                    this.jScrollPaneImage.setVisible(true);
+                    DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+                    String sql = "select * from image";
+                    this.initTabImage(sql, model);
+                    this.resetFormImage();
                 } catch (SQLException ex) {
                     Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
+        if (!select)
+            JOptionPane.showMessageDialog(this, "Aucune image n'est sélectionnée");
     }//GEN-LAST:event_jButtonSupprimerImageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
