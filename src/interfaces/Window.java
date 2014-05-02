@@ -25,7 +25,7 @@ import projetbdm.ProjetBDM;
 public class Window extends javax.swing.JFrame {
     
     private final Connection con;
-    String image_chargement = " ";
+    String image_chargement = "";
     Image img;
     JPanel paner;
     ArrayList<Miniature> trouve = new ArrayList();
