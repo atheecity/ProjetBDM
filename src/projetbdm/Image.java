@@ -36,13 +36,17 @@ public class Image
         try {
             Statement stmt = con.createStatement();
             OracleResultSet rset;
-            rset = (OracleResultSet) stmt.executeQuery("select imageI from image where "
+            rset = (OracleResultSet) stmt.executeQuery("select imageI, miniature from image where "
                     + "idI=" + idI + " for update");
             while(rset.next())
             {
                 OrdImage img = (OrdImage) rset.getORAData(1, OrdImage.getORADataFactory());
+                OrdImage miniature = (OrdImage) rset.getORAData(2, OrdImage.getORADataFactory());
                 img.loadDataFromFile(urlI);
+                img.processCopy("MaxScale=100 100", miniature);
                 img.setProperties();
+                miniature.setProperties();
+                //Mise à jour de l'attribut image
                 OraclePreparedStatement pstmt = (OraclePreparedStatement) con.prepareStatement("update "
                         + "image set imageI = ? where idI=?");
                 pstmt.setORAData(1, img);
@@ -50,6 +54,14 @@ public class Image
                 pstmt.execute();
                 con.commit();
                 pstmt.close();
+                //Mise à jour de l'attribut miniature
+                OraclePreparedStatement pstmt2 = (OraclePreparedStatement) con.prepareStatement("update "
+                        + "image set miniature = ? where idI=?");
+                pstmt2.setORAData(1, miniature);
+                pstmt2.setInt(2, idI);
+                pstmt2.execute();
+                con.commit();
+                pstmt2.close();
             }
             rset.close();
         } catch (SQLException ex) {
