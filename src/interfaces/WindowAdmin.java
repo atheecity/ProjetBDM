@@ -566,6 +566,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(18, 0, 0, 0);
         jPanelAddImage.add(jButtonAnnulerImage, gridBagConstraints);
 
@@ -605,7 +606,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanelAddImage.add(jButtonParcourirI, gridBagConstraints);
@@ -1215,17 +1216,38 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jButtonAnnulerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerImageActionPerformed
         this.jPanelAddImage.setVisible(false);
         this.jScrollPaneImage.setVisible(true);
+        this.resetFormImage();
     }//GEN-LAST:event_jButtonAnnulerImageActionPerformed
 
+    private void resetFormImage()
+    {
+        this.jTextFieldNomI.setText("");
+        this.jTextAreaDescriptionI.setText("");
+        this.jTextFieldUrlI.setText("");
+        this.jDateChooserImage.setDate(null);
+    }
+    
     private void jButtonSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveImageActionPerformed
         String nom = this.jTextFieldNomI.getText();
         DateFormat fmt = DateFormat.getDateInstance(SHORT, FRANCE);
-        String date = fmt.format(this.jDateChooserImage.getDate());
         String description = this.jTextAreaDescriptionI.getText();
         String urlI = this.jTextFieldUrlI.getText();
         
-        Image img = new Image();
-        img.insererImage(nom, date, description, urlI);
+        if (!nom.isEmpty())
+            try {
+                String date = fmt.format(this.jDateChooserImage.getDate());
+                if (!description.isEmpty())
+                    if (!urlI.isEmpty()) {
+                        Image img = new Image();
+                        img.insererImage(nom, date, description, urlI);
+                        this.jPanelAddImage.setVisible(false);
+                        this.jScrollPaneImage.setVisible(true);
+                        this.resetFormImage();
+                    }
+                    else JOptionPane.showMessageDialog(this, "Remplir le champ image");
+                else JOptionPane.showMessageDialog(this, "Remplir le champ description");
+            } catch(Exception e) { JOptionPane.showMessageDialog(this, "Date non valide"); }
+        else JOptionPane.showMessageDialog(this, "Remplir le champ nom image");
     }//GEN-LAST:event_jButtonSaveImageActionPerformed
 
     private void jButtonParcourirIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParcourirIActionPerformed
@@ -1570,10 +1592,31 @@ public class WindowAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelAddApplication2ComponentShown
 
     private void jPanelApplicationComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelApplicationComponentShown
-        DefaultTableModel model = (DefaultTableModel) this.jTable6.getModel();
-        this.initTabCategorie(model);
+        DefaultTableModel model = (DefaultTableModel) this.jTable5.getModel();
+        this.initTabApplication(model);
     }//GEN-LAST:event_jPanelApplicationComponentShown
 
+    private void initTabApplication(DefaultTableModel model)
+    {
+        PreparedStatement st;
+        try {
+            st = con.prepareStatement("select * from application");
+            ResultSet rst = st.executeQuery();
+            model.getDataVector().removeAllElements();
+            while (rst.next()) {
+                int idA = rst.getInt(1);
+                String nomA = rst.getString(2);
+                String dateA = rst.getString(3);
+                String descA = rst.getString(4);
+                float tailleA = rst.getFloat(5);
+                float versionA = rst.getFloat(6);
+                model.addRow(new Object[]{false, idA, nomA, descA, dateA, tailleA, versionA});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Bouton suivant pour sélectionner des images
      * @param evt 
