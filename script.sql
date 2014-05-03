@@ -224,3 +224,14 @@ begin
 end;
 /
 
+--création des index
+create index nomIindex on image(nomI) indextype is ctxsys.context;
+create index descriptionIindex on image(descriptionI) indextype is ctxsys.context;
+create index nomAindex on application(nomA) indextype is ctxsys.context;
+create index descriptionAindex on application(descriptionA) indextype is ctxsys.context;
+
+--reconstruction des index
+alter index nomIindex rebuild;
+alter index descriptionIindex rebuild;
+alter index nomAindex rebuild;
+alter index descriptionAindex rebuild;
