@@ -209,3 +209,18 @@ create table utilisateur of utilisateur_type (
     primary key (login)
 );
 
+/* Création du thesaurus */
+BEGIN
+	CTX_THES.CREATE_THESAURUS('app_thes', FALSE); 
+END;
+/
+
+begin
+  Dbms_Output.Put_Line (
+    Ctx_Thes.bt (
+      phrase => 'dog',
+      lvl    => 1,
+      tname  => 'app_thes' ));
+end;
+/
+

@@ -62,7 +62,7 @@ public class WindowAffiche extends javax.swing.JFrame {
         jPanelImage.setLayout(jPanelImageLayout);
         jPanelImageLayout.setHorizontalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 683, Short.MAX_VALUE)
         );
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,9 +104,9 @@ public class WindowAffiche extends javax.swing.JFrame {
         jPanelAttributLayout.setVerticalGroup(
             jPanelAttributLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAttributLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,13 +114,13 @@ public class WindowAffiche extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+            .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
             .addComponent(jPanelAttribut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -130,7 +130,24 @@ public class WindowAffiche extends javax.swing.JFrame {
     private void afficheImage(JPanel pan,Image img)
     {
         Graphics g=pan.getGraphics();
-        g.drawImage(img, 0, 0, pan.getWidth(),pan.getHeight(),this);
+        
+        int widthPanel = this.jPanelImage.getWidth();
+        int heightPanel = this.jPanelImage.getHeight();
+        
+        float coef = this.coefImage(widthPanel, heightPanel, img.getWidth(null), img.getHeight(null));
+        
+        int x = (int) (img.getWidth(null) * coef);
+        int y = (int) (img.getHeight(null) * coef);
+        
+        int posx = (widthPanel - img.getWidth(null)) / 2;
+        int posy = (heightPanel - img.getHeight(null)) / 2;
+        
+        if (posx < 0) posx = 0;
+        if (posy < 0) posy = 0;
+        
+        System.out.println("px " + posx + " posy " + posy);
+        
+        g.drawImage(img, posx, posy, x, y,this);
     }
     
     @Override
@@ -171,8 +188,26 @@ public class WindowAffiche extends javax.swing.JFrame {
             }
             rset.close();
             s.close();
-        }catch(Exception e){e.printStackTrace();}
+        }catch(Exception e){e.printStackTrace();} 
+    }
+    
+    private float coefImage(int widthPanel, int heightPanel, int widthImg, int heightImg)
+    {
+        float coef = 1;
         
+        int ratioWidth = widthImg - widthPanel;
+        int ratioHeight = heightImg - heightPanel;
+        
+        if (ratioWidth > ratioHeight) {
+            if (widthImg > widthPanel) coef = (float) widthPanel / widthImg;
+            System.out.println("Je rentre la");
+        }
+        else {
+            System.out.println("Je rentre ici");
+            if (heightImg > heightPanel) coef = (float) heightPanel / heightImg; 
+        } 
+        
+        return coef;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

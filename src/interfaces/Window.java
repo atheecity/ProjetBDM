@@ -8,14 +8,23 @@ package interfaces;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
+import java.sql.Array;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import oracle.jdbc.OracleResultSet;
 import oracle.ord.im.OrdImage;
+import oracle.sql.REF;
+import oracle.sql.STRUCT;
 import projetbdm.Miniature;
 import projetbdm.ProjetBDM;
 
@@ -53,27 +62,46 @@ public class Window extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldMotRech = new javax.swing.JTextField();
-        jButtonLanceRechMot = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButtonLanceRechCompa = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jButtonAfficheAdmin = new javax.swing.JButton();
         jPanelLogAdmin = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldLogin = new javax.swing.JTextField();
         jButtonAdmin = new javax.swing.JButton();
         jPasswordFieldPassword = new javax.swing.JPasswordField();
-        jTextFieldRechImage = new javax.swing.JTextField();
-        jButtonParcourir = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jPanelImageCompa = new javax.swing.JPanel();
-        jComboBoxRech = new javax.swing.JComboBox();
         jSeparator2 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
+        jComboBoxCategorie = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jButtonVCategorie = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jComboBoxSysteme = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jButtonVSysteme = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        jComboBoxRech = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldMotRech = new javax.swing.JTextField();
+        jButtonLanceRechMot = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox3 = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jPanel6 = new javax.swing.JPanel();
+        jButtonLanceRechCompa = new javax.swing.JButton();
+        jButtonParcourir = new javax.swing.JButton();
+        jTextFieldRechImage = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jPanelImageCompa = new javax.swing.JPanel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jButtonAfficheAdmin = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanelAcceuil = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -84,26 +112,221 @@ public class Window extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 750));
+        setPreferredSize(new java.awt.Dimension(1000, 800));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(230, 230, 230));
         jPanel1.setMinimumSize(new java.awt.Dimension(210, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(210, 700));
         jPanel1.setVerifyInputWhenFocusTarget(false);
 
+        jPanelLogAdmin.setBackground(new java.awt.Color(230, 230, 230));
+        jPanelLogAdmin.setPreferredSize(new java.awt.Dimension(189, 100));
+        jPanelLogAdmin.setLayout(new java.awt.GridBagLayout());
+
+        jLabel3.setText("Login");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanelLogAdmin.add(jLabel3, gridBagConstraints);
+
+        jLabel4.setText("Password");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanelLogAdmin.add(jLabel4, gridBagConstraints);
+
+        jTextFieldLogin.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldLogin.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldLogin.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        jPanelLogAdmin.add(jTextFieldLogin, gridBagConstraints);
+
+        jButtonAdmin.setText("Go");
+        jButtonAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdminActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        jPanelLogAdmin.add(jButtonAdmin, gridBagConstraints);
+
+        jPasswordFieldPassword.setMaximumSize(new java.awt.Dimension(200, 28));
+        jPasswordFieldPassword.setMinimumSize(new java.awt.Dimension(200, 28));
+        jPasswordFieldPassword.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        jPanelLogAdmin.add(jPasswordFieldPassword, gridBagConstraints);
+
+        jPanel2.setBackground(new java.awt.Color(230, 230, 230));
+        java.awt.GridBagLayout jPanel2Layout = new java.awt.GridBagLayout();
+        jPanel2Layout.columnWidths = new int[] {0, 5, 0};
+        jPanel2Layout.rowHeights = new int[] {0, 5, 0};
+        jPanel2.setLayout(jPanel2Layout);
+
+        jComboBoxCategorie.setMaximumSize(new java.awt.Dimension(200, 28));
+        jComboBoxCategorie.setMinimumSize(new java.awt.Dimension(200, 28));
+        jComboBoxCategorie.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel2.add(jComboBoxCategorie, gridBagConstraints);
+
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel6.setText("Recherche par catégorie");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        jPanel2.add(jLabel6, gridBagConstraints);
+
+        jButtonVCategorie.setText("Valider");
+        jButtonVCategorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVCategorieActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        jPanel2.add(jButtonVCategorie, gridBagConstraints);
+
+        jPanel3.setBackground(new java.awt.Color(230, 230, 230));
+        java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
+        jPanel3Layout.columnWidths = new int[] {0, 5, 0};
+        jPanel3Layout.rowHeights = new int[] {0, 5, 0};
+        jPanel3.setLayout(jPanel3Layout);
+
+        jComboBoxSysteme.setMaximumSize(new java.awt.Dimension(200, 28));
+        jComboBoxSysteme.setMinimumSize(new java.awt.Dimension(200, 28));
+        jComboBoxSysteme.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 0);
+        jPanel3.add(jComboBoxSysteme, gridBagConstraints);
+
+        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel8.setText("Recherche par système");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel3.add(jLabel8, gridBagConstraints);
+
+        jButtonVSysteme.setText("Valider");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        jPanel3.add(jButtonVSysteme, gridBagConstraints);
+
+        jPanel4.setBackground(new java.awt.Color(230, 230, 230));
+        java.awt.GridBagLayout jPanel4Layout = new java.awt.GridBagLayout();
+        jPanel4Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
+        jPanel4Layout.rowHeights = new int[] {0, 5, 0, 5, 0};
+        jPanel4.setLayout(jPanel4Layout);
+
+        jComboBoxRech.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Toutes les images", "Dans image", "Dans image (nom)", "Dans image (description)", "Dans application", "Dans application (nom)", "Dans application (description)" }));
+        jComboBoxRech.setMaximumSize(new java.awt.Dimension(200, 28));
+        jComboBoxRech.setMinimumSize(new java.awt.Dimension(200, 28));
+        jComboBoxRech.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel4.add(jComboBoxRech, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setText("Recherche suivant un mot");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
+        jPanel4.add(jLabel1, gridBagConstraints);
 
-        jTextFieldMotRech.setMinimumSize(new java.awt.Dimension(125, 20));
-        jTextFieldMotRech.setPreferredSize(new java.awt.Dimension(125, 20));
+        jTextFieldMotRech.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldMotRech.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldMotRech.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel4.add(jTextFieldMotRech, gridBagConstraints);
 
-        jButtonLanceRechMot.setText("Lancer");
+        jButtonLanceRechMot.setText("Valider");
         jButtonLanceRechMot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLanceRechMotActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        jPanel4.add(jButtonLanceRechMot, gridBagConstraints);
 
-        jLabel2.setText("Recherche suivant une image");
+        jPanel5.setBackground(new java.awt.Color(230, 230, 230));
+        java.awt.GridBagLayout jPanel5Layout = new java.awt.GridBagLayout();
+        jPanel5Layout.columnWidths = new int[] {0, 5, 0};
+        jPanel5Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0};
+        jPanel5.setLayout(jPanel5Layout);
+
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel7.setText("Recherche sur application");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel5.add(jLabel7, gridBagConstraints);
+
+        jTextField1.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextField1.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextField1.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel5.add(jTextField1, gridBagConstraints);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BT", "NT", "PT", "RT", "SYN", "TR", "TT" }));
+        jComboBox3.setMaximumSize(new java.awt.Dimension(200, 28));
+        jComboBox3.setMinimumSize(new java.awt.Dimension(200, 28));
+        jComboBox3.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel5.add(jComboBox3, gridBagConstraints);
+
+        jButton3.setText("Valider");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        jPanel5.add(jButton3, gridBagConstraints);
+
+        jLabel9.setText("(Thesaurus)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanel5.add(jLabel9, gridBagConstraints);
+
+        jPanel6.setBackground(new java.awt.Color(230, 230, 230));
+        java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
+        jPanel6Layout.columnWidths = new int[] {0, 5, 0};
+        jPanel6Layout.rowHeights = new int[] {0, 5, 0, 5, 0};
+        jPanel6.setLayout(jPanel6Layout);
 
         jButtonLanceRechCompa.setText("Lancer");
         jButtonLanceRechCompa.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +334,64 @@ public class Window extends javax.swing.JFrame {
                 jButtonLanceRechCompaActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        jPanel6.add(jButtonLanceRechCompa, gridBagConstraints);
+
+        jButtonParcourir.setText("Parcourir");
+        jButtonParcourir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonParcourirActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        jPanel6.add(jButtonParcourir, gridBagConstraints);
+
+        jTextFieldRechImage.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldRechImage.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldRechImage.setPreferredSize(new java.awt.Dimension(200, 28));
+        jTextFieldRechImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRechImageActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 0);
+        jPanel6.add(jTextFieldRechImage, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel2.setText("Recherche suivant une image");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel6.add(jLabel2, gridBagConstraints);
+
+        jPanelImageCompa.setPreferredSize(new java.awt.Dimension(200, 130));
+
+        javax.swing.GroupLayout jPanelImageCompaLayout = new javax.swing.GroupLayout(jPanelImageCompa);
+        jPanelImageCompa.setLayout(jPanelImageCompaLayout);
+        jPanelImageCompaLayout.setHorizontalGroup(
+            jPanelImageCompaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelImageCompaLayout.setVerticalGroup(
+            jPanelImageCompaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel6.add(jPanelImageCompa, gridBagConstraints);
 
         jButtonAfficheAdmin.setText("Administrateur");
         jButtonAfficheAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -119,147 +400,58 @@ public class Window extends javax.swing.JFrame {
             }
         });
 
-        jPanelLogAdmin.setPreferredSize(new java.awt.Dimension(189, 100));
-
-        jLabel3.setText("Login");
-
-        jLabel4.setText("Password");
-
-        jButtonAdmin.setText("Go");
-        jButtonAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAdminActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelLogAdminLayout = new javax.swing.GroupLayout(jPanelLogAdmin);
-        jPanelLogAdmin.setLayout(jPanelLogAdminLayout);
-        jPanelLogAdminLayout.setHorizontalGroup(
-            jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLogAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonAdmin)
-                    .addGroup(jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelLogAdminLayout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanelLogAdminLayout.createSequentialGroup()
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelLogAdminLayout.setVerticalGroup(
-            jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLogAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelLogAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAdmin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTextFieldRechImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRechImageActionPerformed(evt);
-            }
-        });
-
-        jButtonParcourir.setText("Parcourir");
-        jButtonParcourir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonParcourirActionPerformed(evt);
-            }
-        });
-
-        jPanelImageCompa.setPreferredSize(new java.awt.Dimension(190, 130));
-
-        javax.swing.GroupLayout jPanelImageCompaLayout = new javax.swing.GroupLayout(jPanelImageCompa);
-        jPanelImageCompa.setLayout(jPanelImageCompaLayout);
-        jPanelImageCompaLayout.setHorizontalGroup(
-            jPanelImageCompaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-        jPanelImageCompaLayout.setVerticalGroup(
-            jPanelImageCompaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
-        );
-
-        jComboBoxRech.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Toutes les images", "Dans image", "Dans image (nom)", "Dans image (description)", "Dans application", "Dans application (nom)", "Dans application (description)" }));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jButtonAfficheAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanelLogAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonParcourir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonLanceRechCompa))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldMotRech, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jButtonLanceRechMot, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, Short.MAX_VALUE)
-                                .addComponent(jSeparator1))
-                            .addComponent(jPanelLogAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxRech, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldRechImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelImageCompa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAfficheAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator5)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator4))
                 .addContainerGap())
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldMotRech, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxRech, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(jButtonLanceRechMot)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldRechImage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonParcourir)
-                    .addComponent(jButtonLanceRechCompa))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelImageCompa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAfficheAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelLogAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelLogAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -274,14 +466,14 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
                 .addGap(309, 309, 309)
                 .addComponent(jLabel5)
-                .addContainerGap(469, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         jPanelAcceuilLayout.setVerticalGroup(
             jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
                 .addGap(288, 288, 288)
                 .addComponent(jLabel5)
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addContainerGap(455, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanelAcceuil, "card5");
@@ -297,11 +489,11 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setLayout(jPanelAfficheLayout);
         jPanelAfficheLayout.setHorizontalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
+            .addGap(0, 728, Short.MAX_VALUE)
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 738, Short.MAX_VALUE)
         );
 
         jPanel7.add(jPanelAffiche, "card4");
@@ -333,14 +525,14 @@ public class Window extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
@@ -360,41 +552,9 @@ public class Window extends javax.swing.JFrame {
             afficheImage(paner,img);
     }
     
-    private void jButtonAfficheAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficheAdminActionPerformed
-        if(jPanelLogAdmin.isVisible() == false) jPanelLogAdmin.setVisible(true);
-        else jPanelLogAdmin.setVisible(false);
-    }//GEN-LAST:event_jButtonAfficheAdminActionPerformed
-
-    private void jButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdminActionPerformed
-        WindowAdmin wa;
-        String login = this.jTextFieldLogin.getText();
-        String password = new String(this.jPasswordFieldPassword.getPassword());
-        if (!ProjetBDM.uConnexion(login, password)) {
-            System.out.println("Erreur login/mot de passe");
-        } else {
-            wa = new WindowAdmin(this.con);
-            wa.setVisible(true);
-        }
-    }//GEN-LAST:event_jButtonAdminActionPerformed
-
-    private void jTextFieldRechImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRechImageActionPerformed
-       
-    }//GEN-LAST:event_jTextFieldRechImageActionPerformed
-
-    private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
-        jPanelAcceuil.setVisible(false);
-        jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
-        trouve.clear();
-        jPanelAffiche.removeAll();
-        jPanelAffiche.repaint();
-        String indic = (String)jComboBoxRech.getSelectedItem();
-        this.foncRecherche(indic);
-    }//GEN-LAST:event_jButtonLanceRechMotActionPerformed
-
     void foncRecherche(String choix)
     {
+        jPanelAffiche.removeAll();
         trouve = new ArrayList();
         try
         {
@@ -498,18 +658,18 @@ public class Window extends javax.swing.JFrame {
         int ordonne = 10;
         int largueur = jPanelAffiche.getSize().width;
         int cmp = 0;
-        int cmpMax = largueur/110;
+        int cmpMax = largueur/150;
         for(Miniature mimi : trouve)
         {
             mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
             cmp++;
             if(cmp<cmpMax)
             {
-                ordonne += 110;
+                ordonne += 150;
             }
             else
             {
-                abscisse += 110;
+                abscisse += 150;
                 ordonne = 10;
                 cmp = 0;
             }
@@ -517,17 +677,6 @@ public class Window extends javax.swing.JFrame {
     }
     }
     
-    private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
-        jPanelAcceuil.setVisible(false);
-        jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(true);
-        image_chargement = jTextFieldRechImage.getText();
-        jLabel7.setText("Image Chargée ");
-        img = jPanelImageCompa.getToolkit().getImage(image_chargement);
-        paner = jPanelImageCompa;
-        repaint();
-    }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         jPanelAcceuil.setVisible(true);        
         jPanelAffiche.setVisible(false);
@@ -539,6 +688,10 @@ public class Window extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jPanelAfficheComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAfficheComponentResized
+        this.remplirPanelAffiche(trouve);
+    }//GEN-LAST:event_jPanelAfficheComponentResized
+
     private void jButtonParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParcourirActionPerformed
         JFileChooser jf=new JFileChooser();
         int i=jf.showOpenDialog(this);
@@ -549,31 +702,170 @@ public class Window extends javax.swing.JFrame {
         jTextFieldRechImage.setText(image_chargement);
     }//GEN-LAST:event_jButtonParcourirActionPerformed
 
-    private void jPanelAfficheComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAfficheComponentResized
+    private void jTextFieldRechImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRechImageActionPerformed
+
+    }//GEN-LAST:event_jTextFieldRechImageActionPerformed
+
+    private void jButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdminActionPerformed
+        WindowAdmin wa;
+        String login = this.jTextFieldLogin.getText();
+        String password = new String(this.jPasswordFieldPassword.getPassword());
+        if (!ProjetBDM.uConnexion(login, password)) {
+            System.out.println("Erreur login/mot de passe");
+        } else {
+            wa = new WindowAdmin(this.con);
+            wa.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonAdminActionPerformed
+
+    private void jButtonAfficheAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficheAdminActionPerformed
+        if(jPanelLogAdmin.isVisible() == false) jPanelLogAdmin.setVisible(true);
+        else jPanelLogAdmin.setVisible(false);
+    }//GEN-LAST:event_jButtonAfficheAdminActionPerformed
+
+    private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
+        jPanelAcceuil.setVisible(false);
+        jPanelAffiche.setVisible(true);
+        jPanelImageCompa.setVisible(true);
+        image_chargement = jTextFieldRechImage.getText();
+        jLabel7.setText("Image Chargée ");
+        img = jPanelImageCompa.getToolkit().getImage(image_chargement);
+        paner = jPanelImageCompa;
+        repaint();
+    }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
+
+    private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
+        jPanelAcceuil.setVisible(false);
+        jPanelAffiche.setVisible(true);
+        jPanelImageCompa.setVisible(false);
+        jLabel7.setText(" ");
+        trouve.clear();
+        jPanelAffiche.removeAll();
+        jPanelAffiche.repaint();
+        String indic = (String)jComboBoxRech.getSelectedItem();
+        this.foncRecherche(indic);
+    }//GEN-LAST:event_jButtonLanceRechMotActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //Sélection des catégories
+        try {
+            //Sélection des catégories
+            PreparedStatement st;
+            st = con.prepareStatement("select * from categorie");
+            st.executeQuery();
+            ResultSet rst = st.executeQuery();
+            while (rst.next()) {
+                this.jComboBoxCategorie.addItem(rst.getString(2));
+            }
+        }
+        catch(Exception e) {System.out.println(e);}
+        
+        //Sélection des systèmes
+        try {
+            //Sélection des catégories
+            PreparedStatement st;
+            st = con.prepareStatement("select * from systeme");
+            st.executeQuery();
+            ResultSet rst = st.executeQuery();
+            while (rst.next()) {
+                this.jComboBoxSysteme.addItem(rst.getString(1));
+            }
+        }
+        catch(Exception e) {System.out.println(e);}
+    }//GEN-LAST:event_formComponentShown
+
+    private void jButtonVCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVCategorieActionPerformed
+        jPanelAcceuil.setVisible(false);
+        jPanelAffiche.setVisible(true);
+        jPanelImageCompa.setVisible(false);
+        jLabel7.setText(" ");
+        trouve.clear();
+        jPanelAffiche.removeAll();
+        jPanelAffiche.repaint();
+        PreparedStatement st;
+        String idC = this.jComboBoxCategorie.getSelectedItem().toString();
+        try {
+            st = con.prepareStatement("select value(a) from application a "
+                    + "where a.categorieA = (select ref(c) from categorie c where c.nomC = ?)");
+            st.setString(1, idC);
+            OracleResultSet rsetA = (OracleResultSet) st.executeQuery();
+            while(rsetA.next()) {
+                STRUCT str = (STRUCT) rsetA.getSTRUCT(1);
+                Object[] tabAtt = str.getAttributes();
+
+                Array arI = (Array) tabAtt[7];
+                OracleResultSet rsetI = (OracleResultSet) arI.getResultSet();
+                while (rsetI.next())
+                {
+                    STRUCT strI = rsetI.getSTRUCT(2);
+                    Object[] tabAttI = strI.getAttributes();
+                    REF refI = (REF) tabAttI[0];
+                    STRUCT strI2 = refI.getSTRUCT();
+                    Object[] tabI2 = strI2.getAttributes();
+                    System.out.println(tabI2[0]);
+                    st = con.prepareStatement("select miniature, idI, nomI from image where idI = " + tabI2[0]);
+                    OracleResultSet rset = (OracleResultSet)st.executeQuery();
+                    rset.next();
+                    OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                    int nume = rset.getInt(2);
+                    String nome = rset.getString(3);
+                    String num2 = Integer.toString(nume);
+                    String url ;
+                    if(minia.getContentLength() == 0) url = "rien.png";
+                    else 
+                    {
+                        url = "miniature-"+num2+nome+".jpeg";
+                        try {
+                            minia.getDataInFile(url);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                    trouve.add(mimimini);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.remplirPanelAffiche(trouve);
-    }//GEN-LAST:event_jPanelAfficheComponentResized
+    }//GEN-LAST:event_jButtonVCategorieActionPerformed
 
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAdmin;
     private javax.swing.JButton jButtonAfficheAdmin;
     private javax.swing.JButton jButtonLanceRechCompa;
     private javax.swing.JButton jButtonLanceRechMot;
     private javax.swing.JButton jButtonParcourir;
+    private javax.swing.JButton jButtonVCategorie;
+    private javax.swing.JButton jButtonVSysteme;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBoxCategorie;
     private javax.swing.JComboBox jComboBoxRech;
+    private javax.swing.JComboBox jComboBoxSysteme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelAcceuil;
     private javax.swing.JPanel jPanelAffiche;
@@ -582,6 +874,10 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldMotRech;
     private javax.swing.JTextField jTextFieldRechImage;

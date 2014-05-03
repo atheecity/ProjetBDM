@@ -8,7 +8,6 @@ package interfaces;
 
 import java.sql.*;
 import java.text.DateFormat;
-import static java.text.DateFormat.MEDIUM;
 import static java.text.DateFormat.SHORT;
 import static java.util.Locale.FRANCE;
 import java.util.logging.Level;
@@ -111,7 +110,8 @@ public class WindowAdmin extends javax.swing.JFrame {
         jPanelApplication = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jButtonAddApplication = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonSupprimerA = new javax.swing.JButton();
+        jButtonGThesaurus = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -156,6 +156,15 @@ public class WindowAdmin extends javax.swing.JFrame {
         jTable8 = new javax.swing.JTable();
         jPanel18 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        jPanelThesaurus = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jTextFieldMot1Thes = new javax.swing.JTextField();
+        jComboBoxSelectThes = new javax.swing.JComboBox();
+        jTextFieldMot2Thes = new javax.swing.JTextField();
+        jButtonSaveThes = new javax.swing.JButton();
+        jButtonAnnulerThes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administration application");
@@ -767,7 +776,10 @@ public class WindowAdmin extends javax.swing.JFrame {
         });
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Actions"));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout jPanel4Layout = new java.awt.GridBagLayout();
+        jPanel4Layout.columnWidths = new int[] {0, 5, 0, 5, 0};
+        jPanel4Layout.rowHeights = new int[] {0};
+        jPanel4.setLayout(jPanel4Layout);
 
         jButtonAddApplication.setText("Ajouter une application");
         jButtonAddApplication.addActionListener(new java.awt.event.ActionListener() {
@@ -775,11 +787,34 @@ public class WindowAdmin extends javax.swing.JFrame {
                 jButtonAddApplicationActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonAddApplication, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(jButtonAddApplication, gridBagConstraints);
 
-        jButton2.setText("Supprimer");
-        jPanel4.add(jButton2, new java.awt.GridBagConstraints());
+        jButtonSupprimerA.setText("Supprimer");
+        jButtonSupprimerA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSupprimerAActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(jButtonSupprimerA, gridBagConstraints);
 
+        jButtonGThesaurus.setText("Gérer Thésaurus");
+        jButtonGThesaurus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGThesaurusActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        jPanel4.add(jButtonGThesaurus, gridBagConstraints);
+
+        jPanel10.setMinimumSize(new java.awt.Dimension(243, 210));
         jPanel10.setLayout(new java.awt.CardLayout());
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
@@ -1002,7 +1037,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication3Layout.createSequentialGroup()
                 .add(jPanel19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .add(jPanel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1099,7 +1134,7 @@ public class WindowAdmin extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelAddApplication2Layout.createSequentialGroup()
                 .add(jPanel17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .add(jPanel12, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 51, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1198,6 +1233,91 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jPanel10.add(jPanelAddApplication4, "card3");
 
+        jPanelThesaurus.setMinimumSize(new java.awt.Dimension(200, 30));
+        java.awt.GridBagLayout jPanelThesaurusLayout = new java.awt.GridBagLayout();
+        jPanelThesaurusLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanelThesaurusLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        jPanelThesaurus.setLayout(jPanelThesaurusLayout);
+
+        jLabel17.setText("Mot 1 : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanelThesaurus.add(jLabel17, gridBagConstraints);
+
+        jLabel19.setText("Relation : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        jPanelThesaurus.add(jLabel19, gridBagConstraints);
+
+        jLabel21.setText("Mot 2 :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanelThesaurus.add(jLabel21, gridBagConstraints);
+
+        jTextFieldMot1Thes.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldMot1Thes.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldMot1Thes.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        jPanelThesaurus.add(jTextFieldMot1Thes, gridBagConstraints);
+
+        jComboBoxSelectThes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BT", "NT ", "PT", "RT", "SYN", "TR", "TT" }));
+        jComboBoxSelectThes.setMaximumSize(new java.awt.Dimension(200, 28));
+        jComboBoxSelectThes.setMinimumSize(new java.awt.Dimension(200, 28));
+        jComboBoxSelectThes.setPreferredSize(new java.awt.Dimension(200, 28));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        jPanelThesaurus.add(jComboBoxSelectThes, gridBagConstraints);
+
+        jTextFieldMot2Thes.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldMot2Thes.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldMot2Thes.setPreferredSize(new java.awt.Dimension(200, 28));
+        jTextFieldMot2Thes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMot2ThesActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        jPanelThesaurus.add(jTextFieldMot2Thes, gridBagConstraints);
+
+        jButtonSaveThes.setText("Sauvegarder");
+        jButtonSaveThes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveThesActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        jPanelThesaurus.add(jButtonSaveThes, gridBagConstraints);
+
+        jButtonAnnulerThes.setText("Annuler");
+        jButtonAnnulerThes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnulerThesActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(14, 0, 0, 0);
+        jPanelThesaurus.add(jButtonAnnulerThes, gridBagConstraints);
+
+        jPanel10.add(jPanelThesaurus, "card7");
+
         org.jdesktop.layout.GroupLayout jPanelApplicationLayout = new org.jdesktop.layout.GroupLayout(jPanelApplication);
         jPanelApplication.setLayout(jPanelApplicationLayout);
         jPanelApplicationLayout.setHorizontalGroup(
@@ -1283,6 +1403,9 @@ public class WindowAdmin extends javax.swing.JFrame {
                         this.jPanelAddImage.setVisible(false);
                         this.jScrollPaneImage.setVisible(true);
                         this.resetFormImage();
+                        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+                        String sql = "select * from image";
+                        this.initTabImage(sql, model);
                     }
                     else JOptionPane.showMessageDialog(this, "Remplir le champ image");
                 else JOptionPane.showMessageDialog(this, "Remplir le champ description");
@@ -1699,7 +1822,7 @@ public class WindowAdmin extends javax.swing.JFrame {
      */
     private void jPanelAddApplication3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAddApplication3ComponentShown
         DefaultTableModel model = (DefaultTableModel) this.jTable7.getModel();
-        String sql = "select * from image";
+        String sql = "select * from image where applicationI is null";
         this.initTabImage(sql, model);
     }//GEN-LAST:event_jPanelAddApplication3ComponentShown
 
@@ -1898,8 +2021,6 @@ public class WindowAdmin extends javax.swing.JFrame {
                     REF refA = (REF) tabAtt[6];
                     STRUCT ste = (STRUCT) refA.getSTRUCT();
                     Object[] tabAttA = ste.getAttributes();
-                    System.out.println(tabAttA[0]);
-                    System.out.println(idI);
                     st = con.prepareStatement("delete the ("
                             + "select a.imagesA from application a "
                             + "where a.idA=?) e where e.imageR.idI=?");
@@ -1928,8 +2049,107 @@ public class WindowAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Aucune image n'est sélectionnée");
     }//GEN-LAST:event_jButtonSupprimerImageActionPerformed
 
+    private void jTextFieldMot2ThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMot2ThesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMot2ThesActionPerformed
+
+    private void jButtonSaveThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveThesActionPerformed
+        String mot1 = this.jTextFieldMot1Thes.getText();
+        String mot2 = this.jTextFieldMot2Thes.getText();
+        String rel = this.jComboBoxSelectThes.getSelectedItem().toString();
+        Thesaurus th = new Thesaurus("app_thes");
+        th.createRelation(mot1, rel, mot2);
+    }//GEN-LAST:event_jButtonSaveThesActionPerformed
+
+    private void jButtonGThesaurusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGThesaurusActionPerformed
+        this.jScrollPane5.setVisible(false);
+        this.jPanelAddApplication.setVisible(false);
+        this.jPanelAddApplication2.setVisible(false);
+        this.jPanelAddApplication3.setVisible(false);
+        this.jPanelAddApplication4.setVisible(false);
+        this.jPanelThesaurus.setVisible(true);
+    }//GEN-LAST:event_jButtonGThesaurusActionPerformed
+
+    private void jButtonAnnulerThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerThesActionPerformed
+        this.jScrollPane5.setVisible(true);
+        this.jPanelThesaurus.setVisible(false);
+    }//GEN-LAST:event_jButtonAnnulerThesActionPerformed
+
+    private void jButtonSupprimerAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerAActionPerformed
+        Boolean select = false;
+        for (int i = 0; i < this.jTable5.getRowCount(); i++)
+        {
+            PreparedStatement st;
+            int idA = Integer.parseInt(this.jTable5.getValueAt(i, 1).toString());
+            if (this.jTable5.getValueAt(i, 0).equals(true)){
+                try {
+                    select = true;
+                    
+                    //Requête pour réupérer l'application
+                    st = con.prepareStatement("select value(a) from application a "
+                            + "where a.idA = ?");
+                    st.setInt(1, idA);
+                    OracleResultSet rsetA = (OracleResultSet) st.executeQuery();
+                    rsetA.next();
+                    STRUCT str = (STRUCT) rsetA.getSTRUCT(1);
+                    Object[] tabAtt = str.getAttributes();
+                    
+                    //Requête pour récupérer la catégorie liée avec l'application
+                    //Puis suppression de l'application dans cette catégorie
+                    REF refC = (REF) tabAtt[6];
+                    STRUCT strC = (STRUCT) refC.getSTRUCT();
+                    Object[] tabAttC = strC.getAttributes();
+                    st = con.prepareStatement("delete the ("
+                            + "select c.applicationsC from categorie c "
+                            + "where c.idC=?) e where e.applicationR.idA=?");
+                    st.setInt(1, Integer.parseInt(tabAttC[0].toString()));
+                    st.setInt(2, idA);
+                    st.execute();
+                    con.commit();
+                    
+                    //Suppression des relations applicationSysteme
+                    st = con.prepareStatement("delete from applicationSysteme where "
+                            + "applicationS = (select ref(a) from application a where idA = ?)");
+                    st.setInt(1, idA);
+                    st.execute();
+                    con.commit();
+                    
+                    //Suppression des reférences pour les images liées à l'application
+                    Array arI = (Array) tabAtt[7];
+                    OracleResultSet rsetI = (OracleResultSet) arI.getResultSet();
+                    while (rsetI.next())
+                    {
+                        STRUCT strI = rsetI.getSTRUCT(2);
+                        Object[] tabAttI = strI.getAttributes();
+                        REF refI = (REF) tabAttI[0];
+                        STRUCT strI2 = refI.getSTRUCT();
+                        Object[] tabI2 = strI2.getAttributes();
+                        st = con.prepareStatement("update image i set i.applicationI = null "
+                                + "where i.idI = ?");
+                        st.setInt(1, Integer.parseInt(tabI2[0].toString()));
+                        st.execute();
+                        con.commit();
+                    }
+                    
+                    //Suppression de l'application
+                    st = con.prepareStatement("delete from application where idA = ?");
+                    st.setInt(1, idA);
+                    st.execute();
+                    con.commit();
+                    
+                    st.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            DefaultTableModel model = (DefaultTableModel) this.jTable5.getModel();
+            this.initTabApplication(model);
+        }
+        if (!select)
+            JOptionPane.showMessageDialog(this, "Aucune application n'est sélectionnée");
+    }//GEN-LAST:event_jButtonSupprimerAActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddApplication;
     private javax.swing.JButton jButtonAddCategorie;
     private javax.swing.JButton jButtonAddSysteme;
@@ -1942,19 +2162,24 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAnnulerC;
     private javax.swing.JButton jButtonAnnulerImage;
     private javax.swing.JButton jButtonAnnulerS;
+    private javax.swing.JButton jButtonAnnulerThes;
     private javax.swing.JButton jButtonDeleteCategorie;
     private javax.swing.JButton jButtonDeleteSysteme;
     private javax.swing.JButton jButtonDeleteUtilisateur;
+    private javax.swing.JButton jButtonGThesaurus;
     private javax.swing.JButton jButtonParcourirI;
     private javax.swing.JButton jButtonSaveApplication;
     private javax.swing.JButton jButtonSaveC;
     private javax.swing.JButton jButtonSaveImage;
     private javax.swing.JButton jButtonSaveSysteme;
+    private javax.swing.JButton jButtonSaveThes;
     private javax.swing.JButton jButtonSaveUtilisateur;
     private javax.swing.JButton jButtonSuivantA1;
     private javax.swing.JButton jButtonSuivantA2;
     private javax.swing.JButton jButtonSuivantA3;
+    private javax.swing.JButton jButtonSupprimerA;
     private javax.swing.JButton jButtonSupprimerImage;
+    private javax.swing.JComboBox jComboBoxSelectThes;
     private com.toedter.calendar.JDateChooser jDateChooserApplication;
     private com.toedter.calendar.JDateChooser jDateChooserImage;
     private javax.swing.JLabel jLabel1;
@@ -1965,9 +2190,12 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2006,6 +2234,7 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCategorie;
     private javax.swing.JPanel jPanelImage;
     private javax.swing.JPanel jPanelSysteme;
+    private javax.swing.JPanel jPanelThesaurus;
     private javax.swing.JPanel jPanelUtilisateur;
     private javax.swing.JPasswordField jPasswordFieldPass;
     private javax.swing.JScrollPane jScrollPane1;
@@ -2031,6 +2260,8 @@ public class WindowAdmin extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescriptionI;
     private javax.swing.JTextField jTextFieldFabriquantS;
     private javax.swing.JTextField jTextFieldLogin;
+    private javax.swing.JTextField jTextFieldMot1Thes;
+    private javax.swing.JTextField jTextFieldMot2Thes;
     private javax.swing.JTextField jTextFieldNomA;
     private javax.swing.JTextField jTextFieldNomC;
     private javax.swing.JTextField jTextFieldNomI;
