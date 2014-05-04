@@ -110,6 +110,7 @@ public class Window extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -518,6 +519,14 @@ public class Window extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Actualiser Index");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuItem2.setText("Quitter");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -1128,6 +1137,24 @@ public class Window extends javax.swing.JFrame {
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonVSystemeActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        PreparedStatement st;
+        try {
+            st = con.prepareStatement("alter index nomIindex rebuild");
+            st.execute();
+            st = con.prepareStatement("alter index descriptionIindex rebuild");
+            st.execute();
+            st = con.prepareStatement("alter index nomAindex rebuild");
+            st.execute();
+            st = con.prepareStatement("alter index descriptionAindex rebuild");
+            st.execute();
+            con.commit();
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     
     
 
@@ -1157,6 +1184,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
