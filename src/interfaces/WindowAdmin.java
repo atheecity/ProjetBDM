@@ -1267,7 +1267,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanelThesaurus.add(jTextFieldMot1Thes, gridBagConstraints);
 
-        jComboBoxSelectThes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BT", "NT ", "PT", "RT", "SYN", "TR", "TT" }));
+        jComboBoxSelectThes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BT", "NT", "RT", "SYN" }));
         jComboBoxSelectThes.setMaximumSize(new java.awt.Dimension(200, 28));
         jComboBoxSelectThes.setMinimumSize(new java.awt.Dimension(200, 28));
         jComboBoxSelectThes.setPreferredSize(new java.awt.Dimension(200, 28));

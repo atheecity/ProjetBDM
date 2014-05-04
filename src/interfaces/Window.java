@@ -27,6 +27,7 @@ import oracle.sql.REF;
 import oracle.sql.STRUCT;
 import projetbdm.Miniature;
 import projetbdm.ProjetBDM;
+import projetbdm.Thesaurus;
 
 /**
  *
@@ -89,9 +90,9 @@ public class Window extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox();
-        jButton3 = new javax.swing.JButton();
+        jTextFieldThes = new javax.swing.JTextField();
+        jComboBoxThes = new javax.swing.JComboBox();
+        jButtonValiderThes = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel6 = new javax.swing.JPanel();
@@ -228,6 +229,11 @@ public class Window extends javax.swing.JFrame {
         jPanel3.add(jLabel8, gridBagConstraints);
 
         jButtonVSysteme.setText("Valider");
+        jButtonVSysteme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVSystemeActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -291,30 +297,35 @@ public class Window extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel5.add(jLabel7, gridBagConstraints);
 
-        jTextField1.setMaximumSize(new java.awt.Dimension(200, 28));
-        jTextField1.setMinimumSize(new java.awt.Dimension(200, 28));
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 28));
+        jTextFieldThes.setMaximumSize(new java.awt.Dimension(200, 28));
+        jTextFieldThes.setMinimumSize(new java.awt.Dimension(200, 28));
+        jTextFieldThes.setPreferredSize(new java.awt.Dimension(200, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel5.add(jTextField1, gridBagConstraints);
+        jPanel5.add(jTextFieldThes, gridBagConstraints);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BT", "NT", "PT", "RT", "SYN", "TR", "TT" }));
-        jComboBox3.setMaximumSize(new java.awt.Dimension(200, 28));
-        jComboBox3.setMinimumSize(new java.awt.Dimension(200, 28));
-        jComboBox3.setPreferredSize(new java.awt.Dimension(200, 28));
+        jComboBoxThes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BT", "NT", "RT", "SYN" }));
+        jComboBoxThes.setMaximumSize(new java.awt.Dimension(200, 28));
+        jComboBoxThes.setMinimumSize(new java.awt.Dimension(200, 28));
+        jComboBoxThes.setPreferredSize(new java.awt.Dimension(200, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        jPanel5.add(jComboBox3, gridBagConstraints);
+        jPanel5.add(jComboBoxThes, gridBagConstraints);
 
-        jButton3.setText("Valider");
+        jButtonValiderThes.setText("Valider");
+        jButtonValiderThes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderThesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
-        jPanel5.add(jButton3, gridBagConstraints);
+        jPanel5.add(jButtonValiderThes, gridBagConstraints);
 
         jLabel9.setText("(Thesaurus)");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1001,11 +1012,126 @@ public class Window extends javax.swing.JFrame {
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonVCategorieActionPerformed
 
+    private void jButtonValiderThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderThesActionPerformed
+        jPanelAcceuil.setVisible(false);
+        jPanelAffiche.setVisible(true);
+        jPanelImageCompa.setVisible(false);
+        jLabel7.setText(" ");
+        trouve.clear();
+        jPanelAffiche.removeAll();
+        jPanelAffiche.repaint();
+        String mot = this.jTextFieldThes.getText();
+        String rel = this.jComboBoxThes.getSelectedItem().toString();
+        Thesaurus thes = new Thesaurus("app_thes");
+        OracleResultSet rset1 = thes.rechercheThes(mot, rel);
+        PreparedStatement st;
+        try {
+            while(rset1.next()) {
+                STRUCT str = (STRUCT) rset1.getSTRUCT(1);
+                Object[] tabAtt = str.getAttributes();
+                
+                Array arI = (Array) tabAtt[7];
+                OracleResultSet rsetI = (OracleResultSet) arI.getResultSet();
+                while (rsetI.next())
+                {
+                    STRUCT strI = rsetI.getSTRUCT(2);
+                    Object[] tabAttI = strI.getAttributes();
+                    REF refI = (REF) tabAttI[0];
+                    STRUCT strI2 = refI.getSTRUCT();
+                    Object[] tabI2 = strI2.getAttributes();
+                    System.out.println(tabI2[0]);
+                    st = con.prepareStatement("select miniature, idI, nomI from image where idI = " + tabI2[0]);
+                    OracleResultSet rset = (OracleResultSet)st.executeQuery();
+                    rset.next();
+                    OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                    int nume = rset.getInt(2);
+                    String nome = rset.getString(3);
+                    String num2 = Integer.toString(nume);
+                    String url ;
+                    if(minia.getContentLength() == 0) url = "rien.png";
+                    else
+                    {
+                        url = "miniature-"+num2+nome+".jpeg";
+                        try {
+                            minia.getDataInFile(url);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                    trouve.add(mimimini);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.remplirPanelAffiche(trouve);
+    }//GEN-LAST:event_jButtonValiderThesActionPerformed
+
+    private void jButtonVSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVSystemeActionPerformed
+        jPanelAcceuil.setVisible(false);
+        jPanelAffiche.setVisible(true);
+        jPanelImageCompa.setVisible(false);
+        jLabel7.setText(" ");
+        trouve.clear();
+        jPanelAffiche.removeAll();
+        jPanelAffiche.repaint();
+        PreparedStatement st;
+        String nomS = this.jComboBoxSysteme.getSelectedItem().toString();
+        try {
+            st = con.prepareStatement("select value(a) from applicationSysteme a where "
+                    + "a.systemeA = (select ref(s) from systeme s where s.nomS = ?)");
+            st.setString(1, nomS);
+            OracleResultSet rset1 = (OracleResultSet) st.executeQuery();
+            while (rset1.next())
+            {
+                STRUCT str1 = (STRUCT) rset1.getSTRUCT(1);
+                Object[] tabAtt1 = str1.getAttributes();
+                REF ref1 = (REF) tabAtt1[1];
+                STRUCT str2 = ref1.getSTRUCT();
+                Object[] tabAtt2 = str2.getAttributes();
+                Array ar1 = (Array) tabAtt2[7];
+                OracleResultSet rset2 = (OracleResultSet) ar1.getResultSet();
+                while (rset2.next())
+                {
+                    STRUCT strI = rset2.getSTRUCT(2);
+                    Object[] tabAtt3 = strI.getAttributes();
+                    REF ref2 = (REF) tabAtt3[0];
+                    STRUCT str3 = ref2.getSTRUCT();
+                    Object[] tabAtt4 = str3.getAttributes();
+                    System.out.println(tabAtt4[0]);
+                    st = con.prepareStatement("select miniature, idI, nomI from image where idI = " + tabAtt4[0]);
+                    OracleResultSet rset = (OracleResultSet)st.executeQuery();
+                    rset.next();
+                    OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                    int nume = rset.getInt(2);
+                    String nome = rset.getString(3);
+                    String num2 = Integer.toString(nume);
+                    String url ;
+                    if(minia.getContentLength() == 0) url = "rien.png";
+                    else
+                    {
+                        url = "miniature-"+num2+nome+".jpeg";
+                        try {
+                            minia.getDataInFile(url);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                    trouve.add(mimimini);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.remplirPanelAffiche(trouve);
+    }//GEN-LAST:event_jButtonVSystemeActionPerformed
+
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAdmin;
     private javax.swing.JButton jButtonAfficheAdmin;
     private javax.swing.JButton jButtonLanceRechCompa;
@@ -1013,10 +1139,11 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton jButtonParcourir;
     private javax.swing.JButton jButtonVCategorie;
     private javax.swing.JButton jButtonVSysteme;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JButton jButtonValiderThes;
     private javax.swing.JComboBox jComboBoxCategorie;
     private javax.swing.JComboBox jComboBoxRech;
     private javax.swing.JComboBox jComboBoxSysteme;
+    private javax.swing.JComboBox jComboBoxThes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1047,9 +1174,9 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldMotRech;
     private javax.swing.JTextField jTextFieldRechImage;
+    private javax.swing.JTextField jTextFieldThes;
     // End of variables declaration//GEN-END:variables
 }

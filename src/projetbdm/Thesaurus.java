@@ -9,6 +9,7 @@ package projetbdm;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.OracleResultSet;
 
 /**
  *
@@ -27,8 +28,9 @@ public class Thesaurus {
     
     public void createRelation(String phrase, String rel, String relPhrase)
     {
+        PreparedStatement pst;
         try {
-            PreparedStatement pst = con.prepareStatement("BEGIN ctx_thes.create_relation(?, ?, ?, ?); END;");
+            pst = con.prepareStatement("BEGIN ctx_thes.create_relation(?, ?, ?, ?); END;");
             pst.setString(1, this.nameThesaurus);
             pst.setString(2, phrase);
             pst.setString(3, rel);
@@ -41,5 +43,37 @@ public class Thesaurus {
         }
     }
     
-    
+    public OracleResultSet rechercheThes(String motU, String rel)
+    {
+        PreparedStatement pst;
+        OracleResultSet rset = null;
+        try {
+            switch(rel){
+                case "BT":
+                case "NT":
+                    pst = con.prepareStatement("select value(a) from application a "
+                        + "where contains(descriptionA,?)>0 "
+                        + "or contains(nomA, ?)>0");
+                    pst.setString(1, rel + "(" + motU + ",1," + nameThesaurus + ")");
+                    pst.setString(2, rel + "(" + motU + ",1," + nameThesaurus + ")");
+                    rset = (OracleResultSet) pst.executeQuery();
+                    break;
+                case "SYN":
+                case "RT":
+                    pst = con.prepareStatement("select value(a) from application a "
+                        + "where contains(descriptionA,?)>0 "
+                        + "or contains(nomA, ?)>0");
+                    pst.setString(1, rel + "(" + motU + "," + nameThesaurus + ")");
+                    pst.setString(2, rel + "(" + motU + "," + nameThesaurus + ")");
+                    rset = (OracleResultSet) pst.executeQuery();
+                    break;
+                default:
+                    break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Thesaurus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rset;
+    }
 }

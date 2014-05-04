@@ -1,4 +1,4 @@
-drop table utilisateur;
+	drop table utilisateur;
 drop table applicationSysteme;
 drop table systeme;
 drop table application;
@@ -215,11 +215,15 @@ BEGIN
 END;
 /
 
+begin 
+	ctx_thes.create_relation('app_thes', 'social', 'SYN', 'social');
+end;
+/
+
 begin
   Dbms_Output.Put_Line (
-    Ctx_Thes.bt (
-      phrase => 'dog',
-      lvl    => 1,
+    Ctx_Thes.syn (
+      phrase => 'social',
       tname  => 'app_thes' ));
 end;
 /
