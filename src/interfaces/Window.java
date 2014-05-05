@@ -974,8 +974,11 @@ public class Window extends javax.swing.JFrame {
         img = jPanelImageCompa.getToolkit().getImage(image_chargement);
         paner = jPanelImageCompa;
         repaint();
+        
     }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
-
+    
+    
+    
     private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
