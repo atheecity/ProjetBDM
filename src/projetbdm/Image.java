@@ -46,7 +46,7 @@ public class Image
                 OrdImage img = (OrdImage) rset.getORAData(1, OrdImage.getORADataFactory());
                 OrdImage miniature = (OrdImage) rset.getORAData(2, OrdImage.getORADataFactory());
                 img.loadDataFromFile(urlI);
-                img.processCopy("MaxScale=100 100", miniature);
+                img.processCopy("MaxScale=200 200", miniature);
                 img.setProperties();
                 miniature.setProperties();
                 //Mise à jour de l'attribut image

@@ -897,18 +897,18 @@ public class Window extends javax.swing.JFrame {
         int ordonne = 10;
         int largueur = jPanelAffiche.getSize().width;
         int cmp = 0;
-        int cmpMax = largueur/150;
+        int cmpMax = largueur/250;
         for(Miniature mimi : trouve)
         {
             mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
             cmp++;
             if(cmp<cmpMax)
             {
-                ordonne += 150;
+                ordonne += 250;
             }
             else
             {
-                abscisse += 150;
+                abscisse += 250;
                 ordonne = 10;
                 cmp = 0;
             }
@@ -920,7 +920,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(true);        
         jPanelAffiche.setVisible(false);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -982,7 +981,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1022,7 +1020,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1079,7 +1076,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1135,7 +1131,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
