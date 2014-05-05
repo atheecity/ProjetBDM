@@ -181,7 +181,7 @@ create table image of image_type (
 --IMAGE
 CREATE SEQUENCE NumI
   MINVALUE 0
-  START WITH 0
+  START WITH 1
   INCREMENT BY 1
   NOCACHE;
 

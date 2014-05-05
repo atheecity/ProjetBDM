@@ -101,6 +101,14 @@ public class Window extends javax.swing.JFrame {
         jTextFieldRechImage = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanelImageCompa = new javax.swing.JPanel();
+        jSlidercouleur = new javax.swing.JSlider();
+        jSliderforme = new javax.swing.JSlider();
+        jSlidertexture = new javax.swing.JSlider();
+        jSliderlocalisation = new javax.swing.JSlider();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jButtonAfficheAdmin = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -114,7 +122,6 @@ public class Window extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 800));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -337,7 +344,7 @@ public class Window extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(230, 230, 230));
         java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
         jPanel6Layout.columnWidths = new int[] {0, 5, 0};
-        jPanel6Layout.rowHeights = new int[] {0, 5, 0, 5, 0};
+        jPanel6Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel6.setLayout(jPanel6Layout);
 
         jButtonLanceRechCompa.setText("Lancer");
@@ -348,7 +355,7 @@ public class Window extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 12;
         jPanel6.add(jButtonLanceRechCompa, gridBagConstraints);
 
         jButtonParcourir.setText("Parcourir");
@@ -402,8 +409,50 @@ public class Window extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 12;
         jPanel6.add(jPanelImageCompa, gridBagConstraints);
+
+        jSlidercouleur.setValue(50);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        jPanel6.add(jSlidercouleur, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        jPanel6.add(jSliderforme, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        jPanel6.add(jSlidertexture, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        jPanel6.add(jSliderlocalisation, gridBagConstraints);
+
+        jLabel10.setText("Couleur");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        jPanel6.add(jLabel10, gridBagConstraints);
+
+        jLabel11.setText("Forme");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        jPanel6.add(jLabel11, gridBagConstraints);
+
+        jLabel12.setText("Texture");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        jPanel6.add(jLabel12, gridBagConstraints);
+
+        jLabel13.setText("Localisation");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        jPanel6.add(jLabel13, gridBagConstraints);
 
         jButtonAfficheAdmin.setText("Administrateur");
         jButtonAfficheAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -485,7 +534,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
                 .addGap(288, 288, 288)
                 .addComponent(jLabel5)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanelAcceuil, "card5");
@@ -505,7 +554,7 @@ public class Window extends javax.swing.JFrame {
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 738, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
         );
 
         jPanel7.add(jPanelAffiche, "card4");
@@ -551,7 +600,7 @@ public class Window extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -848,18 +897,18 @@ public class Window extends javax.swing.JFrame {
         int ordonne = 10;
         int largueur = jPanelAffiche.getSize().width;
         int cmp = 0;
-        int cmpMax = largueur/150;
+        int cmpMax = largueur/250;
         for(Miniature mimi : trouve)
         {
             mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
             cmp++;
             if(cmp<cmpMax)
             {
-                ordonne += 150;
+                ordonne += 250;
             }
             else
             {
-                abscisse += 150;
+                abscisse += 250;
                 ordonne = 10;
                 cmp = 0;
             }
@@ -871,7 +920,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(true);        
         jPanelAffiche.setVisible(false);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -918,17 +966,21 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(true);
         image_chargement = jTextFieldRechImage.getText();
-        jLabel7.setText("Image Chargée ");
+        double couleur = (double)jSlidercouleur.getValue()/100;
+        double forme = (double)jSliderforme.getValue()/100;
+        double localisation = (double)jSliderlocalisation.getValue()/100;
+        double texture = (double)jSlidertexture.getValue()/100;
         img = jPanelImageCompa.getToolkit().getImage(image_chargement);
         paner = jPanelImageCompa;
         repaint();
     }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
-
+    
+    
+    
     private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -968,7 +1020,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1025,7 +1076,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1081,7 +1131,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         jPanelImageCompa.setVisible(false);
-        jLabel7.setText(" ");
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1172,6 +1221,10 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxSysteme;
     private javax.swing.JComboBox jComboBoxThes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1202,6 +1255,10 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSlider jSlidercouleur;
+    private javax.swing.JSlider jSliderforme;
+    private javax.swing.JSlider jSliderlocalisation;
+    private javax.swing.JSlider jSlidertexture;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldMotRech;
     private javax.swing.JTextField jTextFieldRechImage;

@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 
-
 /**
  *
  * @author cmolin
@@ -23,8 +22,8 @@ public class ProjetBDM {
         Connection con = null;
         try {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-            //String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
-            String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
+            String url = "jdbc:oracle:thin:@butor:1521:ensb2013";
+            //String url = "jdbc:oracle:thin:@ufrsciencestech.u-bourgogne.fr:25561/ensb2013";
             con = DriverManager.getConnection(url, "cm429363", "cm429363");
             con.setAutoCommit(false);
         } catch (SQLException ec) {

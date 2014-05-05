@@ -72,9 +72,9 @@ public class Miniature {
         JLabel lalala = new JLabel(new ImageIcon(this.img));
         JLabel nomt = new JLabel(this.nom);
         JLabel typet = new JLabel(this.type);
-        lalala.setBounds(x, y, 100, 70);
-        nomt.setBounds(x, y+70, 100, 15);
-        typet.setBounds(x, y+85, 100, 15);
+        lalala.setBounds(x, y, 200, 200);
+        nomt.setBounds(x, y+200, 100, 15);
+        typet.setBounds(x, y+215, 100, 15);
         panel.add(lalala);
         panel.add(nomt);
         panel.add(typet);
