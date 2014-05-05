@@ -974,7 +974,6 @@ public class Window extends javax.swing.JFrame {
         img = jPanelImageCompa.getToolkit().getImage(image_chargement);
         paner = jPanelImageCompa;
         repaint();
-        
     }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
     
     

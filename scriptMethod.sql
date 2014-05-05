@@ -21,3 +21,7 @@ CREATE OR REPLACE TYPE BODY image_type AS
     END addMini;
 END;
 /
+
+create or replace type body image_type as 
+	member function compare(average in double precision, colorHisto in double precision, PostColor in double precision, texture in double precision) return double precision is 
+		
