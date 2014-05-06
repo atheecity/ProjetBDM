@@ -37,8 +37,6 @@ public class Window extends javax.swing.JFrame {
     
     private final Connection con;
     String image_chargement = "";
-    Image img;
-    JPanel paner;
     ArrayList<Miniature> trouve = new ArrayList();
             
     /**
@@ -52,7 +50,6 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil.setVisible(true);
         jPanelAffiche.setVisible(false);
         jPanelLogAdmin.setVisible(false);
-        jPanelImageCompa.setVisible(false);
     }
 
     /**
@@ -100,7 +97,6 @@ public class Window extends javax.swing.JFrame {
         jButtonParcourir = new javax.swing.JButton();
         jTextFieldRechImage = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPanelImageCompa = new javax.swing.JPanel();
         jSlidercouleur = new javax.swing.JSlider();
         jSliderforme = new javax.swing.JSlider();
         jSlidertexture = new javax.swing.JSlider();
@@ -393,26 +389,6 @@ public class Window extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel6.add(jLabel2, gridBagConstraints);
-
-        jPanelImageCompa.setPreferredSize(new java.awt.Dimension(200, 130));
-
-        javax.swing.GroupLayout jPanelImageCompaLayout = new javax.swing.GroupLayout(jPanelImageCompa);
-        jPanelImageCompa.setLayout(jPanelImageCompaLayout);
-        jPanelImageCompaLayout.setHorizontalGroup(
-            jPanelImageCompaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanelImageCompaLayout.setVerticalGroup(
-            jPanelImageCompaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
-        jPanel6.add(jPanelImageCompa, gridBagConstraints);
-
-        jSlidercouleur.setValue(50);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -606,24 +582,10 @@ public class Window extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void afficheImage(JPanel pan,Image img)
-    {
-        Graphics g=pan.getGraphics();
-        g.drawImage(img, 0, 0, pan.getWidth(),pan.getHeight(),this);
-    }
-    
-    @Override
-    public void paint(Graphics g)
-    {
-        super.paint(g);
-        if(img!=null)
-            afficheImage(paner,img);
-    }                                                                                                                                                                                             
 
     void foncRecherche(String choix)
     {
-        trouve = new ArrayList();        
+        trouve = new ArrayList();
         try
         {
             Statement s=con.createStatement();
@@ -919,7 +881,6 @@ public class Window extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         jPanelAcceuil.setVisible(true);        
         jPanelAffiche.setVisible(false);
-        jPanelImageCompa.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -964,15 +925,25 @@ public class Window extends javax.swing.JFrame {
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(true);
         image_chargement = jTextFieldRechImage.getText();
         double couleur = (double)jSlidercouleur.getValue()/100;
         double forme = (double)jSliderforme.getValue()/100;
         double localisation = (double)jSliderlocalisation.getValue()/100;
         double texture = (double)jSlidertexture.getValue()/100;
-        img = jPanelImageCompa.getToolkit().getImage(image_chargement);
-        paner = jPanelImageCompa;
-        repaint();
+        try
+        {
+            Statement stmt = con.createStatement();
+            OracleResultSet rset = (OracleResultSet) stmt.executeQuery("select count(idI) from image where idI=0");
+            if(rset.next())
+            {
+                int existe = rset.getInt(1);
+                System.out.println(existe);
+                if(existe == 0)
+                {
+                    
+                }
+            }
+        }catch(Exception e){e.printStackTrace();}
     }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
     
     
@@ -980,7 +951,6 @@ public class Window extends javax.swing.JFrame {
     private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(false);
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1019,7 +989,6 @@ public class Window extends javax.swing.JFrame {
     private void jButtonVCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVCategorieActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(false);
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1075,7 +1044,6 @@ public class Window extends javax.swing.JFrame {
     private void jButtonValiderThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderThesActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(false);
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1130,7 +1098,6 @@ public class Window extends javax.swing.JFrame {
     private void jButtonVSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVSystemeActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
-        jPanelImageCompa.setVisible(false);
         trouve.clear();
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
@@ -1247,7 +1214,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanelAcceuil;
     private javax.swing.JPanel jPanelAffiche;
-    private javax.swing.JPanel jPanelImageCompa;
     private javax.swing.JPanel jPanelLogAdmin;
     private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JSeparator jSeparator1;
