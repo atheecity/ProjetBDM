@@ -2008,9 +2008,9 @@ public class WindowAdmin extends javax.swing.JFrame {
         {
             if (this.jTable1.getValueAt(i, 0).equals(true)){
                 select = true;
-                PreparedStatement st;
                 int idI = Integer.parseInt(this.jTable1.getValueAt(i, 1).toString());
                 try {
+                    PreparedStatement st;
                     st = con.prepareStatement("select value(i) from image i "
                             + "where i.idI = ?");
                     st.setInt(1, idI);
@@ -2018,28 +2018,24 @@ public class WindowAdmin extends javax.swing.JFrame {
                     rset.next();
                     STRUCT stt = (STRUCT) rset.getSTRUCT(1);
                     Object[] tabAtt = stt.getAttributes();
-                    REF refA = (REF) tabAtt[6];
-                    STRUCT ste = (STRUCT) refA.getSTRUCT();
-                    Object[] tabAttA = ste.getAttributes();
-                    st = con.prepareStatement("delete the ("
-                            + "select a.imagesA from application a "
-                            + "where a.idA=?) e where e.imageR.idI=?");
-                    st.setInt(1, Integer.parseInt(tabAttA[0].toString()));
-                    st.setInt(2, idI);
-                    st.execute();
-                    con.commit();
+                    if (tabAtt[6] != null) {
+                        REF refA = (REF) tabAtt[6];
+                        STRUCT ste = (STRUCT) refA.getSTRUCT();
+                        Object[] tabAttA = ste.getAttributes();
+                        st = con.prepareStatement("delete the ("
+                                + "select a.imagesA from application a "
+                                + "where a.idA=?) e where e.imageR.idI=?");
+                        st.setInt(1, Integer.parseInt(tabAttA[0].toString()));
+                        st.setInt(2, idI);
+                        st.execute();
+                        con.commit();
+                    }
                     st = con.prepareStatement("delete from image"
                             + " where idI=?");
                     st.setInt(1, idI);
                     st.execute();
                     con.commit();
                     st.close();
-                    this.jPanelAddImage.setVisible(false);
-                    this.jScrollPaneImage.setVisible(true);
-                    DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-                    String sql = "select * from image";
-                    this.initTabImage(sql, model);
-                    this.resetFormImage();
                 } catch (SQLException ex) {
                     Logger.getLogger(WindowAdmin.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -2047,6 +2043,12 @@ public class WindowAdmin extends javax.swing.JFrame {
         }
         if (!select)
             JOptionPane.showMessageDialog(this, "Aucune image n'est sélectionnée");
+        this.jPanelAddImage.setVisible(false);
+        this.jScrollPaneImage.setVisible(true);
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        String sql = "select * from image";
+        this.initTabImage(sql, model);
+        this.resetFormImage();
     }//GEN-LAST:event_jButtonSupprimerImageActionPerformed
 
     private void jTextFieldMot2ThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMot2ThesActionPerformed
