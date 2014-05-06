@@ -16,11 +16,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.ord.im.OrdImage;
 import oracle.sql.REF;
@@ -390,6 +393,8 @@ public class Window extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel6.add(jLabel2, gridBagConstraints);
+
+        jSlidercouleur.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -637,7 +642,7 @@ public class Window extends javax.swing.JFrame {
                             url = "miniature-"+num2+nome+".jpeg";
                             minia.getDataInFile(url);
                         }
-                        Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                        Miniature mimimini = new Miniature(nume, url, nome, "", con);
                         trouve.add(mimimini);
                     }
                     rset.close();
@@ -663,7 +668,7 @@ public class Window extends javax.swing.JFrame {
                                 url = "miniature-"+num2+nome+".jpeg";
                                 minia.getDataInFile(url);
                             }
-                            Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                            Miniature mimimini = new Miniature(nume, url, nome, "", con);
                             trouve.add(mimimini);
                         }
                         rset.close();
@@ -695,7 +700,7 @@ public class Window extends javax.swing.JFrame {
                                 url = "miniature-"+num2+nome+".jpeg";
                                 minia.getDataInFile(url);
                             }
-                            Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                            Miniature mimimini = new Miniature(nume, url, nome, "", con);
                             trouve.add(mimimini);
                         }
                         rset.close();
@@ -727,7 +732,7 @@ public class Window extends javax.swing.JFrame {
                                 url = "miniature-"+num2+nome+".jpeg";
                                 minia.getDataInFile(url);
                             }
-                            Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                            Miniature mimimini = new Miniature(nume, url, nome, "", con);
                             trouve.add(mimimini);
                         }
                         rset.close();
@@ -767,7 +772,7 @@ public class Window extends javax.swing.JFrame {
                                     url = "miniature-"+num2+nome+".jpeg";
                                     minia.getDataInFile(url);
                                 }
-                                Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                                Miniature mimimini = new Miniature(nume, url, nome, "", con);
                                 trouve.add(mimimini);
                             }
                             rset2.close();
@@ -808,7 +813,7 @@ public class Window extends javax.swing.JFrame {
                                     url = "miniature-"+num2+nome+".jpeg";
                                     minia.getDataInFile(url);
                                 }
-                                Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                                Miniature mimimini = new Miniature(nume, url, nome, "", con);
                                 trouve.add(mimimini);
                             }
                             rset2.close();
@@ -849,7 +854,7 @@ public class Window extends javax.swing.JFrame {
                                     url = "miniature-"+num2+nome+".jpeg";
                                     minia.getDataInFile(url);
                                 }
-                                Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                                Miniature mimimini = new Miniature(nume, url, nome, "", con);
                                 trouve.add(mimimini);
                             }
                             rset2.close();
@@ -884,27 +889,27 @@ public class Window extends javax.swing.JFrame {
         }
         else
         {
-        int abscisse = 20;
-        int ordonne = 10;
-        int largueur = jPanelAffiche.getSize().width;
-        int cmp = 0;
-        int cmpMax = largueur/200;
-        for(Miniature mimi : trouve)
-        {
-            mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
-            cmp++;
-            if(cmp<cmpMax)
+            int abscisse = 20;
+            int ordonne = 10;
+            int largueur = jPanelAffiche.getSize().width;
+            int cmp = 0;
+            int cmpMax = largueur/200;
+            for(Miniature mimi : trouve)
             {
-                ordonne += 200;
-            }
-            else
-            {
-                abscisse += 200;
-                ordonne = 10;
-                cmp = 0;
+                mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
+                cmp++;
+                if(cmp<cmpMax)
+                {
+                    ordonne += 200;
+                }
+                else
+                {
+                    abscisse += 200;
+                    ordonne = 10;
+                    cmp = 0;
+                }
             }
         }
-    }
     }
     
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -954,28 +959,91 @@ public class Window extends javax.swing.JFrame {
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
+        trouve = new ArrayList();
         image_chargement = jTextFieldRechImage.getText();
         double couleur = (double)jSlidercouleur.getValue()/100;
         double forme = (double)jSliderforme.getValue()/100;
         double localisation = (double)jSliderlocalisation.getValue()/100;
         double texture = (double)jSlidertexture.getValue()/100;
-        try
+        if(!"".equals(image_chargement))
         {
-            Statement stmt = con.createStatement();
-            OracleResultSet rset = (OracleResultSet) stmt.executeQuery("select count(idI) from image where idI=0");
-            if(rset.next())
+            try
             {
-                int existe = rset.getInt(1);
-                System.out.println(existe);
-                if(existe == 0)
+                Statement stmt = con.createStatement();
+                OracleResultSet rset = (OracleResultSet) stmt.executeQuery("select count(idI) from image where idI=0");
+                if(rset.next())
                 {
-                    
+                    int existe = rset.getInt(1);
+                    if(existe == 0)
+                    {
+                        PreparedStatement pstmt = con.prepareStatement("INSERT INTO image VALUES (0,to_date(?, 'DD/MM/YYYY')"
+                            + ",'image a comparer','image a comparer', ordsys.ordimage.init(), ordsys.ordimage.init(), null)");
+                        pstmt.setString(1, "06/05/2014");
+                        pstmt.executeQuery();
+                        con.commit();
+                        pstmt.close();
+                    }
+                }     
+                rset.close();
+                OracleResultSet rset2 = (OracleResultSet) stmt.executeQuery("select imageI, miniature from image where idI=0 for update");
+                if(rset2.next())
+                {
+                    OrdImage img = (OrdImage) rset2.getORAData(1, OrdImage.getORADataFactory());
+                    OrdImage miniature = (OrdImage) rset2.getORAData(2, OrdImage.getORADataFactory());
+                    img.loadDataFromFile(image_chargement);
+                    img.processCopy("MaxScale=150 150", miniature);
+                    img.setProperties();
+                    miniature.setProperties();
+                    //Mise à jour de l'attribut image
+                    OraclePreparedStatement pstmt = (OraclePreparedStatement) con.prepareStatement("update "
+                            + "image set imageI = ? where idI=0");
+                    pstmt.setORAData(1, img);
+                    pstmt.execute();
+                    con.commit();
+                    pstmt.close();
+                    //Mise à jour de l'attribut miniature
+                    OraclePreparedStatement pstmt2 = (OraclePreparedStatement) con.prepareStatement("update "
+                            + "image set miniature = ? where idI=0");
+                    pstmt2.setORAData(1, miniature);
+                    pstmt2.execute();
+                    con.commit();
+                    pstmt2.close();
                 }
-            }
-        }catch(Exception e){e.printStackTrace();}
+                rset2.close();
+                OracleResultSet rset3 = (OracleResultSet) stmt.executeQuery("select i.miniature,i.idI,i.nomI, i.compare("+couleur+","+forme+","+localisation+","+texture+") from image i");
+                while(rset3.next())
+                {
+                    OrdImage minia = (OrdImage) rset3.getORAData(1,OrdImage.getORADataFactory());
+                    int nume = rset3.getInt(2);
+                    String nome = rset3.getString(3);
+                    double score = rset3.getDouble(4);
+                    if(score < 50)
+                    {
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else 
+                        {
+                            url = "miniature-"+num2+nome+".jpeg";
+                            minia.getDataInFile(url);
+                        }
+                        Miniature mimimini = new Miniature(nume, url, nome, Double.toString(score) , con);
+                        trouve.add(mimimini);
+                    }                                
+                }
+                rset3.close();
+                stmt.close();
+            }catch(Exception e){e.printStackTrace();}
+        }
+        else
+        {
+            JLabel jj = new JLabel("Vous n'avez pas rentré d'image");
+            jj.setBounds(20, 20, 500, 15);
+            jPanelAffiche.add(jj);
+        }
+        
+        this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
-    
-    
     
     private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
         jPanelAcceuil.setVisible(false);
@@ -1060,7 +1128,7 @@ public class Window extends javax.swing.JFrame {
                             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                    Miniature mimimini = new Miniature(nume, url, nome, "", con);
                     trouve.add(mimimini);
                 }
             }
@@ -1114,7 +1182,7 @@ public class Window extends javax.swing.JFrame {
                             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                    Miniature mimimini = new Miniature(nume, url, nome, "", con);
                     trouve.add(mimimini);
                 }
             }
@@ -1172,7 +1240,7 @@ public class Window extends javax.swing.JFrame {
                             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    Miniature mimimini = new Miniature(nume, url, nome, "image", con);
+                    Miniature mimimini = new Miniature(nume, url, nome, "", con);
                     trouve.add(mimimini);
                 }
             }

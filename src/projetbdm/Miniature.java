@@ -24,40 +24,6 @@ public class Miniature {
     String type;
     private final Connection con;    
     
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    
-    
     public Miniature(int n, String i, String s, String t, Connection c)
     {
         this.num = n;
@@ -71,13 +37,13 @@ public class Miniature {
     {
         JLabel lalala = new JLabel(new ImageIcon(this.img));
         JLabel nomt = new JLabel(this.nom);
-        //JLabel typet = new JLabel(this.type);
+        JLabel typet = new JLabel(this.type);
         lalala.setBounds(x, y, 150, 150);
-        nomt.setBounds(x, y+160, 100, 15);
-        //typet.setBounds(x, y+175, 100, 15);
+        nomt.setBounds(x, y+160, 150, 15);
+        typet.setBounds(x, y+175, 100, 15);
         panel.add(lalala);
         panel.add(nomt);
-        //panel.add(typet);
+        panel.add(typet);
         panel.repaint();
         lalala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -91,11 +57,11 @@ public class Miniature {
                 WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
         });
-        /*typet.addMouseListener(new java.awt.event.MouseAdapter() {
+        typet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
-        });*/
+        });
     }
 }
