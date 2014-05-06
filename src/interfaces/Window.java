@@ -115,6 +115,7 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuil = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanelAffiche = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -412,19 +413,27 @@ public class Window extends javax.swing.JFrame {
         gridBagConstraints.gridy = 12;
         jPanel6.add(jPanelImageCompa, gridBagConstraints);
 
-        jSlidercouleur.setValue(50);
+        jSlidercouleur.setPreferredSize(new java.awt.Dimension(206, 40));
+        jSlidercouleur.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         jPanel6.add(jSlidercouleur, gridBagConstraints);
+
+        jSliderforme.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         jPanel6.add(jSliderforme, gridBagConstraints);
+
+        jSlidertexture.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         jPanel6.add(jSlidertexture, gridBagConstraints);
+
+        jSliderlocalisation.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jSliderlocalisation.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -532,9 +541,9 @@ public class Window extends javax.swing.JFrame {
         jPanelAcceuilLayout.setVerticalGroup(
             jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
-                .addGap(288, 288, 288)
+                .addGap(182, 182, 182)
                 .addComponent(jLabel5)
-                .addContainerGap(476, Short.MAX_VALUE))
+                .addContainerGap(578, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanelAcceuil, "card5");
@@ -546,15 +555,36 @@ public class Window extends javax.swing.JFrame {
             }
         });
 
+        jPanel9.setMaximumSize(new java.awt.Dimension(150, 200));
+        jPanel9.setMinimumSize(new java.awt.Dimension(150, 200));
+        jPanel9.setPreferredSize(new java.awt.Dimension(150, 200));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanelAfficheLayout = new javax.swing.GroupLayout(jPanelAffiche);
         jPanelAffiche.setLayout(jPanelAfficheLayout);
         jPanelAfficheLayout.setHorizontalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 728, Short.MAX_VALUE)
+            .addGroup(jPanelAfficheLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(566, Short.MAX_VALUE))
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGroup(jPanelAfficheLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(540, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanelAffiche, "card4");
@@ -897,18 +927,18 @@ public class Window extends javax.swing.JFrame {
         int ordonne = 10;
         int largueur = jPanelAffiche.getSize().width;
         int cmp = 0;
-        int cmpMax = largueur/250;
+        int cmpMax = largueur/200;
         for(Miniature mimi : trouve)
         {
             mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
             cmp++;
             if(cmp<cmpMax)
             {
-                ordonne += 250;
+                ordonne += 200;
             }
             else
             {
-                abscisse += 250;
+                abscisse += 200;
                 ordonne = 10;
                 cmp = 0;
             }
@@ -1245,6 +1275,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelAcceuil;
     private javax.swing.JPanel jPanelAffiche;
     private javax.swing.JPanel jPanelImageCompa;

@@ -145,8 +145,6 @@ public class WindowAffiche extends javax.swing.JFrame {
         if (posx < 0) posx = 0;
         if (posy < 0) posy = 0;
         
-        System.out.println("px " + posx + " posy " + posy);
-        
         g.drawImage(img, posx, posy, x, y,this);
     }
     
@@ -209,10 +207,8 @@ public class WindowAffiche extends javax.swing.JFrame {
         
         if (ratioWidth > ratioHeight) {
             if (widthImg > widthPanel) coef = (float) widthPanel / widthImg;
-            System.out.println("Je rentre la");
         }
         else {
-            System.out.println("Je rentre ici");
             if (heightImg > heightPanel) coef = (float) heightPanel / heightImg; 
         } 
         

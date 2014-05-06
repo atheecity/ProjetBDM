@@ -71,13 +71,13 @@ public class Miniature {
     {
         JLabel lalala = new JLabel(new ImageIcon(this.img));
         JLabel nomt = new JLabel(this.nom);
-        JLabel typet = new JLabel(this.type);
-        lalala.setBounds(x, y, 200, 200);
-        nomt.setBounds(x, y+200, 100, 15);
-        typet.setBounds(x, y+215, 100, 15);
+        //JLabel typet = new JLabel(this.type);
+        lalala.setBounds(x, y, 150, 150);
+        nomt.setBounds(x, y+160, 100, 15);
+        //typet.setBounds(x, y+175, 100, 15);
         panel.add(lalala);
         panel.add(nomt);
-        panel.add(typet);
+        //panel.add(typet);
         panel.repaint();
         lalala.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -91,11 +91,11 @@ public class Miniature {
                 WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
         });
-        typet.addMouseListener(new java.awt.event.MouseAdapter() {
+        /*typet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 WindowAffiche waff = new WindowAffiche(con, num, nom);
             }
-        });
+        });*/
     }
 }
