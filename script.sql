@@ -239,3 +239,8 @@ alter index nomIindex rebuild;
 alter index descriptionIindex rebuild;
 alter index nomAindex rebuild;
 alter index descriptionAindex rebuild;
+
+--function
+alter type image_type add member function compare(average in double precision, colorHisto in double precision, PostColor in double precision, texture in double precision) return double precision
+cascade;
+alter type image_type drop member procedure addMini cascade;
