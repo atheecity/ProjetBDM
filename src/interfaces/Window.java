@@ -6,8 +6,6 @@
 
 package interfaces;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.io.IOException;
 import java.sql.Array;
 import java.sql.Connection;
@@ -16,13 +14,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.ord.im.OrdImage;
@@ -38,8 +33,9 @@ import projetbdm.Thesaurus;
  */
 public class Window extends javax.swing.JFrame {
     
+    //contient la connexion a la base de donné faite dans projetBDM
     private final Connection con;
-    String image_chargement = "";
+    //liste contenant toutes les miniature à afficher
     ArrayList<Miniature> trouve = new ArrayList();
             
     /**
@@ -617,8 +613,10 @@ public class Window extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //fait le traitement suivant la recherche par mot demande dans la jcombobox correspondante
     void foncRecherche(String choix)
     {
+        //reinitialise trouve
         trouve = new ArrayList();
         try
         {
@@ -628,6 +626,7 @@ public class Window extends javax.swing.JFrame {
             switch(choix)
             {
                 case "Toutes les images" :
+                    //affiche toutes les images sans exception
                     rset = (OracleResultSet)s.executeQuery("select miniature, idI, nomI from image");
                     while(rset.next())
                     {
@@ -643,6 +642,7 @@ public class Window extends javax.swing.JFrame {
                             minia.getDataInFile(url);
                         }
                         Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                        //ajout à la liste à afficher
                         trouve.add(mimimini);
                     }
                     rset.close();
@@ -650,6 +650,7 @@ public class Window extends javax.swing.JFrame {
                 case "Dans image" : 
                     if(!"".equals(mot))
                     {
+                        //affiche si le mot est contenu dans le nom ou la descrip de l'image
                         rset = (OracleResultSet)s.executeQuery(
                             "select miniature, idI, nomI "
                                     + "from image "
@@ -669,12 +670,14 @@ public class Window extends javax.swing.JFrame {
                                 minia.getDataInFile(url);
                             }
                             Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                            //ajout à la liste à afficher
                             trouve.add(mimimini);
                         }
                         rset.close();
                     }
                     else
                     {
+                        //si le champs est vide on met un msg d'erreur
                         JLabel jj = new JLabel("Pas de résultat pour votre recherche");
                         jj.setBounds(20, 20, 500, 15);
                         jPanelAffiche.add(jj);
@@ -683,6 +686,7 @@ public class Window extends javax.swing.JFrame {
                 case "Dans image (nom)" : 
                     if(!"".equals(mot))
                     {
+                        //affiche si le mot est contenu dans le nom de l'image
                         rset = (OracleResultSet)s.executeQuery(
                             "select miniature, idI, nomI "
                                     + "from image "
@@ -701,12 +705,14 @@ public class Window extends javax.swing.JFrame {
                                 minia.getDataInFile(url);
                             }
                             Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                            //ajout à la liste à afficher
                             trouve.add(mimimini);
                         }
                         rset.close();
                     }
                     else
                     {
+                        //si le champs est vide on met un msg d'erreur
                         JLabel jj = new JLabel("Pas de résultat pour votre recherche");
                         jj.setBounds(20, 20, 500, 15);
                         jPanelAffiche.add(jj);
@@ -715,6 +721,7 @@ public class Window extends javax.swing.JFrame {
                 case "Dans image (description)" : 
                     if(!"".equals(mot))
                     {
+                        //affiche si le mot est contenu dans la descrip de l'image
                         rset = (OracleResultSet)s.executeQuery(
                             "select miniature, idI, nomI "
                                     + "from image "
@@ -733,12 +740,14 @@ public class Window extends javax.swing.JFrame {
                                 minia.getDataInFile(url);
                             }
                             Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                            //ajout à la liste à afficher
                             trouve.add(mimimini);
                         }
                         rset.close();
                     }
                     else
                     {
+                        //si le champs est vide on met un msg d'erreur
                         JLabel jj = new JLabel("Pas de résultat pour votre recherche");
                         jj.setBounds(20, 20, 500, 15);
                         jPanelAffiche.add(jj);
@@ -747,6 +756,7 @@ public class Window extends javax.swing.JFrame {
                 case "Dans application" :
                     if(!"".equals(mot))
                     {
+                        //affiche les images de l'application si le mot est contenu dans le nom ou la descrip
                         rset = (OracleResultSet)s.executeQuery(
                             "select a.idA "
                                     + "from application a "
@@ -773,6 +783,7 @@ public class Window extends javax.swing.JFrame {
                                     minia.getDataInFile(url);
                                 }
                                 Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                                //ajout à la liste à afficher
                                 trouve.add(mimimini);
                             }
                             rset2.close();
@@ -781,6 +792,7 @@ public class Window extends javax.swing.JFrame {
                     }
                     else
                     {
+                        //si le champs est vide on met un msg d'erreur
                         JLabel jj = new JLabel("Pas de résultat pour votre recherche");
                         jj.setBounds(20, 20, 500, 15);
                         jPanelAffiche.add(jj);
@@ -789,6 +801,7 @@ public class Window extends javax.swing.JFrame {
                 case "Dans application (nom)" :
                     if(!"".equals(mot))
                     {
+                        //affiche les images de l'application si le mot est contenu dans le nom
                         rset = (OracleResultSet)s.executeQuery(
                             "select a.idA "
                                     + "from application a "
@@ -814,6 +827,7 @@ public class Window extends javax.swing.JFrame {
                                     minia.getDataInFile(url);
                                 }
                                 Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                                //ajout à la liste à afficher
                                 trouve.add(mimimini);
                             }
                             rset2.close();
@@ -822,6 +836,7 @@ public class Window extends javax.swing.JFrame {
                     }
                     else
                     {
+                        //si le champs est vide on met un msg d'erreur
                         JLabel jj = new JLabel("Pas de résultat pour votre recherche");
                         jj.setBounds(20, 20, 500, 15);
                         jPanelAffiche.add(jj);
@@ -830,6 +845,7 @@ public class Window extends javax.swing.JFrame {
                 case "Dans application (description)" :
                     if(!"".equals(mot))
                     {
+                        //affiche les images de l'application si le mot est contenu dans la descrip
                         rset = (OracleResultSet)s.executeQuery(
                             "select a.idA "
                                     + "from application a "
@@ -855,6 +871,7 @@ public class Window extends javax.swing.JFrame {
                                     minia.getDataInFile(url);
                                 }
                                 Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                                //ajout à la liste à afficher
                                 trouve.add(mimimini);
                             }
                             rset2.close();
@@ -863,6 +880,7 @@ public class Window extends javax.swing.JFrame {
                     }
                     else
                     {
+                        //si le champs est vide on met un msg d'erreur
                         JLabel jj = new JLabel("Pas de résultat pour votre recherche");
                         jj.setBounds(20, 20, 500, 15);
                         jPanelAffiche.add(jj);
@@ -874,21 +892,26 @@ public class Window extends javax.swing.JFrame {
             }
             s.close();
         }catch(Exception e){e.printStackTrace();}
+        //lance l'affichage des miniatures
         this.remplirPanelAffiche(trouve);
     }
     
+    //affiche les miniatures dans le panel prévu pour cela
     public void remplirPanelAffiche(ArrayList<Miniature> trouve)
     {
+        //initialise le panel
         jPanelAffiche.removeAll();
         jPanelAffiche.repaint();
         if(trouve.isEmpty())
         {
+            //si l'attribut est vide on met un msg d'erreur
             JLabel jj = new JLabel("Pas de résultat pour votre recherche");
             jj.setBounds(20, 20, 500, 15);
             jPanelAffiche.add(jj);
         }
         else
         {
+            //on va placer les miniatures par rapport à la taille du panel
             int abscisse = 20;
             int ordonne = 10;
             int largueur = jPanelAffiche.getSize().width;
@@ -896,6 +919,7 @@ public class Window extends javax.swing.JFrame {
             int cmpMax = largueur/200;
             for(Miniature mimi : trouve)
             {
+                //creation de la miniature a l'endroit donné par ordonne et abscisse
                 mimi.afficheMini(jPanelAffiche, ordonne, abscisse);
                 cmp++;
                 if(cmp<cmpMax)
@@ -912,21 +936,26 @@ public class Window extends javax.swing.JFrame {
         }
     }
     
+    //ouvre l'acceuil quand on clique sur acceuil dans le menu
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         jPanelAcceuil.setVisible(true);        
         jPanelAffiche.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    //ferme l'application quand on clique sur quitter dans le menu
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    
+    //réaffiche quand la taille du panel change
     private void jPanelAfficheComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelAfficheComponentResized
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jPanelAfficheComponentResized
 
+    //ouvre le jfilechooser quand on clique sur parcourir
     private void jButtonParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParcourirActionPerformed
         JFileChooser jf=new JFileChooser();
+        String image_chargement = "";
         int i=jf.showOpenDialog(this);
         if(i==JFileChooser.APPROVE_OPTION)
         {
@@ -939,6 +968,7 @@ public class Window extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextFieldRechImageActionPerformed
 
+    //ouvre la fenetre administrateur si le login/mdp est bon
     private void jButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdminActionPerformed
         WindowAdmin wa;
         String login = this.jTextFieldLogin.getText();
@@ -951,15 +981,18 @@ public class Window extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAdminActionPerformed
 
+    //affiche le panel avec le login et mdp
     private void jButtonAfficheAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAfficheAdminActionPerformed
         if(jPanelLogAdmin.isVisible() == false) jPanelLogAdmin.setVisible(true);
         else jPanelLogAdmin.setVisible(false);
     }//GEN-LAST:event_jButtonAfficheAdminActionPerformed
-
+    
+    //on ajoute l'image a comparer en id 0 puis on la compare avec tte les image de la base
     private void jButtonLanceRechCompaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechCompaActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
         trouve = new ArrayList();
+        String image_chargement = "";
         image_chargement = jTextFieldRechImage.getText();
         double couleur = (double)jSlidercouleur.getValue()/100;
         double forme = (double)jSliderforme.getValue()/100;
@@ -970,10 +1003,12 @@ public class Window extends javax.swing.JFrame {
             try
             {
                 Statement stmt = con.createStatement();
+                //vérif que l'image id=0 existe
                 OracleResultSet rset = (OracleResultSet) stmt.executeQuery("select count(idI) from image where idI=0");
                 if(rset.next())
                 {
                     int existe = rset.getInt(1);
+                    //si non on l'insert
                     if(existe == 0)
                     {
                         PreparedStatement pstmt = con.prepareStatement("INSERT INTO image VALUES (0,to_date(?, 'DD/MM/YYYY')"
@@ -985,6 +1020,7 @@ public class Window extends javax.swing.JFrame {
                     }
                 }     
                 rset.close();
+                // insertion de l'image a comparer en id 0
                 OracleResultSet rset2 = (OracleResultSet) stmt.executeQuery("select imageI, miniature from image where idI=0 for update");
                 if(rset2.next())
                 {
@@ -1010,6 +1046,7 @@ public class Window extends javax.swing.JFrame {
                     pstmt2.close();
                 }
                 rset2.close();
+                //on récup les images de la base avec leur score calculé par compare
                 OracleResultSet rset3 = (OracleResultSet) stmt.executeQuery("select i.miniature,i.idI,i.nomI, i.compare("+couleur+","+forme+","+localisation+","+texture+") from image i");
                 while(rset3.next())
                 {
@@ -1017,6 +1054,7 @@ public class Window extends javax.swing.JFrame {
                     int nume = rset3.getInt(2);
                     String nome = rset3.getString(3);
                     double score = rset3.getDouble(4);
+                    //si le score est concluant on l'ajoute
                     if(score < 50)
                     {
                         String num2 = Integer.toString(nume);
@@ -1041,10 +1079,11 @@ public class Window extends javax.swing.JFrame {
             jj.setBounds(20, 20, 500, 15);
             jPanelAffiche.add(jj);
         }
-        
+        //on affiche le résultat
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonLanceRechCompaActionPerformed
     
+    //initialise et appel le traitement pour la recherche par mot
     private void jButtonLanceRechMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLanceRechMotActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
@@ -1055,6 +1094,7 @@ public class Window extends javax.swing.JFrame {
         this.foncRecherche(indic);
     }//GEN-LAST:event_jButtonLanceRechMotActionPerformed
 
+    //rempli les combobox à l'ouverture de la fenetre
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //Sélection des catégories
         try {
@@ -1071,7 +1111,7 @@ public class Window extends javax.swing.JFrame {
         
         //Sélection des systèmes
         try {
-            //Sélection des catégories
+            //Sélection des systèmes
             PreparedStatement st;
             st = con.prepareStatement("select * from systeme");
             st.executeQuery();
@@ -1083,6 +1123,7 @@ public class Window extends javax.swing.JFrame {
         catch(Exception e) {System.out.println(e);}
     }//GEN-LAST:event_formComponentShown
 
+    //affiche les images des applications appartenant à la catégorie sélectionné
     private void jButtonVCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVCategorieActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
@@ -1138,6 +1179,7 @@ public class Window extends javax.swing.JFrame {
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonVCategorieActionPerformed
 
+    //affiche la recherche avec le thesaurus
     private void jButtonValiderThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderThesActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
@@ -1192,6 +1234,7 @@ public class Window extends javax.swing.JFrame {
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonValiderThesActionPerformed
 
+    //affiche les images des apllications ayant pour systeme celui selectionné
     private void jButtonVSystemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVSystemeActionPerformed
         jPanelAcceuil.setVisible(false);
         jPanelAffiche.setVisible(true);
@@ -1250,6 +1293,7 @@ public class Window extends javax.swing.JFrame {
         this.remplirPanelAffiche(trouve);
     }//GEN-LAST:event_jButtonVSystemeActionPerformed
 
+    //reconstruit les index quand on clique dans le menu sur actualiser index
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         PreparedStatement st;
         try {

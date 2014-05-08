@@ -20,10 +20,15 @@ import oracle.ord.im.OrdImage;
  * @author Rémus
  */
 public class WindowAffiche extends javax.swing.JFrame {
+    
+    //identifiant de l'image
     int identifiant;
+    //connection de la base
     private final Connection con;
+    //attribut pour l'affichage
     Image img;
     JPanel paner;
+    
     /**
      * Creates new form WindowAffiche
      */
@@ -127,10 +132,11 @@ public class WindowAffiche extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    //dessine l'image dans le panel de gauche
     private void afficheImage(JPanel pan,Image img)
     {
         Graphics g=pan.getGraphics();
-        
+        //posittionne et retaille l'image par rapport au panel
         int widthPanel = this.jPanelImage.getWidth();
         int heightPanel = this.jPanelImage.getHeight();
         
@@ -152,10 +158,12 @@ public class WindowAffiche extends javax.swing.JFrame {
     public void paint(Graphics g)
     {
         super.paint(g);
+        //appel la methode affiche image lors du repaint
         if(img!=null)
             afficheImage(paner,img);
     }
     
+    //récup les données à afficher
     public void remplirTout()
     {
         try
@@ -179,16 +187,19 @@ public class WindowAffiche extends javax.swing.JFrame {
                 String nomA = rset.getString(5);
                 String descripA = rset.getString(6);
                 String versionA = rset.getString(7);
+                //info contenu dans la base
                 info = info+"Information sur l'image :\n nom : "+nomI+"\n date : "+date+"\n description : "+descripI+"\n\n";
                 String info2 = "Information sur l'application :\n nom : "+nomA+"\n description : "+descripA+"\n version : "+versionA;
                 info = info+info2;
                 jTextArea.setText(info);
                 im.getDataInFile(urlFich);
                 DefaultTableModel dtm = (DefaultTableModel) this.jTableAttribut.getModel();
+                //affichage des caractéristiques
                 dtm.addRow(new Object[]{"hauteur",im.getHeight()});
                 dtm.addRow(new Object[]{"Largeur",im.getWidth()});
                 dtm.addRow(new Object[]{"Taille",im.getContentLength()});
                 dtm.addRow(new Object[]{"Format",im.getFormat()});
+                //affiche dans le panel de l'image
                 img = jPanelImage.getToolkit().getImage(urlFich);
                 paner = jPanelImage;
                 repaint();
@@ -198,6 +209,7 @@ public class WindowAffiche extends javax.swing.JFrame {
         }catch(Exception e){e.printStackTrace();} 
     }
     
+    //redimensionne l'image suivant la taille du panel
     private float coefImage(int widthPanel, int heightPanel, int widthImg, int heightImg)
     {
         float coef = 1;
