@@ -16,30 +16,8 @@ drop type systeme_type force;
 drop type applicationSysteme_type force;
 drop type categorie_type force;
 
-/*create type motCle_type as object (
-    mot varchar2(50)
-);
-/*/
-
 create type application_type;
 /
-
-/*create type note_type as object (
-    idN integer, 
-    note integer,
-    text varchar2(200),
-    applicationN ref application_type
-);
-/*/
-
-/*create type note_ref_type as object (
-    noteR ref note_type
-);
-/*/
-
-/*create type notes_type as table of note_ref_type;
-/
-*/
 
 create type image_type as object (
     idI integer, 
@@ -48,8 +26,9 @@ create type image_type as object (
     descriptionI varchar2(150),
     imageI ORDSYS.ORDImage, 
     miniature ordsys.ordimage, 
-    applicationI ref application_type,
-    member procedure addMini
+    applicationI ref application_type, 
+    member function compare(average in double precision, colorHisto in double precision, PostColor in double precision, texture in double precision) return double precision, 
+    member function affiche return varchar2
 );
 /
 
@@ -60,34 +39,6 @@ create type image_ref_type as object (
 
 create type images_type as table of image_ref_type;
 /
-
-/*create type motCleImage_type as object (
-    imageM ref image_type,
-    motCleI ref motCle_type
-);
-/*/
-
-/*create type video_type as object (
-    idV integer, 
-    dateV date, 
-    nomV varchar2(50),
-    applicationV ref application_type
-);
-/*/
-
-/*create type video_ref_type as object (
-    videoR ref video_type
-);
-/*/
-
-/*create type videos_type as table of video_ref_type;
-/ */
-
-/*create type motCleVideo_type as object (
-    videoM ref video_type,
-    motCleV ref motCle_type
-);
-/*/
 
 create type categorie_type;
 /
@@ -100,7 +51,8 @@ create type application_type as object (
     taille float, 
     version float,
     categorieA ref categorie_type,
-    imagesA images_type
+    imagesA images_type,
+    member function affiche return varchar2
 );
 /
 
@@ -115,7 +67,8 @@ create type applications_type as table of application_ref_type;
 create type systeme_type as object (
     nomS varchar2(50), 
     fabriquant varchar2(150), 
-    versionA float
+    versionA float, 
+    member function afficheS return varchar2
 );
 /
 
@@ -128,7 +81,8 @@ create type applicationSysteme_type as object (
 create type categorie_type as object (
     idC integer, 
     nomC varchar2(50),
-    applicationsC applications_type
+    applicationsC applications_type,
+    member function affiche return varchar2
 );
 /
 
@@ -142,10 +96,6 @@ create type utilisateur_type as object (
 create table systeme of systeme_type (
     primary key(nomS)
 );
-
-/*create table motCle of motCle_type (
-    primary key(mot)
-);*/
 
 create table categorie of categorie_type (
     primary key(idC)
@@ -168,11 +118,6 @@ CREATE SEQUENCE NumA
   INCREMENT BY 1
   NOCACHE;
 
-/*create table note of note_type (
-    primary key(idN), 
-    applicationN scope is application
-);*/
-
 create table image of image_type (
     primary key(idI),
     applicationI scope is application
@@ -184,21 +129,6 @@ CREATE SEQUENCE NumI
   START WITH 1
   INCREMENT BY 1
   NOCACHE;
-
-/*create table video of video_type (
-    primary key(idV),
-    applicationV scope is application
-);*/
-
-/*create table motCleVideo of motCleVideo_type (
-    videoM scope is video,
-    motCleV scope is motCle
-);*/
-
-/*create table motCleImage of motCleImage_type (
-    imageM scope is image, 
-    motCleI scope is motCle
-);*/
 
 create table applicationSysteme of applicationSysteme_type (
     systemeA scope is systeme,
@@ -244,3 +174,7 @@ alter index descriptionAindex rebuild;
 alter type image_type add member function compare(average in double precision, colorHisto in double precision, PostColor in double precision, texture in double precision) return double precision
 cascade;
 alter type image_type drop member procedure addMini cascade;
+alter type image_type add member function affiche return varchar2 cascade;
+alter type application_type add member function afficheA return varchar2 cascade;
+alter type categorie_type add member function afficheC return varchar2 cascade;
+alter type systeme_type add member function afficheS return varchar2 cascade;

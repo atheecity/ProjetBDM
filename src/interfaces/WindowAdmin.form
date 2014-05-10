@@ -1887,12 +1887,8 @@
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserImage">
                       <Properties>
-                        <Property name="dateFormatString" type="java.lang.String" value="d/MM/YYYY"/>
-                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[150, 28]"/>
-                        </Property>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[150, 28]"/>
+                          <Dimension value="[200, 28]"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[200, 28]"/>

@@ -627,9 +627,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanelAddImage.add(jButtonParcourirI, gridBagConstraints);
 
-        jDateChooserImage.setDateFormatString("d/MM/YYYY");
-        jDateChooserImage.setMaximumSize(new java.awt.Dimension(150, 28));
-        jDateChooserImage.setMinimumSize(new java.awt.Dimension(150, 28));
+        jDateChooserImage.setMinimumSize(new java.awt.Dimension(200, 28));
         jDateChooserImage.setPreferredSize(new java.awt.Dimension(200, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -1594,6 +1592,7 @@ public class WindowAdmin extends javax.swing.JFrame {
 
     private void jButtonAnnulerCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerCActionPerformed
         this.jScrollPane4.setVisible(true);
+        this.jTextFieldNomC.setText(null);
         this.jPanelAddCategorie.setVisible(false);
     }//GEN-LAST:event_jButtonAnnulerCActionPerformed
 
@@ -1770,6 +1769,9 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jPanelApplicationComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelApplicationComponentShown
         DefaultTableModel model = (DefaultTableModel) this.jTable5.getModel();
         this.initTabApplication(model);
+        model = (DefaultTableModel) this.jTable7.getModel();
+        String sql = "select * from image where applicationI is null";
+        this.initTabImage(sql, model);
     }//GEN-LAST:event_jPanelApplicationComponentShown
 
     private void initTabApplication(DefaultTableModel model)

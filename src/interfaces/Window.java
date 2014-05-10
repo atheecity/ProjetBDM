@@ -260,7 +260,7 @@ public class Window extends javax.swing.JFrame {
         jPanel4.add(jComboBoxRech, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel1.setText("Recherche suivant un mot");
+        jLabel1.setText("Recherche par mots-clés");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -512,7 +512,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
                 .addGap(309, 309, 309)
                 .addComponent(jLabel5)
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addContainerGap(404, Short.MAX_VALUE))
         );
         jPanelAcceuilLayout.setVerticalGroup(
             jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,7 +553,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanelAfficheLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addContainerGap(588, Short.MAX_VALUE))
         );
         jPanelAfficheLayout.setVerticalGroup(
             jPanelAfficheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -650,12 +650,23 @@ public class Window extends javax.swing.JFrame {
                 case "Dans image" : 
                     if(!"".equals(mot))
                     {
-                        //affiche si le mot est contenu dans le nom ou la descrip de l'image
-                        rset = (OracleResultSet)s.executeQuery(
-                            "select miniature, idI, nomI "
-                                    + "from image "
-                                    + "where contains (nomI,'!"+mot+"')>0 "
-                                    + "or contains (descriptionI,'!"+mot+"')>0");
+                        String[] chaine = this.prepareRequeteRech(mot);
+                        //AND si plus de 3 résultats et OR dans le cas contraire
+                        PreparedStatement st = con.prepareStatement("select miniature, idI, nomI "
+                            + "from image "
+                            + "where contains (nomI,'"+ chaine[1] +"')>0 "
+                            + "or contains (descriptionI,'!"+ chaine[1] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                        rset = (OracleResultSet) st.executeQuery();
+                        if (this.getRowCount(rset) < 3) {
+                            st = con.prepareStatement("select miniature, idI, nomI "
+                                + "from image "
+                                + "where contains (nomI,'"+ chaine[0] +"')>0 "
+                                + "or contains (descriptionI,'!"+ chaine[0] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                            rset = (OracleResultSet) st.executeQuery();
+                        }
+
                         while(rset.next())
                         {
                             OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
@@ -686,11 +697,21 @@ public class Window extends javax.swing.JFrame {
                 case "Dans image (nom)" : 
                     if(!"".equals(mot))
                     {
-                        //affiche si le mot est contenu dans le nom de l'image
-                        rset = (OracleResultSet)s.executeQuery(
-                            "select miniature, idI, nomI "
-                                    + "from image "
-                                    + "where contains (nomI,'!"+mot+"')>0");
+                        String[] chaine = this.prepareRequeteRech(mot);
+                        //AND si plus de 3 résultats et OR dans le cas contraire
+                        PreparedStatement st = con.prepareStatement("select miniature, idI, nomI "
+                            + "from image "
+                            + "where contains (nomI,'"+ chaine[1] +"')>0 ", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                        rset = (OracleResultSet) st.executeQuery();
+                        if (this.getRowCount(rset) < 3) {
+                            st = con.prepareStatement("select miniature, idI, nomI "
+                                + "from image "
+                                + "where contains (nomI,'"+ chaine[0] +"')>0 ", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                            rset = (OracleResultSet) st.executeQuery();
+                        }
+                        
                         while(rset.next())
                         {
                             OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
@@ -721,11 +742,21 @@ public class Window extends javax.swing.JFrame {
                 case "Dans image (description)" : 
                     if(!"".equals(mot))
                     {
-                        //affiche si le mot est contenu dans la descrip de l'image
-                        rset = (OracleResultSet)s.executeQuery(
-                            "select miniature, idI, nomI "
-                                    + "from image "
-                                    + "where contains (descriptionI,'!"+mot+"')>0");
+                        String[] chaine = this.prepareRequeteRech(mot);
+                        //AND si plus de 3 résultats et OR dans le cas contraire
+                        PreparedStatement st = con.prepareStatement("select miniature, idI, nomI "
+                            + "from image "
+                            + "where contains (descriptionI,'"+ chaine[1] +"')>0 ", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                        rset = (OracleResultSet) st.executeQuery();
+                        if (this.getRowCount(rset) < 3) {
+                            st = con.prepareStatement("select miniature, idI, nomI "
+                                + "from image "
+                                + "where contains (descriptionI,'"+ chaine[0] +"')>0 ", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                            rset = (OracleResultSet) st.executeQuery();
+                        }
+                        
                         while(rset.next())
                         {
                             OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
@@ -756,12 +787,23 @@ public class Window extends javax.swing.JFrame {
                 case "Dans application" :
                     if(!"".equals(mot))
                     {
-                        //affiche les images de l'application si le mot est contenu dans le nom ou la descrip
-                        rset = (OracleResultSet)s.executeQuery(
-                            "select a.idA "
-                                    + "from application a "
-                                    + "where contains (nomA,'!"+mot+"')>0 "
-                                    + "or contains (descriptionA,'!"+mot+"')>0");
+                        String[] chaine = this.prepareRequeteRech(mot);
+                        //AND si plus de 3 résultats et OR dans le cas contraire
+                        PreparedStatement st = con.prepareStatement("select a.idA "
+                            + "from application a "
+                            + "where contains (nomA,'"+ chaine[1] +"')>0 "
+                            + "or contains (descriptionA,'!"+ chaine[1] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                        rset = (OracleResultSet) st.executeQuery();
+                        if (this.getRowCount(rset) < 3) {
+                            st = con.prepareStatement("select a.idA "
+                                + "from application a "
+                                + "where contains (nomA,'"+ chaine[0] +"')>0 "
+                                + "or contains (descriptionA,'!"+ chaine[0] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                                OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                            rset = (OracleResultSet) st.executeQuery();
+                        }
+                        
                         while(rset.next())
                         {
                             int numnum = rset.getInt(1);
@@ -801,11 +843,21 @@ public class Window extends javax.swing.JFrame {
                 case "Dans application (nom)" :
                     if(!"".equals(mot))
                     {
-                        //affiche les images de l'application si le mot est contenu dans le nom
-                        rset = (OracleResultSet)s.executeQuery(
-                            "select a.idA "
-                                    + "from application a "
-                                    + "where contains (nomA,'!"+mot+"')>0");
+                        String[] chaine = this.prepareRequeteRech(mot);
+                        //AND si plus de 3 résultats et OR dans le cas contraire
+                        PreparedStatement st = con.prepareStatement("select a.idA "
+                            + "from application a "
+                            + "where contains (nomA,'"+ chaine[1] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                        rset = (OracleResultSet) st.executeQuery();
+                        if (this.getRowCount(rset) < 3) {
+                            st = con.prepareStatement("select a.idA "
+                                + "from application a "
+                                + "where contains (nomA,'"+ chaine[0] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                                OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                            rset = (OracleResultSet) st.executeQuery();
+                        }
+
                         while(rset.next())
                         {
                             int numnum = rset.getInt(1);
@@ -845,11 +897,21 @@ public class Window extends javax.swing.JFrame {
                 case "Dans application (description)" :
                     if(!"".equals(mot))
                     {
-                        //affiche les images de l'application si le mot est contenu dans la descrip
-                        rset = (OracleResultSet)s.executeQuery(
-                            "select a.idA "
-                                    + "from application a "
-                                    + "where contains (descriptionA,'!"+mot+"')>0");
+                        String[] chaine = this.prepareRequeteRech(mot);
+                        //AND si plus de 3 résultats et OR dans le cas contraire
+                        PreparedStatement st = con.prepareStatement("select a.idA "
+                            + "from application a "
+                            + "where contains (descriptionA,'"+ chaine[1] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                            OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                        rset = (OracleResultSet) st.executeQuery();
+                        if (this.getRowCount(rset) < 3) {
+                            st = con.prepareStatement("select a.idA "
+                                + "from application a "
+                                + "where contains (descriptionA,'"+ chaine[0] +"')>0", OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE,
+                                OracleResultSet.HOLD_CURSORS_OVER_COMMIT);
+                            rset = (OracleResultSet) st.executeQuery();
+                        }
+
                         while(rset.next())
                         {
                             int numnum = rset.getInt(1);
@@ -894,6 +956,41 @@ public class Window extends javax.swing.JFrame {
         }catch(Exception e){e.printStackTrace();}
         //lance l'affichage des miniatures
         this.remplirPanelAffiche(trouve);
+    }
+    
+    private String[] prepareRequeteRech(String chaine) throws SQLException
+    {
+        String[] parts = chaine.split(" ");
+        String[] chaineR = new String[2];
+        chaineR[0] = "!" + parts[0];
+        chaineR[1] = "!" + parts[0];
+        for (int i=1; i < parts.length; i++)
+        {
+            chaineR[0] += " OR !" + parts[i];
+            chaineR[1] += " AND !" + parts[i];
+        }
+        
+        return chaineR;
+    }
+    
+    private int getRowCount(OracleResultSet resultSet) {
+        if (resultSet == null) {
+            return 0;
+        }
+        try {
+            resultSet.last();
+            return resultSet.getRow();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        } finally {
+            try {
+                resultSet.beforeFirst();
+            } catch (SQLException exp) {
+                exp.printStackTrace();
+            }
+       }
+        
+       return 0;
     }
     
     //affiche les miniatures dans le panel prévu pour cela

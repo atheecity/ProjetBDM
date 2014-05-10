@@ -56,7 +56,7 @@ public class WindowAffiche extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAttribut = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea = new javax.swing.JTextArea();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 400));
@@ -67,7 +67,7 @@ public class WindowAffiche extends javax.swing.JFrame {
         jPanelImage.setLayout(jPanelImageLayout);
         jPanelImageLayout.setHorizontalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 683, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
         jPanelImageLayout.setVerticalGroup(
             jPanelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,9 +95,7 @@ public class WindowAffiche extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAttribut);
 
-        jTextArea.setColumns(20);
-        jTextArea.setRows(5);
-        jScrollPane2.setViewportView(jTextArea);
+        jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout jPanelAttributLayout = new javax.swing.GroupLayout(jPanelAttribut);
         jPanelAttribut.setLayout(jPanelAttributLayout);
@@ -111,7 +109,7 @@ public class WindowAffiche extends javax.swing.JFrame {
             .addGroup(jPanelAttributLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,13 +117,13 @@ public class WindowAffiche extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addComponent(jPanelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelAttribut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -173,8 +171,8 @@ public class WindowAffiche extends javax.swing.JFrame {
             String idI = Integer.toString(identifiant);
             String info = "";
             OracleResultSet rset = (OracleResultSet)s.executeQuery(
-                    "select imageI, nomI, dateI, descriptionI, "
-                            + "i.applicationI.nomA, i.applicationI.descriptionA, i.applicationI.version "
+                    "select imageI, nomI, i.affiche(), "
+                            + "i.applicationI.afficheA(), i.applicationI.categorieA.afficheC(), i.applicationI.idA "
                             + "from image i "
                             + "where i.idI="+idI);
             if(rset.next())
@@ -182,20 +180,31 @@ public class WindowAffiche extends javax.swing.JFrame {
                 OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());
                 String nomI = rset.getString(2);
                 String urlFich = idI+nomI+".jpeg";
-                String date = rset.getString(3);
-                String descripI = rset.getString(4);
-                String nomA = rset.getString(5);
-                String descripA = rset.getString(6);
-                String versionA = rset.getString(7);
+                String affI = rset.getString(3);
+                String affA = rset.getString(4);
+                String affC = rset.getString(5);
+                int idA = rset.getInt(6);
+                //Sélection des systèmes liés à l'application 
+                OracleResultSet rset2 = (OracleResultSet)s.executeQuery(
+                    "select asy.systemeA.afficheS() "
+                    + "from applicationSysteme asy "
+                    + "where asy.applicationS = (select ref(a) from application a where idA = " + idA + ")");
+                String affS = "<br/><br/><b>Systemes compatible(s): </b>";
+                while(rset2.next()) {
+                    String affSS = rset2.getString(1);
+                    affS += "<br/>" + affSS;
+                }
                 //info contenu dans la base
-                info = info+"Information sur l'image :\n nom : "+nomI+"\n date : "+date+"\n description : "+descripI+"\n\n";
-                String info2 = "Information sur l'application :\n nom : "+nomA+"\n description : "+descripA+"\n version : "+versionA;
-                info = info+info2;
-                jTextArea.setText(info);
+                info += "<b>Information sur l'image :</b><br/>" + affI;
+                info += "<br/><br/><b>Information sur l'application :</b><br/>" + affA;          
+                info += "<br/><br/><b>Catégorie de l'application :</b><br/>" + affC;
+                info += affS;
+                jTextPane1.setContentType("text/html");
+                jTextPane1.setText("<html>" + info + "</html>");
                 im.getDataInFile(urlFich);
                 DefaultTableModel dtm = (DefaultTableModel) this.jTableAttribut.getModel();
                 //affichage des caractéristiques
-                dtm.addRow(new Object[]{"hauteur",im.getHeight()});
+                dtm.addRow(new Object[]{"Hauteur",im.getHeight()});
                 dtm.addRow(new Object[]{"Largeur",im.getWidth()});
                 dtm.addRow(new Object[]{"Taille",im.getContentLength()});
                 dtm.addRow(new Object[]{"Format",im.getFormat()});
@@ -233,6 +242,6 @@ public class WindowAffiche extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAttribut;
-    private javax.swing.JTextArea jTextArea;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
