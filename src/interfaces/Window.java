@@ -104,6 +104,8 @@ public class Window extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jTextFieldseuil = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jButtonAfficheAdmin = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -438,6 +440,19 @@ public class Window extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
         jPanel6.add(jLabel13, gridBagConstraints);
+
+        jTextFieldseuil.setText("50");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        jPanel6.add(jTextFieldseuil, gridBagConstraints);
+
+        jLabel14.setText("Seuil :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel6.add(jLabel14, gridBagConstraints);
 
         jButtonAfficheAdmin.setText("Administrateur");
         jButtonAfficheAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -989,7 +1004,6 @@ public class Window extends javax.swing.JFrame {
                 exp.printStackTrace();
             }
        }
-        
        return 0;
     }
     
@@ -1090,6 +1104,7 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setVisible(true);
         trouve = new ArrayList();
         String image_chargement = "";
+        int seuil = Integer.parseInt(jTextFieldseuil.getText());
         image_chargement = jTextFieldRechImage.getText();
         double couleur = (double)jSlidercouleur.getValue()/100;
         double forme = (double)jSliderforme.getValue()/100;
@@ -1152,7 +1167,7 @@ public class Window extends javax.swing.JFrame {
                     String nome = rset3.getString(3);
                     double score = rset3.getDouble(4);
                     //si le score est concluant on l'ajoute
-                    if(score < 50)
+                    if(score < seuil)
                     {
                         String num2 = Integer.toString(nume);
                         String url ;
@@ -1430,6 +1445,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1468,5 +1484,6 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldMotRech;
     private javax.swing.JTextField jTextFieldRechImage;
     private javax.swing.JTextField jTextFieldThes;
+    private javax.swing.JTextField jTextFieldseuil;
     // End of variables declaration//GEN-END:variables
 }
