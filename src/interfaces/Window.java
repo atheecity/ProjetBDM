@@ -341,7 +341,7 @@ public class Window extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(230, 230, 230));
         java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
-        jPanel6Layout.columnWidths = new int[] {0, 5, 0};
+        jPanel6Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
         jPanel6Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         jPanel6.setLayout(jPanel6Layout);
 
@@ -352,7 +352,7 @@ public class Window extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 12;
         jPanel6.add(jButtonLanceRechCompa, gridBagConstraints);
 
@@ -363,7 +363,7 @@ public class Window extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
         jPanel6.add(jButtonParcourir, gridBagConstraints);
@@ -377,81 +377,89 @@ public class Window extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 0);
         jPanel6.add(jTextFieldRechImage, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setText("Recherche suivant une image");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel6.add(jLabel2, gridBagConstraints);
 
         jSlidercouleur.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
         jPanel6.add(jSlidercouleur, gridBagConstraints);
 
         jSliderforme.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
         jPanel6.add(jSliderforme, gridBagConstraints);
 
         jSlidertexture.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
         jPanel6.add(jSlidertexture, gridBagConstraints);
 
         jSliderlocalisation.setMaximumSize(new java.awt.Dimension(32767, 40));
         jSliderlocalisation.setPreferredSize(new java.awt.Dimension(206, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 3;
         jPanel6.add(jSliderlocalisation, gridBagConstraints);
 
         jLabel10.setText("Couleur");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 4;
         jPanel6.add(jLabel10, gridBagConstraints);
 
         jLabel11.setText("Forme");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 6;
         jPanel6.add(jLabel11, gridBagConstraints);
 
         jLabel12.setText("Texture");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 8;
         jPanel6.add(jLabel12, gridBagConstraints);
 
         jLabel13.setText("Localisation");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 10;
         jPanel6.add(jLabel13, gridBagConstraints);
 
         jTextFieldseuil.setText("50");
+        jTextFieldseuil.setMinimumSize(new java.awt.Dimension(6, 28));
+        jTextFieldseuil.setPreferredSize(new java.awt.Dimension(18, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jPanel6.add(jTextFieldseuil, gridBagConstraints);
 
         jLabel14.setText("Seuil :");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanel6.add(jLabel14, gridBagConstraints);
 
         jButtonAfficheAdmin.setText("Administrateur");
