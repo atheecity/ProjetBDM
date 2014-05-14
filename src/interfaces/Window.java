@@ -6,6 +6,7 @@
 
 package interfaces;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Array;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.ord.im.OrdImage;
@@ -120,6 +122,14 @@ public class Window extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -448,7 +458,7 @@ public class Window extends javax.swing.JFrame {
 
         jTextFieldseuil.setText("50");
         jTextFieldseuil.setMinimumSize(new java.awt.Dimension(6, 28));
-        jTextFieldseuil.setPreferredSize(new java.awt.Dimension(18, 28));
+        jTextFieldseuil.setPreferredSize(new java.awt.Dimension(30, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 12;
@@ -588,6 +598,12 @@ public class Window extends javax.swing.JFrame {
 
         jPanel7.add(jPanelAffiche, "card4");
 
+        jMenuBar1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jMenuBar1ComponentRemoved(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("Acceuil");
@@ -661,7 +677,7 @@ public class Window extends javax.swing.JFrame {
                         if(minia.getContentLength() == 0) url = "rien.png";
                         else 
                         {
-                            url = "miniature-"+num2+nome+".jpeg";
+                            url = "image/miniature-"+num2+nome+".jpeg";
                             minia.getDataInFile(url);
                         }
                         Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -700,7 +716,7 @@ public class Window extends javax.swing.JFrame {
                             if(minia.getContentLength() == 0) url = "rien.png";
                             else 
                             {
-                                url = "miniature-"+num2+nome+".jpeg";
+                                url = "image/miniature-"+num2+nome+".jpeg";
                                 minia.getDataInFile(url);
                             }
                             Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -745,7 +761,7 @@ public class Window extends javax.swing.JFrame {
                             if(minia.getContentLength() == 0) url = "rien.png";
                             else 
                             {
-                                url = "miniature-"+num2+nome+".jpeg";
+                                url = "image/miniature-"+num2+nome+".jpeg";
                                 minia.getDataInFile(url);
                             }
                             Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -790,7 +806,7 @@ public class Window extends javax.swing.JFrame {
                             if(minia.getContentLength() == 0) url = "rien.png";
                             else 
                             {
-                                url = "miniature-"+num2+nome+".jpeg";
+                                url = "image/miniature-"+num2+nome+".jpeg";
                                 minia.getDataInFile(url);
                             }
                             Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -844,7 +860,7 @@ public class Window extends javax.swing.JFrame {
                                 if(minia.getContentLength() == 0) url = "rien.png";
                                 else 
                                 {
-                                    url = "miniature-"+num2+nome+".jpeg";
+                                    url = "image/miniature-"+num2+nome+".jpeg";
                                     minia.getDataInFile(url);
                                 }
                                 Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -898,7 +914,7 @@ public class Window extends javax.swing.JFrame {
                                 if(minia.getContentLength() == 0) url = "rien.png";
                                 else 
                                 {
-                                    url = "miniature-"+num2+nome+".jpeg";
+                                    url = "image/miniature-"+num2+nome+".jpeg";
                                     minia.getDataInFile(url);
                                 }
                                 Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -952,7 +968,7 @@ public class Window extends javax.swing.JFrame {
                                 if(minia.getContentLength() == 0) url = "rien.png";
                                 else 
                                 {
-                                    url = "miniature-"+num2+nome+".jpeg";
+                                    url = "image/miniature-"+num2+nome+".jpeg";
                                     minia.getDataInFile(url);
                                 }
                                 Miniature mimimini = new Miniature(nume, url, nome, "", con);
@@ -1182,7 +1198,7 @@ public class Window extends javax.swing.JFrame {
                         if(minia.getContentLength() == 0) url = "rien.png";
                         else 
                         {
-                            url = "miniature-"+num2+nome+".jpeg";
+                            url = "image/miniature-"+num2+nome+".jpeg";
                             minia.getDataInFile(url);
                         }
                         Miniature mimimini = new Miniature(nume, url, nome, Double.toString(score) , con);
@@ -1282,7 +1298,7 @@ public class Window extends javax.swing.JFrame {
                     if(minia.getContentLength() == 0) url = "rien.png";
                     else 
                     {
-                        url = "miniature-"+num2+nome+".jpeg";
+                        url = "image/miniature-"+num2+nome+".jpeg";
                         try {
                             minia.getDataInFile(url);
                         } catch (IOException ex) {
@@ -1308,50 +1324,55 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.repaint();
         String mot = this.jTextFieldThes.getText();
         String rel = this.jComboBoxThes.getSelectedItem().toString();
-        Thesaurus thes = new Thesaurus("app_thes");
-        OracleResultSet rset1 = thes.rechercheThes(mot, rel);
-        PreparedStatement st;
-        try {
-            while(rset1.next()) {
-                STRUCT str = (STRUCT) rset1.getSTRUCT(1);
-                Object[] tabAtt = str.getAttributes();
-                
-                Array arI = (Array) tabAtt[7];
-                OracleResultSet rsetI = (OracleResultSet) arI.getResultSet();
-                while (rsetI.next())
-                {
-                    STRUCT strI = rsetI.getSTRUCT(2);
-                    Object[] tabAttI = strI.getAttributes();
-                    REF refI = (REF) tabAttI[0];
-                    STRUCT strI2 = refI.getSTRUCT();
-                    Object[] tabI2 = strI2.getAttributes();
-                    System.out.println(tabI2[0]);
-                    st = con.prepareStatement("select miniature, idI, nomI from image where idI = " + tabI2[0]);
-                    OracleResultSet rset = (OracleResultSet)st.executeQuery();
-                    rset.next();
-                    OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
-                    int nume = rset.getInt(2);
-                    String nome = rset.getString(3);
-                    String num2 = Integer.toString(nume);
-                    String url ;
-                    if(minia.getContentLength() == 0) url = "rien.png";
-                    else
+        if (!"".equals(mot)) {
+            Thesaurus thes = new Thesaurus("app_thes");
+            OracleResultSet rset1 = thes.rechercheThes(mot, rel);
+            PreparedStatement st;
+            try {
+                while(rset1.next()) {
+                    STRUCT str = (STRUCT) rset1.getSTRUCT(1);
+                    Object[] tabAtt = str.getAttributes();
+
+                    Array arI = (Array) tabAtt[7];
+                    OracleResultSet rsetI = (OracleResultSet) arI.getResultSet();
+                    while (rsetI.next())
                     {
-                        url = "miniature-"+num2+nome+".jpeg";
-                        try {
-                            minia.getDataInFile(url);
-                        } catch (IOException ex) {
-                            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                        STRUCT strI = rsetI.getSTRUCT(2);
+                        Object[] tabAttI = strI.getAttributes();
+                        REF refI = (REF) tabAttI[0];
+                        STRUCT strI2 = refI.getSTRUCT();
+                        Object[] tabI2 = strI2.getAttributes();
+                        System.out.println(tabI2[0]);
+                        st = con.prepareStatement("select miniature, idI, nomI from image where idI = " + tabI2[0]);
+                        OracleResultSet rset = (OracleResultSet)st.executeQuery();
+                        rset.next();
+                        OrdImage minia = (OrdImage) rset.getORAData(1,OrdImage.getORADataFactory());
+                        int nume = rset.getInt(2);
+                        String nome = rset.getString(3);
+                        String num2 = Integer.toString(nume);
+                        String url ;
+                        if(minia.getContentLength() == 0) url = "rien.png";
+                        else
+                        {
+                            url = "image/miniature-"+num2+nome+".jpeg";
+                            try {
+                                minia.getDataInFile(url);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
+                        Miniature mimimini = new Miniature(nume, url, nome, "", con);
+                        trouve.add(mimimini);
                     }
-                    Miniature mimimini = new Miniature(nume, url, nome, "", con);
-                    trouve.add(mimimini);
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            this.remplirPanelAffiche(trouve);
         }
-        this.remplirPanelAffiche(trouve);
+        else {
+            JOptionPane.showMessageDialog(this, "Remplir le champ");
+        }
     }//GEN-LAST:event_jButtonValiderThesActionPerformed
 
     //affiche les images des apllications ayant pour systeme celui selectionné
@@ -1396,7 +1417,7 @@ public class Window extends javax.swing.JFrame {
                     if(minia.getContentLength() == 0) url = "rien.png";
                     else
                     {
-                        url = "miniature-"+num2+nome+".jpeg";
+                        url = "image/miniature-"+num2+nome+".jpeg";
                         try {
                             minia.getDataInFile(url);
                         } catch (IOException ex) {
@@ -1431,6 +1452,30 @@ public class Window extends javax.swing.JFrame {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuBar1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jMenuBar1ComponentRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuBar1ComponentRemoved
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.out.println("testttt");
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        System.out.println("test");
+        File myDir = new File("image");
+        emptyDirectory(myDir);
+    }
+    
+        
+    public void emptyDirectory(File folder){
+        for(File file : folder.listFiles()){
+            if(file.isDirectory()){
+                emptyDirectory(file);
+            }
+            file.delete();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     
     

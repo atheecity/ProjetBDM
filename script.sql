@@ -16,9 +16,11 @@ drop type systeme_type force;
 drop type applicationSysteme_type force;
 drop type categorie_type force;
 
+-- Création du type application
 create type application_type;
 /
 
+-- Création du type image
 create type image_type as object (
     idI integer, 
     dateI date, 
@@ -40,9 +42,11 @@ create type image_ref_type as object (
 create type images_type as table of image_ref_type;
 /
 
+-- Création du type categorie
 create type categorie_type;
 /
 
+-- Création du type application
 create type application_type as object (
     idA integer, 
     nomA varchar2(50),
@@ -52,7 +56,7 @@ create type application_type as object (
     version float,
     categorieA ref categorie_type,
     imagesA images_type,
-    member function affiche return varchar2
+    member function afficheA return varchar2
 );
 /
 
@@ -64,6 +68,7 @@ create type application_ref_type as object (
 create type applications_type as table of application_ref_type;
 /
 
+--Création du type systeme
 create type systeme_type as object (
     nomS varchar2(50), 
     fabriquant varchar2(150), 
@@ -72,12 +77,14 @@ create type systeme_type as object (
 );
 /
 
+-- Création du type applicationSysteme
 create type applicationSysteme_type as object (
     systemeA ref systeme_type, 
     applicationS ref application_type
 );
 /
 
+-- Création du type categorie
 create type categorie_type as object (
     idC integer, 
     nomC varchar2(50),
@@ -86,6 +93,7 @@ create type categorie_type as object (
 );
 /
 
+-- Création du type utilisateur
 create type utilisateur_type as object (
     login varchar2(50),
     password varchar2(50)
@@ -93,48 +101,58 @@ create type utilisateur_type as object (
 /
 
 /********** TABLE ************/
+-- Création de la table systeme
 create table systeme of systeme_type (
     primary key(nomS)
 );
 
+-- Création de la table categorie
 create table categorie of categorie_type (
     primary key(idC)
 ) nested table applicationsC store as tabApplications ;
 
+-- Sequence numC pour categorie
 CREATE SEQUENCE NumC
   MINVALUE 0
   START WITH 0
   INCREMENT BY 1
   NOCACHE;
 
+-- Création de la table application
 create table application of application_type (
     primary key(idA), 
     categorieA scope is categorie
 ) nested table imagesA store as tabImages;
 
+
+-- Création numA pour application
 CREATE SEQUENCE NumA
   MINVALUE 0
   START WITH 0
   INCREMENT BY 1
   NOCACHE;
 
+-- Création de la table image
 create table image of image_type (
     primary key(idI),
     applicationI scope is application
 );
 
---IMAGE
+-- Création numI pour image
 CREATE SEQUENCE NumI
   MINVALUE 0
   START WITH 1
   INCREMENT BY 1
   NOCACHE;
 
+-- Création de la table applicationSysteme
 create table applicationSysteme of applicationSysteme_type (
     systemeA scope is systeme,
     applicationS scope is application
 );
 
+
+-- Création de la table utilisateur
 create table utilisateur of utilisateur_type (
     primary key (login)
 );

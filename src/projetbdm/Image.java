@@ -41,7 +41,7 @@ public class Image
             OracleResultSet rset;
             rset = (OracleResultSet) stmt.executeQuery("select imageI, miniature from image where "
                     + "idI=(SELECT (max(idI)) FROM image) for update");
-            while(rset.next())
+            if(rset.next())
             {
                 OrdImage img = (OrdImage) rset.getORAData(1, OrdImage.getORADataFactory());
                 OrdImage miniature = (OrdImage) rset.getORAData(2, OrdImage.getORADataFactory());

@@ -179,7 +179,7 @@ public class WindowAffiche extends javax.swing.JFrame {
             {
                 OrdImage im=(OrdImage)rset.getORAData(1, OrdImage.getORADataFactory());
                 String nomI = rset.getString(2);
-                String urlFich = idI+nomI+".jpeg";
+                String urlFich = "image/" + idI+nomI+".jpeg";
                 String affI = rset.getString(3);
                 String affA = rset.getString(4);
                 String affC = rset.getString(5);

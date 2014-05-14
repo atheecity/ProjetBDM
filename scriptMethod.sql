@@ -1,3 +1,4 @@
+-- Création de la méthode affiche de la table image
 create or replace type body image_type as 
     member function compare(average in double precision, colorHisto in double precision, PostColor in double precision, texture in double precision) return double precision is
             blob1 BLOB;
@@ -25,8 +26,8 @@ create or replace type body image_type as
 end;
 /
 
+-- Création de la méthode afficheA de la table application
 create or replace type body application_type as 
-    --Méthode pour afficher les informations de l'application
     member function afficheA return varchar2 is
         aff varchar2(1000);
     begin
@@ -37,6 +38,7 @@ create or replace type body application_type as
 end;
 /
 
+-- Création de la méthode afficheC de la table categorie
 create or replace type body categorie_type as 
     --Méthode pour afficher les informations de l'application
     member function afficheC return varchar2 is
@@ -48,6 +50,7 @@ create or replace type body categorie_type as
 end;
 /
 
+-- Création de la méthode afficheS de la table systeme
 create or replace type body systeme_type as 
     --Méthode pour afficher les informations de l'application
     member function afficheS return varchar2 is

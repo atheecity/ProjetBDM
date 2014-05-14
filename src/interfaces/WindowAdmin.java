@@ -1567,10 +1567,11 @@ public class WindowAdmin extends javax.swing.JFrame {
      */
     private void initTabSysteme(DefaultTableModel model)
     {
-        Systeme s = new Systeme();
+        Systeme s;
         try {
             java.util.Map maMap = con.getTypeMap();
             maMap.put("CM429363.SYSTEME_TYPE", Class.forName("projetbdm.Systeme"));
+            //Récupération des sytèmes
             PreparedStatement st = con.prepareStatement("select value(s) from systeme s");
             ResultSet rst = st.executeQuery();
             
