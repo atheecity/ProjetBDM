@@ -113,6 +113,11 @@ public class Window extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanelAcceuil = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jPanelAffiche = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -536,23 +541,64 @@ public class Window extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.CardLayout());
 
-        jLabel5.setText("acceuil");
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel5.setText("Page d'acceuil");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel15.setText("Bienvenue");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel16.setText("Le monde");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 55)); // NOI18N
+        jLabel17.setText("Applications");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel18.setText("Sur");
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel19.setText("Des");
 
         javax.swing.GroupLayout jPanelAcceuilLayout = new javax.swing.GroupLayout(jPanelAcceuil);
         jPanelAcceuil.setLayout(jPanelAcceuilLayout);
         jPanelAcceuilLayout.setHorizontalGroup(
             jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addComponent(jLabel5)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addGroup(jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAcceuilLayout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addGroup(jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanelAcceuilLayout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15)))
+                            .addComponent(jLabel17)))
+                    .addGroup(jPanelAcceuilLayout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(jLabel18))
+                    .addGroup(jPanelAcceuilLayout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(jLabel19)))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         jPanelAcceuilLayout.setVerticalGroup(
             jPanelAcceuilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAcceuilLayout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel5)
-                .addContainerGap(578, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel19)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanelAcceuil, "card5");
@@ -646,7 +692,7 @@ public class Window extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
@@ -1128,7 +1174,9 @@ public class Window extends javax.swing.JFrame {
         jPanelAffiche.setVisible(true);
         trouve = new ArrayList();
         String image_chargement = "";
-        int seuil = Integer.parseInt(jTextFieldseuil.getText());
+        int seuil = 50;
+        if(!"".equals(jTextFieldseuil.getText()))
+            seuil = Integer.parseInt(jTextFieldseuil.getText());
         image_chargement = jTextFieldRechImage.getText();
         double couleur = (double)jSlidercouleur.getValue()/100;
         double forme = (double)jSliderforme.getValue()/100;
@@ -1499,6 +1547,11 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
