@@ -1113,7 +1113,7 @@ public class WindowAdmin extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(77, 77, 77));
-        jLabel18.setText("Sélectionner au moins une catégorie pour l'application");
+        jLabel18.setText("Sélectionner une catégorie pour l'application");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
