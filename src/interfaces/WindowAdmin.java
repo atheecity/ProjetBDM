@@ -1945,6 +1945,7 @@ public class WindowAdmin extends javax.swing.JFrame {
         this.initTabApplication(model);
         this.jPanelAddApplication4.setVisible(false);
         this.jScrollPane5.setVisible(true);
+        this.resetFormApplication();
     }//GEN-LAST:event_jButtonSaveApplicationActionPerformed
 
     /**
@@ -2064,6 +2065,10 @@ public class WindowAdmin extends javax.swing.JFrame {
         String rel = this.jComboBoxSelectThes.getSelectedItem().toString();
         Thesaurus th = new Thesaurus("app_thes");
         th.createRelation(mot1, rel, mot2);
+        this.jScrollPane5.setVisible(true);
+        this.jPanelThesaurus.setVisible(false);
+        this.jTextFieldMot1Thes.setText(null);
+        this.jTextFieldMot2Thes.setText(null);
     }//GEN-LAST:event_jButtonSaveThesActionPerformed
 
     private void jButtonGThesaurusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGThesaurusActionPerformed
@@ -2078,6 +2083,8 @@ public class WindowAdmin extends javax.swing.JFrame {
     private void jButtonAnnulerThesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerThesActionPerformed
         this.jScrollPane5.setVisible(true);
         this.jPanelThesaurus.setVisible(false);
+        this.jTextFieldMot1Thes.setText(null);
+        this.jTextFieldMot2Thes.setText(null);
     }//GEN-LAST:event_jButtonAnnulerThesActionPerformed
 
     private void jButtonSupprimerAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerAActionPerformed
